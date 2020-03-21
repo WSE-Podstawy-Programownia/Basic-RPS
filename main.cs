@@ -1,5 +1,30 @@
 using System;
 
+//TODO
+/*stworzyć klasę dla gracza, która przechowuje jego statystyki
+poziom [1 - 3]
+atak == poziom
+exp
+exp do następnego poziomu
+imie
+klase/profesje  [profesja : klasy player]
+*/
+
+/*
+napisać metodę pobierającą wynik i wyświetlającą go graficznie
+for [*] i [ ] - gramy do 10 pkt
+*/
+
+//stworzyć przed walką możliwość wyboru przeciwnika
+
+/*umiejetnosci [inherited metody]
+Paladyn - dodaje sobie 1/2/3 pkt
+łotrzyk - zamienia pkt przeciwnika i swoje (raz na walkę)
+mag - resetuje wszystkie pkt (raz na walkę)
+*/
+
+//po kazdej walce dodajemy expa graczowi
+
 class MainClass {
 
   enum Symbols
@@ -10,6 +35,8 @@ class MainClass {
       }
 
   public static void Main (string[] args) {
+    
+
 
     RockPaperScissorsGame();
 
