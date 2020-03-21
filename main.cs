@@ -3,7 +3,8 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
-      WriteLine("Player One, choose RPS:\n(1) Rock\n(2) Paper\n(3) Scissors");
+
+    while(true){WriteLine("Witaj graczu pierwszy! Wybierz:\n(1) Kamień\n(2) Papier\n(3) Nożyczki");
       string inputPlayerOne;
       inputPlayerOne = ReadLine();
 
@@ -12,52 +13,65 @@ class MainClass {
       }
 
       else if(inputPlayerOne == "2"){
-        WriteLine("wybrałeś papier");
+        WriteLine("Wybrałeś papier");
       }
       
       else if(inputPlayerOne == "3"){
-        WriteLine("wybrałeś nożyce");
+        WriteLine("Wybrałeś nożyce");
       }
 
       else{
-        WriteLine("cos niepoprawnego");
+        WriteLine("Niepoprawny znak");
       }
 
-      WriteLine("Player Two, choose RPS:\n(1) Rock\n(2) Paper\n(3) Scissors");
+      WriteLine("Naciśnij cokolwiek");
+      ReadKey();
+      Clear();
+
+      WriteLine("Dzień dobry graczu drugi, wybierz:\n(1) Kamień\n(2) Papier\n(3) Nożyczki");
       string inputPlayerTwo;
       inputPlayerTwo = ReadLine();
 
       if(inputPlayerTwo == "1"){
-        WriteLine("Wybrałeś kamień");
+        WriteLine("Wybrałeś kamień, świetna decyzja");
       }
 
       else if(inputPlayerTwo == "2"){
-        WriteLine("wybrałeś papier");
+        WriteLine("Wybrałeś papier");
       }
       
       else if(inputPlayerTwo == "3"){
-        WriteLine("wybrałeś nożyce");
+        WriteLine("Wybrałeś nożyce");
       }
 
       else{
-        WriteLine("cos niepoprawnego");
+        WriteLine("Wpisz poprawną liczbę!");
       }
 
       if(inputPlayerOne == inputPlayerTwo){
-        WriteLine("remis");
+        WriteLine("remis :(");
       }
 
       else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
        || (inputPlayerOne == "2" && inputPlayerTwo == "1")
        || (inputPlayerOne == "3" && inputPlayerTwo == "2")){
-          WriteLine("zwycieza gracz1");
+          WriteLine("Zwycięzcą jest gracz 1!");
         }
 
          else if((inputPlayerTwo == "1" && inputPlayerOne == "3")
        || (inputPlayerTwo == "2" && inputPlayerOne == "1")
        || (inputPlayerTwo == "3" && inputPlayerOne == "2")){
-          WriteLine("zwycieza gracz2");
+          WriteLine("Gratulacje, graczu 2. Wygrałeś.");
         }
+
+      WriteLine("Czy chcesz wyjść? [y]");
+      string isExit = ReadLine();
+
+      if(isExit == "y"){
+        break;
+      }
+      Clear();
+    }
 
 
       
