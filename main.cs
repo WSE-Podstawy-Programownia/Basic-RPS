@@ -3,7 +3,8 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
-    string wiadomoscPowitalna = "Wybór P1:\nk=Kamień\np=Papier\nn=Nożyce ";
+    while(true){
+    string wiadomoscPowitalna = "Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce ";
     WriteLine(wiadomoscPowitalna);
     string inputPlayerOne;
     inputPlayerOne = ReadLine();
@@ -20,8 +21,11 @@ class MainClass {
    else{
      WriteLine("Błędny wybór");
    }
+  WriteLine("Naciśnij dowolny klawisz, żeby przejść do P2");
+  ReadKey();
+  Clear();
 
-   WriteLine("Wybór P2:\nk= Kamień\np=Papier\nn=Nożyce ");
+   WriteLine("Wybór P2:\nk = Kamień\np = Papier\nn = Nożyce ");
     string inputPlayerTwo;
     inputPlayerTwo = ReadLine();
 
@@ -53,6 +57,15 @@ class MainClass {
   }
   else{
     WriteLine("Wpisano niepoprawne znaki");
+}
+    WriteLine("Zakończyć grę? [t]");
+    string isExit = ReadLine();
+
+    if(isExit == "t"){
+        break;
+      }
+    Clear();
+  
   }
   }
 }
