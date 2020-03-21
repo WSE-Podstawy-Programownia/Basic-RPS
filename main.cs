@@ -35,7 +35,6 @@ WyborGracz2Int)
     }
     else if (WyborGracz1Int > WyborGracz2Int){
 WriteLine ("wygrał gracz 1");
-//Nie dokończone
   }
   }
 }
