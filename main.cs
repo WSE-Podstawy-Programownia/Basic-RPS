@@ -19,5 +19,4 @@ class MainClass {
     WriteLine ("Remis");
     }
   }
-
 }
