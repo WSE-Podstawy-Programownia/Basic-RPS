@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 class MainClass {
   public static void Main (string[] args) {
-    while(true){
+     while (true){
       string poczatekrozgrywki = "Gra Papier, Kamień, Nożyce. Witaj Graczu NUMER 1! Wybierz jedną z opcji: \n1 - Papier \n2 - Kamień \n3 - Nożyce";
       WriteLine(poczatekrozgrywki);
       string InputPlayerOne;
@@ -51,6 +51,7 @@ class MainClass {
           }
       else{
         WriteLine("Ktoś dokonał niepoprawnego wyboru!");
+        continue;
         }
       WriteLine("Czy chcesz zakonczyc? [y]");
       string isExit = ReadLine();
