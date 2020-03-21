@@ -28,6 +28,15 @@ while(!Int32.TryParse(choiseOfThePlayerTwo, out choiseOfThePlayerTwoInt)
 if (choiseOfThePlayerOne == choiseOfThePlayerTwo){
   WriteLine ("Remis");
 }
-
+else if ((choiseOfThePlayerOne == "1" && choiseOfThePlayerTwo == "3")
+||(choiseOfThePlayerOne == "2" && choiseOfThePlayerTwo == "1")
+||(choiseOfThePlayerOne == "3" && choiseOfThePlayerTwo == "2")){
+  WriteLine("Wygrywa pierwszy gracz");
+}
+else if((choiseOfThePlayerOne == "3" && choiseOfThePlayerTwo == "1")
+|| (choiseOfThePlayerOne == "1" && choiseOfThePlayerTwo == "2")
+||(choiseOfThePlayerOne == "2" && choiseOfThePlayerTwo == "3")){
+  WriteLine("Wygrywa drugi gracz");
+}
   }  
 }
