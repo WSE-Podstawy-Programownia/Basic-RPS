@@ -6,7 +6,7 @@ class MainClass {
     string inputPlayerOne;
     inputPlayerOne = ReadLine ();
 
-if(inputPlayerOne == "1"){
+     if(inputPlayerOne == "1"){
       WriteLine ("PlayerOne pick Rock.");
     }
     else if(inputPlayerOne == "2"){
@@ -27,7 +27,7 @@ if(inputPlayerOne == "1"){
     inputPlayerTwo = ReadLine ();
 
 
-if(inputPlayerTwo == "1"){
+   if(inputPlayerTwo == "1"){
       WriteLine ("PlayerOne pick Rock.");
     }
     else if(inputPlayerTwo == "2"){
@@ -43,18 +43,18 @@ if(inputPlayerTwo == "1"){
     Read();
     Clear();
 
-if(inputPlayerOne == inputPlayerTwo){
-WriteLine("Draw, another time guys.");
-}
+    if(inputPlayerOne == inputPlayerTwo){
+  WriteLine("Draw, another time guys.");
+  }
 
-else if((inputPlayerOne == "1" && inputPlayerTwo == "2")
-|| (inputPlayerOne == "2" && inputPlayerTwo == "1")
-|| (inputPlayerOne == "3" && inputPlayerTwo == "2")){ WriteLine("Dear PlayerOne you are the winner!");
-}
+  else if((inputPlayerOne == "1" && inputPlayerTwo == "2")
+  || (inputPlayerOne == "2" && inputPlayerTwo == "1")
+  || (inputPlayerOne == "3" && inputPlayerTwo == "2")){ WriteLine("Dear PlayerOne you are the winner!");
+  }
 
-else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
-|| (inputPlayerOne == "2" && inputPlayerTwo == "3")
-|| (inputPlayerOne == "3" && inputPlayerTwo == "1")){ WriteLine("Dear PlayerTwo you are the winner!");
-};
+  else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
+  || (inputPlayerOne == "2" && inputPlayerTwo == "3")
+  || (inputPlayerOne == "3" && inputPlayerTwo == "1")){ WriteLine("Dear PlayerTwo you are the winner!");
+  };
   }
 }
