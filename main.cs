@@ -1,7 +1,7 @@
 using System;
 using static System.Console;
 
-
+//test
 class MainClass {
   public static void Main (string[] args) {
    WriteLine ("Witaj w grze RPS");
