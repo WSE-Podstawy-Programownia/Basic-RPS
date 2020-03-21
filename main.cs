@@ -57,6 +57,7 @@ class MainClass {
     if(isExit == "y"){
       break;
     }
+    Clear();
   }
   }
 }
