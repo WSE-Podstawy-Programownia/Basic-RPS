@@ -9,8 +9,8 @@ class MainClass {
      int ChoiceOfTheFirstPlayerInt;
      //probuje zmienic wartosc wczytana na int
      while(!Int32.TryParse(ChoiceOfTheFirstPlayer, out ChoiceOfTheFirstPlayerInt)
-     ||ChoiceOfTheFirstPlayer > 3
-     ||ChoiceOfTheFirstPlayer <=0 ){
+     ||int.Parse(ChoiceOfTheFirstPlayer) > 3
+     ||int.Parse(ChoiceOfTheFirstPlayer) <= 0 ) {
        WriteLine("Give the right number");
        ChoiceOfTheFirstPlayer = ReadLine();
        }
