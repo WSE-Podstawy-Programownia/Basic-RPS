@@ -10,7 +10,7 @@ public class PRS
       Console.Clear();
       //  System.Console.WriteLine("Player 1 chose {0}", P1);
       System.Console.WriteLine("Player 2, choose from Rock, Scissors, Paper");
-       // string P2 = "Rock";
+      // string P2 = "Rock";
       string P2 = System.Console.ReadLine();
       Console.Clear();
       System.Console.WriteLine("Player 1 chose {0}", P1);
