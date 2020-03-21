@@ -17,6 +17,7 @@ class MainClass {
     c_p2=Console.ReadLine();//drugi gracz przypisuje wartość zmiennej
     Console.WriteLine ("Press any key to continue");//komunikat o końcu tury
     Console.ReadKey(); //czekanie na klawisz
+    
     Console.Clear(); //czyszczenie ekranu
       if (c_p1 == c_p2) {//wszystkie remisy
         Console.WriteLine ("Remis");} 
