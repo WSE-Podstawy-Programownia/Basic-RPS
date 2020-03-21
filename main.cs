@@ -5,7 +5,7 @@ public class Program
 {
     public static void Main()
     {
-
+        //preparing stuff
     		HumanPlayer player = new HumanPlayer();
         ComputerPlayer enemy = new ComputerPlayer();
 
@@ -15,6 +15,7 @@ public class Program
 
         bool complete = false;
 
+        //main loop, runs till input after match result != y
         while (!complete)
         {
             player.Greet();
@@ -27,6 +28,8 @@ public class Program
                 Console.WriteLine("Player has chosen: " + userChoice);
                 Console.WriteLine("Computer has chosen: " + enemyChoice);
 
+                // here goes the magic (there is a finite number of possible results of subtraction
+                // therefore we can simplify the whole decision part)
                 if (userChoice == enemyChoice)
                     Console.WriteLine(drawMsg);
                 else if (userChoice - enemyChoice == -2 || userChoice - enemyChoice == 1)
