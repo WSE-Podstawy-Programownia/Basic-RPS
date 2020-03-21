@@ -3,35 +3,35 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
-    string wiadomoscPowitalna = "Wybór P1:\n1. Rock\n2. Paper\n3. Scissors ";
+    string wiadomoscPowitalna = "Wybór P1:\nk=Kamień\np=Papier\nn=Nożyce ";
     WriteLine(wiadomoscPowitalna);
     string inputPlayerOne;
     inputPlayerOne = ReadLine();
-    
-   if(inputPlayerOne == "1"){
+
+   if(inputPlayerOne == "k"){
      WriteLine("Gracz pierwszy wybrał kamień");
    }
-   else if (inputPlayerOne == "2"){
+   else if (inputPlayerOne == "p"){
      WriteLine("Gracz pierwszy wybrał papier");
      }
-  else if (inputPlayerOne == "3"){
+  else if (inputPlayerOne == "n"){
     WriteLine("Gracz pierwszy wybrał nożyce");
     }
    else{
      WriteLine("Błędny wybór");
    }
 
-   WriteLine("Wybór P2:\n1. Rock\n2. Paper\n3. Scissors ");
+   WriteLine("Wybór P2:\nk= Kamień\np=Papier\nn=Nożyce ");
     string inputPlayerTwo;
     inputPlayerTwo = ReadLine();
 
-  if(inputPlayerTwo == "1"){
+  if(inputPlayerTwo == "k"){
       WriteLine("Gracz drugi wybrał kamień");
    }
-   else if (inputPlayerTwo == "2"){
+   else if (inputPlayerTwo == "p"){
      WriteLine("Gracz drugi wybrał papier");
      }
-  else if (inputPlayerTwo == "3"){
+  else if (inputPlayerTwo == "n"){
     WriteLine("Gracz drugi wybrał nożyce");
     }
    else{
@@ -41,14 +41,14 @@ class MainClass {
   if(inputPlayerOne == inputPlayerTwo){
     WriteLine("Remis");
   }
-  else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
-  | (inputPlayerOne == "2" && inputPlayerTwo == "1")
-  | (inputPlayerOne == "3" && inputPlayerTwo == "2")){
+  else if((inputPlayerOne == "k" && inputPlayerTwo == "n")
+  | (inputPlayerOne == "p" && inputPlayerTwo == "k")
+  | (inputPlayerOne == "n" && inputPlayerTwo == "p")){
     WriteLine("Zwycięstwo gracza pierwszego");
   }
-  else if((inputPlayerOne == "3" && inputPlayerTwo == "1")
-  | (inputPlayerOne == "1" && inputPlayerTwo == "2")
-  | (inputPlayerOne == "2" && inputPlayerTwo == "3")){
+  else if((inputPlayerOne == "n" && inputPlayerTwo == "k")
+  | (inputPlayerOne == "k" && inputPlayerTwo == "p")
+  | (inputPlayerOne == "p" && inputPlayerTwo == "n")){
     WriteLine("Zwycięstwo gracza drugiego");
   }
   else{
