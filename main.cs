@@ -3,6 +3,7 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
+    while(true){
     WriteLine ("[Gracz 1] wybierz symbol:\n(1) kamien\n(2) papier\n(3) nozyce");
     string choiseOfThePlayerOne = ReadLine();
     int choiseOfThePlayerOneInt;
@@ -38,5 +39,13 @@ else if((choiseOfThePlayerOne == "3" && choiseOfThePlayerTwo == "1")
 ||(choiseOfThePlayerOne == "2" && choiseOfThePlayerTwo == "3")){
   WriteLine("Wygrywa drugi gracz");
 }
+WriteLine("czy chcesz zakonczyc? [y]");
+string isExit = ReadLine();
+
+if(isExit == "y"){
+  break;
+}
+Clear();
+    }
   }  
 }
