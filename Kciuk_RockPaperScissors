@@ -1,34 +1,25 @@
 using System;
-
-public class PRS
-{
-    public static void Main()
-    {
-      System.Console.WriteLine("Player 1, choose from Rock, Scissors, Paper");
-      //  string P1 = "Scissors";
-      string P1 = System.Console.ReadLine();
-      Console.Clear();
-      //  System.Console.WriteLine("Player 1 chose {0}", P1);
-      System.Console.WriteLine("Player 2, choose from Rock, Scissors, Paper");
-       // string P2 = "Rock";
-      string P2 = System.Console.ReadLine();
-      Console.Clear();
-      System.Console.WriteLine("Player 1 chose {0}", P1);
-      System.Console.WriteLine("Player 2 chose {0}", P2);
-
-      if (P1 == P2)  {
-        Console.WriteLine("It's a draft!");
-      } else if (P1 == "Rock" && P2 == "Scissors"
-                  || P1 == "Paper" && P2 == "Rock"
-                  || P1 == "Scissors" && P2 == "Paper") {
-        Console.WriteLine("{0} beats {1}! Player 1 wins!", P1, P2);
-      } else if (P1 == "Scissors" && P2 == "Rock"
-                  || P1 == "Rock" && P2 == "Paper"
-                  || P1 == "Paper" && P2 == "Scissors") {
-        Console.WriteLine("{0} beats {1}! Player 2 wins!", P2, P1);
-      }else{
-        Console.WriteLine("Oops! Something went wrong!");
-      }
-    }
-}
-
+using static System.Console;
+class MainClass {
+  public static void Main (string[] args) {
+    while(true){
+   WriteLine (" Witaj w kamiennej masakrze 9000! niech[Gracz pierwszy] poda swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
+   string wyborpierwszegogracza = ReadLine();
+   WriteLine("[Gracz drugi] prosze podac swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
+string wybordrugiegogracza = ReadLine();
+if (wyborpierwszegogracza == wybordrugiegogracza){WriteLine ("Remis");}
+if (wyborpierwszegogracza == "1" && wybordrugiegogracza == "2")
+{WriteLine ("wygral Gracz drugi");}
+if (wyborpierwszegogracza == "1" && wybordrugiegogracza == "3")
+{WriteLine ("wygral Gracz pierwszy");}
+if (wyborpierwszegogracza == "2" && wybordrugiegogracza == "1")
+{WriteLine ("wygral Gracz pierwszy");}
+if (wyborpierwszegogracza == "2" && wybordrugiegogracza == "3")
+{WriteLine ("wygral Gracz drugi");}
+if (wyborpierwszegogracza == "3" && wybordrugiegogracza == "1")
+{WriteLine ("wygral Gracz drugi");}
+if (wyborpierwszegogracza == "3" && wybordrugiegogracza == "2")
+{WriteLine ("wygral Gracz pierwszy");}
+ReadKey();
+Clear();
+}}}
