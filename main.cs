@@ -4,7 +4,7 @@ class MainClass
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Chcesz zagraæ z komputerem? t/n");
+        Console.WriteLine("Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
         bool playWithComputer = Console.ReadKey().KeyChar == 't';
 
         bool keepPlaying = true;
@@ -23,7 +23,6 @@ class MainClass
             {
                 player2 = GetChoice();
             }
-
             if (player2 == 1)
             {
                 if (player1 == 1)
