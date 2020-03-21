@@ -47,9 +47,12 @@ else if((inputPlayerOne == "1" && inputPlayerTwo == "3") || (inputPlayerOne == "
 else if((inputPlayerOne == "3" && inputPlayerTwo == "1") || (inputPlayerOne == "1" && inputPlayerTwo == "2") || (inputPlayerOne == "2" && inputPlayerTwo == "3")){
   WriteLine("wygrywa tu");
  }
- WriteLine("chcesz skonczyc te runde?");
- string isExit = ReadLine();
+// WriteLine("chcesz skonczyc te runde? [y]");
+ //string isExit = ReadLine();
 
- if
+ //if(isExit == "y"){
+ //  break;
+// }
+ //Clear();
 }
 }
