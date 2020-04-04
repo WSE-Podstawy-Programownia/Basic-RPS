@@ -3,6 +3,8 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
+  string[,] Tabelawynikow = new string[10,3];
+    int TabelawynikowCurrentIndex = 0;
     Console.WriteLine ("Witaj w grze papier, kamień, nożyce ;)");
     Console.WriteLine ("Graczu nr. 1 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");
     string wyborgracza1 = System.Console.ReadLine();
@@ -39,10 +41,9 @@ class MainClass {
       Console.WriteLine("Wygrał gracz nr 2");
     }
 
-  string[,] Tabelawynikow = new string[10,3];
 
-  int TabelawynikowCurrentIndex = 0;
-  
+
+
   string wyborgracza1String = Console.ReadLine();
 Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;
   string wyborgracza2String = Console.ReadLine();
