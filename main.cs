@@ -2,6 +2,10 @@ using System;
 using static System.Console;
 
 class MainClass {
+
+  string[,] gamesRecord = new string[10,3];
+  int gamesRecordCurrentIndex = 0;
+
   public static void Main (string[] args) {
     while(true){
     string wiadomoscPowitalna = "Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce ";
@@ -10,12 +14,15 @@ class MainClass {
     inputPlayerOne = ReadLine();
 
    if(inputPlayerOne == "k"){
+     gamesRecord[gamesRecordCurrentIndex, 0] = "Gracz pierwszy wybrał kamień";
      WriteLine("Gracz pierwszy wybrał kamień");
    }
    else if (inputPlayerOne == "p"){
+     gamesRecord[gamesRecordCurrentIndex, 0] = "Gracz pierwszy wybrał papier"
      WriteLine("Gracz pierwszy wybrał papier");
      }
   else if (inputPlayerOne == "n"){
+    gamesRecord[gamesRecordCurrentIndex, 0] = "Gracz pierwszy wybrał nożyce"
     WriteLine("Gracz pierwszy wybrał nożyce");
     }
    else{
