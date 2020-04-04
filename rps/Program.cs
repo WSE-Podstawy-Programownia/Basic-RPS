@@ -12,7 +12,7 @@ class MainClass
     int gamesRecordCurrentIndex = 0;
     
     
-    while (playerOneScore < 3 && playerTwoScore < 3)
+    do
     {
       int playerOneChoice;
       bool playerOneParseSuccess;
@@ -49,9 +49,10 @@ class MainClass
         Console.WriteLine("Player 2 won!");
         gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
       }
-    
 
-    }
+      gamesRecordCurrentIndex++;
+      Console.WriteLine ("Do you want to quit? (y)");
+    } while (gamesRecordCurrentIndex < 10 && Console.ReadLine() != "y");
 
     if (playerOneScore == 3)
     {
