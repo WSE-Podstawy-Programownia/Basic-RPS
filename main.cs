@@ -5,7 +5,8 @@ class MainClass {
     
     string c_p1; //inicjalizacja zmiennej dla gracza 1
     string c_p2; //inicjalizacja zmiennej dla gracza 2
-    string[,] gamesRecord = new string[10,3]; //inicjalizacja tablicy wyników
+    int gamesRecordSize = 3;
+    string[,] gamesRecord = new string[gamesRecordSize,3]; //inicjalizacja tablicy wyników
     int gamesRecordCurrentIndex = 0;
     
     do {
@@ -27,46 +28,49 @@ class MainClass {
             
             if (c_p1 == c_p2) {//wszystkie remisy
               Console.WriteLine ("Remis");
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Tie";
               }
             
             else if (c_p1 == "1" && c_p2 == "2"){ // gracz 1 kamien, gracz 2 papier
               Console.WriteLine ("Paper beats Rock. Player 2 wins.",c_p1,c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
               }
                   
             else if  (c_p1 == "1" && c_p2 == "3") {// gracz 1 kamien, gracz 2 nozyce
               Console.WriteLine ("Rock beats Scissors. Player 1 wins.",c_p1,c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1 won";
               }
 
             else if (c_p1=="2" && c_p2 == "1"){ // gracz 1 papier, gracz 2 kamien
               Console.WriteLine ("Paper beats Rock. Player 1 wins.",c_p1, c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1 won";
               }
             
             else if (c_p1=="2" && c_p2 == "3"){ // gracz 1 papier, gracz 2 nożyce
               Console.WriteLine ("Scissors beat Paper. Player 2 wins.",c_p1,c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
              }
           
             else if (c_p1=="3" && c_p2 == "1"){ // gracz 1 nozyce gracz 2 kamien
               Console.WriteLine ("Rock beats Scissors. Player 2 wins.",c_p1,c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
               }
             
             else if (c_p1=="3" && c_p2=="2") {//gracz 1 nozyce, gracz 2 papier
               Console.WriteLine ("Scissors beat Paper. Player 1 wins.", c_p1,c_p2);
-              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1";
+              gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1 won";
               }
-              gamesRecordCurrentIndex += 1;
+              gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
               Console.WriteLine ("Do you want to quit? (t)");
+              
 
 
     } while (Console.ReadLine() != "t");
-
-
-
+  Console.WriteLine ("The scores are:");
+    for (int i = 0; i < gamesRecordCurrentIndex; i++){
+          Console.WriteLine ("Gra #{0}: {1} - {2},{3}.",
+            i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
+}
 
   }
 }
