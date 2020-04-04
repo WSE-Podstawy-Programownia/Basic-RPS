@@ -2,59 +2,58 @@ using System;
 using static System.Console;
 class MainClass {
   public static void Main (string[] args) {
-    WriteLine("Dear player One, choose wisely:\n1 - Rock\n2 - Paper\n3- Scissors" );
-    string inputPlayerOne;
-    inputPlayerOne = ReadLine ();
 
-     if(inputPlayerOne == "1"){
-      WriteLine ("PlayerOne pick Rock.");
-    }
-    else if(inputPlayerOne == "2"){
-      WriteLine ("PlayerOne select Paper.");
-    }
-    else if(inputPlayerOne == "3"){
-      WriteLine ("PlayerOne take Scissors.");
-    }
-    else {
-      WriteLine ("PlayerOne Choose to die hard");
-    }
-    WriteLine("Select any key to continue");
-    Read();
-     Clear();
+    bool continueGame = true;
 
-    WriteLine("Dear player Two, choose wisely:\n1 - Rock\n2 - Paper\n3- Scissors" );
-    string inputPlayerTwo;
-    inputPlayerTwo = ReadLine ();
+    while(continueGame) {
+
+      int inputPlayerOne;  // inputPlayerOne = integer - wartosć wpisana przez gracza jest traktowana jako liczba całkowita
+      
+
+      WriteLine("Dear player One, choose wisely:\n1 - Rock\n2 - Paper\n3- Scissors" );
+      inputPlayerOne = Int32.Parse(ReadLine());  // change Readline to int (ciąg znaków na liczbę całkowitą)
+
+      string[] RPS = new string[] {"CRAP", "Rock", "Paper", "Scissors"}; //zmienna typu string [] (symbol tablicy) + nazwa tablicy = new string [] (ograniczenie tablicy)
+
+      WriteLine("Player one has selected {0}", RPS[inputPlayerOne]);
+
+      WriteLine("Select any key to continue");
+      Read();
+      Clear();
+
+      WriteLine("Dear player Two, choose wisely:\n1 - Rock\n2 - Paper\n3- Scissors" );
+      int inputPlayerTwo;
+      inputPlayerTwo = Int32.Parse(ReadLine());
+
+      WriteLine("Player two has selected {0}", RPS[inputPlayerOne]);
+
+      WriteLine("Select any key to know the result.");
+      Read();
+      Clear();
+
+      if(inputPlayerOne == inputPlayerTwo){
+        WriteLine("Draw, another time guys.");
+      }
+      else if (inputPlayerOne - inputPlayerTwo == -2 || inputPlayerOne - inputPlayerTwo == 1) { // || or \ + shift
+        WriteLine("Player one has won");
+      }
+      else {
+        WriteLine("Player two has won");
+      }
+
+      string playerChoice;
+      WriteLine("Do you want to continue? y");
+      playerChoice = ReadLine();
+      if(playerChoice == "y") {
+        continueGame = true;
+      }
+      else {
+        continueGame = false;
+      }
+      Read();
+      Clear();
 
 
-   if(inputPlayerTwo == "1"){
-      WriteLine ("PlayerOne pick Rock.");
     }
-    else if(inputPlayerTwo == "2"){
-      WriteLine ("PlayerOne select Paper.");
-    }
-    else if(inputPlayerTwo == "3"){
-      WriteLine ("PlayerOne take Scissors.");
-    }
-    else {
-      WriteLine ("PlayerTwo Choose to die hard.");
-    }
-    WriteLine("Select any key to know the result.");
-    Read();
-    Clear();
-
-    if(inputPlayerOne == inputPlayerTwo){
-  WriteLine("Draw, another time guys.");
-  }
-
-  else if((inputPlayerOne == "1" && inputPlayerTwo == "2")
-  || (inputPlayerOne == "2" && inputPlayerTwo == "1")
-  || (inputPlayerOne == "3" && inputPlayerTwo == "2")){ WriteLine("Dear PlayerOne you are the winner!");
-  }
-
-  else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
-  || (inputPlayerOne == "2" && inputPlayerTwo == "3")
-  || (inputPlayerOne == "3" && inputPlayerTwo == "1")){ WriteLine("Dear PlayerTwo you are the winner!");
-  };
   }
 }
