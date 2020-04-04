@@ -69,7 +69,7 @@ class MainClass {
 
   Console.WriteLine ("The scores are:");
     for (int i = 0; i < gamesRecordCurrentIndex; i++){
-          Console.WriteLine ("Gra #{0}: {1} - {2},{3}.",
+          Console.WriteLine ("Game #{0}: {1} - {2},{3}.",
             i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
 }
 
