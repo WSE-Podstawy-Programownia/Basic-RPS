@@ -3,7 +3,11 @@ using static System.Console;
 
 class MainClass {
   public static void Main (string[] args) {
-  
+  int gamesRecordSize = 10;
+  int gamesRecordCurrentSize = 0;
+  string[,] gamesRecord = new string[gamesRecordSize,3];
+  int gamesRecordCurrentIndex = 0;
+
   while(true){
       
       
@@ -12,6 +16,8 @@ class MainClass {
     WriteLine(WiadomoscPowitalna);
     string inputPlayerOne;
     inputPlayerOne = ReadLine();
+    gamesRecord[gamesRecordCurrentIndex, 0] = inputPlayerOne;
+
      if(inputPlayerOne == "1"){
       WriteLine("Player One choose Rock");
     }
@@ -28,7 +34,7 @@ class MainClass {
     WriteLine("Player Two, choose RPS:\n(1) Rock\n(2) Paper\n(3) Scissors"); 
     string inputPlayerTwo;
     inputPlayerTwo = ReadLine();
-
+    gamesRecord[gamesRecordCurrentIndex, 1] = inputPlayerTwo;
     if(inputPlayerTwo == "1"){
       WriteLine("Player Two choose Rock");
     }
@@ -43,19 +49,27 @@ class MainClass {
     }
     if(inputPlayerTwo == inputPlayerOne){
       WriteLine("Remis");
+      gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
     }
     else if((inputPlayerOne == "1" && inputPlayerTwo == "3")
     || (inputPlayerOne == "2" && inputPlayerTwo == "1")
     || (inputPlayerOne == "3" && inputPlayerTwo == "2")){
       WriteLine("Player One won");
+      gamesRecord[gamesRecordCurrentIndex, 2] = "Player One won";
     }
     else if((inputPlayerTwo == "1" && inputPlayerOne == "3")
     || (inputPlayerTwo == "2" && inputPlayerOne == "1")
     || (inputPlayerTwo == "3" && inputPlayerOne == "2")){
       WriteLine("Player Two won");
+      gamesRecord[gamesRecordCurrentIndex, 2] = "Player Two won";
     }
     else{
       WriteLine("Unexpected symbol was written");
+      gamesRecord[gamesRecordCurrentIndex, 2] = "Unexpected symbol";
+    }
+    gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+    if (gamesRecordCurrentSize < gamesRecordSize){
+      gamesRecordCurrentSize++;
     }
 
     WriteLine("DO you want to exit? [y]");
@@ -65,20 +79,8 @@ class MainClass {
     }
     Clear();
   }
-  int gamesRecordSize = 10;
-  string[,] gamesRecord = new string[10,3];
-  int gamesRecordCurrentIndex = 0;
-  string firstPlayerChoiceString = Console.ReadLine();
-  gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
-  string secondPlayerChoiceString = Console.ReadLine();
-  gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
-  gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
-  gamesRecord[gamesRecordCurrentIndex, 2] = "First";
-  gamesRecord[gamesRecordCurrentIndex, 2] = "Second";
-  gamesRecordCurrentIndex += 1;
-  gamesRecordCurrentIndex = (gamesRecordCurrentSize + 1) % gamesRecordSize;
   Console.WriteLine ("Game score:");
-  int gamesRecordCurrentSize;
+  
   for (int i = 0; i <gamesRecordCurrentSize; i++){
     int currentIndex;
     if (gamesRecordCurrentSize < gamesRecordSize){
@@ -87,8 +89,8 @@ class MainClass {
     else {
       currentIndex = gamesRecordCurrentIndex;
     }
-    Console.WriteLine ("Game #{0}: {1} - {2}, Player {3} won",
-    i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
+    Console.WriteLine ("Game #{0}: {1} - {2}, {3}",
+    i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
   }
   }
 }
