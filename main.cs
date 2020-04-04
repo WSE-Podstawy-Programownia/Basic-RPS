@@ -7,7 +7,13 @@ class MainClass
         Console.WriteLine("Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
         bool playWithComputer = Console.ReadKey().KeyChar == 't';
         Console.WriteLine();
-        
+
+        int numberOfGames = 3;
+        int gamesRecordCurrentIndex = 0;
+        string[,] gamesRecord = new string[numberOfGames, 3];
+
+        Console.WriteLine($"Startujemy! Zagramy do {numberOfGames}!");
+
         bool keepPlaying = true;
         while (keepPlaying)
         {
@@ -26,9 +32,24 @@ class MainClass
             Console.WriteLine($"Gracz 1 wybra³: {ConvertChoiceToDescription(player1)}, gracz 2 wybra³: {ConvertChoiceToDescription(player2)}");
             var winner = GetWinner(player1, player2);
             Console.WriteLine(ConvertWinnerToDescription(winner));
-            
-            Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");            
-            keepPlaying = Console.ReadKey().KeyChar == 't';
+
+            gamesRecord[gamesRecordCurrentIndex, 0] = ConvertChoiceToDescription(player1);
+            gamesRecord[gamesRecordCurrentIndex, 1] = ConvertChoiceToDescription(player2);
+            gamesRecord[gamesRecordCurrentIndex, 2] = ConvertWinnerToDescription(winner);
+            gamesRecordCurrentIndex++;
+
+            keepPlaying = gamesRecordCurrentIndex < numberOfGames;
+
+            if (keepPlaying)
+            {
+                Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
+                keepPlaying = Console.ReadKey().KeyChar == 't';
+            }
+            else
+            {
+                Console.WriteLine("Rozegralismy wszystkie gry! Nacisnij dowolny klawisz...");
+                Console.ReadKey();
+            }
             Console.Clear();
         }
     }
