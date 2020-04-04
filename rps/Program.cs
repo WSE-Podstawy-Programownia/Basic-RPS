@@ -8,8 +8,9 @@ class MainClass
     Console.ReadKey();
     Console.Clear();
 
-    int playerOneScore = 0;
-    int playerTwoScore = 0;
+    string [,] gamesRecord = new string [10,3];
+    int gamesRecordCurrentIndex = 0;
+    
     
     while (playerOneScore < 3 && playerTwoScore < 3)
     {
@@ -20,6 +21,8 @@ class MainClass
         Console.WriteLine("[Player 1] Enter your choice:\n(1) rock\n(2) paper\n(3) scissors");
         playerOneParseSuccess = Int32.TryParse(Console.ReadLine(), out playerOneChoice);
       } while (!playerOneParseSuccess || playerOneChoice <= 0 || playerOneChoice >= 4);
+      gamesRecord[gamesRecordCurrentIndex, 0] = playerOneChoice.ToString();
+      
       int playerTwoChoice;
       bool playerTwoParseSuccess;
       do
@@ -27,22 +30,26 @@ class MainClass
         Console.WriteLine("[Player 2] Enter your choice:\n(1) rock\n(2) paper\n(3) scissors");
         playerTwoParseSuccess = Int32.TryParse(Console.ReadLine(), out playerTwoChoice);
       } while (!playerTwoParseSuccess || playerTwoChoice <=0 || playerTwoChoice >= 4);
-      
+      gamesRecord[gamesRecordCurrentIndex, 1] = playerTwoChoice.ToString();
+
       int difference = playerOneChoice - playerTwoChoice;
       if (difference == 1 || difference == -2)
       {
-        playerOneScore = playerOneScore + 1;
-        Console.WriteLine("Player 1 won! Score : {0} - {1}", playerOneScore, playerTwoScore);
+        Console.WriteLine("Player 1 won!");
+        gamesRecord[gamesRecordCurrentIndex,2]="Player 1 won";
+
       }
       else if (difference == 0)
       {
-        Console.WriteLine("Draw!!! Score: {0} - {1}", playerOneScore, playerTwoScore);
+        Console.WriteLine("Draw!!!");
+        gamesRecord[gamesRecordCurrentIndex, 2] = "Draw";
       }
       else
       {
-        playerTwoScore = playerTwoScore + 1;
-        Console.WriteLine("Player 2 won! Score : {0} - {1}", playerOneScore, playerTwoScore);
+        Console.WriteLine("Player 2 won!");
+        gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
       }
+    
 
     }
 
