@@ -5,7 +5,7 @@ class MainClass
     public static void Main(string[] args)
     {
         Console.WriteLine("Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
-        bool playWithComputer = Console.ReadKey().KeyChar == 't';
+        bool playWithComputer = GetYesOrNo();
         Console.WriteLine();
 
         int numberOfGames = 3;
@@ -43,7 +43,7 @@ class MainClass
             if (keepPlaying)
             {
                 Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
-                keepPlaying = Console.ReadKey().KeyChar == 't';
+                keepPlaying = GetYesOrNo();
             }
             else
             {
@@ -51,6 +51,27 @@ class MainClass
                 Console.ReadKey();
             }
             Console.Clear();
+        }
+
+        Console.WriteLine($"Liczba rozegranych gier: {gamesRecordCurrentIndex}");
+        for (int i = 0; i < gamesRecordCurrentIndex; i++)
+        {
+            Console.WriteLine($"[Gra {i + 1}] Gracz 1: {gamesRecord[i, 0]}, Gracz 2: {gamesRecord[i, 1]}, Wynik: {gamesRecord[i, 2]}");
+        }
+        Console.WriteLine("Nacisnij dowolny klawisz...");
+        Console.ReadKey();
+    }
+
+    static bool GetYesOrNo()
+    {
+        while (true)
+        {
+            var pressedKey = Console.ReadKey().KeyChar;
+            if (pressedKey == 't') return true;
+            if (pressedKey == 'n') return false;
+            
+            Console.WriteLine();
+            Console.WriteLine("Wybierz t lub n");
         }
     }
 
