@@ -54,5 +54,31 @@ else if((inputPlayerOne == "3" && inputPlayerTwo == "1") || (inputPlayerOne == "
  //  break;
 // }
  //Clear();
-}
+
+
+ int gamesRecordSize = 10;
+ string [,] gamesRecordv= new string[10,3];
+ int gamesRecordCurrentIndex = 0;
+ string firstPlayerChoiceString = Console.ReadLine();
+ gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
+ string secondPlayerChoiceString = Console.ReadLine();
+ gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
+ gamesRecord[gamesRecordCurrentIndex, 2] = "remis";
+ gamesRecord[gamesRecordCurrentIndex, 2] = "pierwszy";
+ gamesRecord[gamesRecordCurrentIndex, 2] = "drugi";
+ gamesRecordCurrentIndex +- 1;
+ gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+ Console.WriteLine ("Game score: ");
+ int gamesRecordCurrentSize;
+ for (int i = 0; i <gamesRecordCurrentSize; i++){
+   int currentIndex;
+   if (gamesRecordCurrentSize < gamesRecordSize){
+     currentIndex = 0;
+   }
+   else {
+     currentIndex = gamesRecordCurrentIndex;
+   }
+   Console.WriteLine (" Gra #{0}: {1} - {2}, Grasz {3} wygrywa"), i+1, gamesRecord[i,0], gamesRecord [i,1], gamesRecord [i, 2]);
+ } 
+} 
 }
