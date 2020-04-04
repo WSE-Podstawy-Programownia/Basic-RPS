@@ -10,7 +10,7 @@ class MainClass {
     int gamesRecordCurrentSize = 0;
     do 
     {
-      string wiadomoscPowitalna = "Graczu pierwszy, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce";
+      string wiadomoscPowitalna = "GRACZU pierwszy, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce";
       WriteLine(wiadomoscPowitalna);
       string inputPlayerOne;
       inputPlayerOne = ReadLine();
@@ -31,7 +31,7 @@ class MainClass {
         WriteLine("Gracz wpisał coś niepoprawnego");
       }
 
-      WriteLine("Graczu drugi, wybierz jedną z możliwości:\n1 - Kamień\n2 - Papier\n3 - Nożyce");
+      WriteLine("GRACZU drugi, wybierz jedną z możliwości:\n1 - Kamień\n2 - Papier\n3 - Nożyce");
       string inputPlayerTwo;
       inputPlayerTwo = ReadLine();
       
@@ -99,7 +99,7 @@ class MainClass {
       {
         currentIndex = gamesRecordCurrentIndex;
       }
-      
+
       WriteLine("Gra #{0}: {1} - {2}, wygrał gracz {3}", i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
     }
   }
