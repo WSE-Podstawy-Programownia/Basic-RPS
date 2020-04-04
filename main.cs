@@ -47,11 +47,14 @@ class MainClass {
         gameOutput[gameNumber, 2] = "Player two won";
       }
 
+      gameNumber++; //number +1 /co kolejkę numer gry się po prostu zwiększa
 
       string playerChoice;
       WriteLine("Do you want to continue? y");
       playerChoice = ReadLine();
       if(playerChoice == "y") {
+        Read();
+        Clear();
         continue; //no reason to do anything with variable, just go to next game
       }
       else {
@@ -59,14 +62,13 @@ class MainClass {
       }
       Read();
       Clear();
+
     }
 
-    for (int i = 0; i <= gameNumber; i++) {
-      WriteLine("WYNIK GRY {0}: Player one: {1} Player two: {2} Result: {3}", i+1, gameOutput[i, 0],
-      gameOutput[i, 1], gameOutput[i, 2]);
+    for (int i = 0; i < gameNumber; i++) {
+          WriteLine("WYNIK GRY {0}: Player one: {1} Player two: {2} Result: {3}", i+1, gameOutput[i, 0],
+          gameOutput[i, 1], gameOutput[i, 2]);
     }
-
-    gameNumber++; //number +1 /co kolejkę numer gry się po prostu zwiększa
 
   }
 }
