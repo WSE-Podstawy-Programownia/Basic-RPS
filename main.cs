@@ -1,82 +1,66 @@
 using System;
 using static System.Console;
 
-class MainClass 
-{
-  public static void Main (string[] args) 
-  {
-    while(true){
-      string startingScreen = "pls enter your selection: \n1 - Rock \n2 - Paper \n3 - Scissors";
-      WriteLine("Player one, " + startingScreen);
-      string playerOneInput;
-      playerOneInput = ReadLine();
-
-      if(playerOneInput == "1")
-      {
-        WriteLine("Player One selection: Rock");
-      }
-      else if(playerOneInput == "2")
-      {
-        WriteLine("Player One selection: Paper");
-      }
-      else if(playerOneInput == "3")
-      {
-        WriteLine("Player One selection: Scissors");
-      }
-      else 
-      {
-        WriteLine("Invalid Input. Try again.");
-      }
-      System.Console.Clear();
-
-
-      WriteLine("\n");
-      WriteLine("Player two, " + startingScreen)
-      string playerTwoInput;
-      playerTwoInput = ReadLine();
-
-      if(playerTwoInput == "1")
-      {
-        WriteLine("player two choice: Rock");
-      }
-      else if(playerTwoInput == "2")
-      {
-        WriteLine("player two choice: Paper");
-      }
-      else if(playerTwoInput == "3")
-      {
-        WriteLine("player two choice: Scissors");
-      }
-      else 
-      {
-        WriteLine("Invalid Input. Try again.");
-      }
-      System.Console.Clear();
-
-
-      if(playerOneInput == playerTwoInput)
-      {
-        WriteLine("Remis");
-      }
-      else if(playerOneInput == "1" && playerTwoInput == "2" || playerOneInput == "2" && playerTwoInput == "3" || playerOneInput == "3" && playerTwoInput == "1")
-      {
-        WriteLine("Player two wins!");
-      }
-      else if(playerOneInput == "1" && playerTwoInput == "3" || playerOneInput == "2" && playerTwoInput == "1" || playerOneInput == "3" && playerTwoInput == "2")
-      {
-        WriteLine("Player one wins!");
-      }
-      else 
-      {
-        WriteLine("Invalid Input. Try again.");
-      }
-      System.Console.Clear();
-      WriteLine("Do you want to exit? [y]");
-      string isExit = ReadLine();
-      if(isExit == "y"){
-        break;
-      }
-      Clear();
+class MainClass {
+  public static void Main (string[] args) {
+  while(true){
+    string wiadomoscPowitalna = "Graczu pierwszy, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce";
+    WriteLine(wiadomoscPowitalna);
+    string inputPlayerOne;
+    inputPlayerOne = ReadLine();
+    if(inputPlayerOne == "1"){
+      WriteLine("Gracz pierwszy wybrał kamień");
     }
+    else if(inputPlayerOne == "2"){
+      WriteLine("Gracz pierwszy wybrał papier");
+    }
+    else if(inputPlayerOne == "3"){
+      WriteLine("Gracz pierwszy wybrał nożyce");
+    }
+    else{
+      WriteLine("Gracz wpisał coś niepoprawnego");
+    }
+
+    WriteLine("Graczu drugi, wybierz jedną z możliwości:\n1 Kamień\n2 Papier\n3 Nożyce");
+    string inputPlayerTwo;
+    inputPlayerTwo = ReadLine();
+    
+    if(inputPlayerTwo == "1"){
+      WriteLine("Gracz drugi wybrał kamień");
+    }
+    else if(inputPlayerTwo == "2"){
+      WriteLine("Gracz drugi wybrał papier");
+    }
+    else if(inputPlayerTwo == "3"){
+      WriteLine("Gracz drugi wybrał nożyce");
+    }
+    else{
+      WriteLine("Gracz wpisał coś niepoprawnego");
+    }
+    
+    if(inputPlayerOne == inputPlayerTwo){
+      WriteLine("Remis");
+    }
+    else if((inputPlayerOne == "1" && inputPlayerTwo == "3") 
+    || (inputPlayerOne == "2" && inputPlayerTwo == "1")
+    || (inputPlayerOne == "3" && inputPlayerTwo == "2")){
+      WriteLine("Zwyciestwo gracza pierwszego");
+    }
+    else if((inputPlayerOne == "3" && inputPlayerTwo == "1") 
+    || (inputPlayerOne == "1" && inputPlayerTwo == "2")
+    || (inputPlayerOne == "2" && inputPlayerTwo == "3")){
+      WriteLine("Zwyciestwo gracza drugi");
+    }
+    else{
+      WriteLine("Wpisano niepoprawne znaki");
+    }
+
+    WriteLine("Czy chcesz zakonczyc? [y]");
+    string isExit = ReadLine();
+    if(isExit == "y"){
+      break;
+    }
+    Clear();
+  }
   }
 }
