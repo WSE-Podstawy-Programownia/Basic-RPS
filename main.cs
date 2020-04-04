@@ -6,95 +6,97 @@ class MainClass
     {
         Console.WriteLine("Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
         bool playWithComputer = Console.ReadKey().KeyChar == 't';
-
+        Console.WriteLine();
+        
         bool keepPlaying = true;
         while (keepPlaying)
         {
-            int player1 = GetChoice();
-
-            int player2;
+            Choice player1 = GetHumanChoice("Gracz 1");
+            Choice player2;
 
             if (playWithComputer)
             {
-                Random rnd = new Random();
-                player2 = rnd.Next(1, 4);
+                player2 = GetComputerChoice();
             }
             else 
             {
-                player2 = GetChoice();
+                player2 = GetHumanChoice("Gracz 2");
             }
-            if (player2 == 1)
-            {
-                if (player1 == 1)
-                {
-                    Console.WriteLine("Komputer wybra³ papier");
-                    Console.WriteLine("Remis!");
-                }
-                else if (player1 == 2)
-                {
-                    Console.WriteLine("Komputer wybra³ kamieñ");
-                    Console.WriteLine("Remis!");
-                }
-                else if (player1 == 3)
-                {
-                    Console.WriteLine("Komputer wybra³ no¿yce");
-                    Console.WriteLine("Remis!");
-                }
-            }
-            else if (player2 == 2)
-            {
-                if (player1 == 1)
-                {
-                    Console.WriteLine("Komputer wybra³ kamieñ");
-                    Console.WriteLine("Wygrana! Papier pokonuje kamieñ");
-                }
-                else if (player1 == 2)
-                {
-                    Console.WriteLine("Komputer wybra³ no¿yce");
-                    Console.WriteLine("Wygrana! Kamieñ pokonuje no¿yce");
-                }
-                else if (player1 == 3)
-                {
-                    Console.WriteLine("Komputer wybra³ papier");
-                    Console.WriteLine("Wygrana! No¿yce pokonuj¹ papier");
-                }
-            }
-            else if (player2 == 3)
-            {
-                if (player1 == 1)
-                {
-                    Console.WriteLine("Komputer wybra³ no¿yce");
-                    Console.WriteLine("Przegrana! No¿yce pokonuj¹ papier");
-                }
-                else if (player1 == 2)
-                {
-                    Console.WriteLine("Komputer wybra³ papier");
-                    Console.WriteLine("Przegrana! Papier pokonuje kamieñ");
-                }
-                else if (player1 == 3)
-                {
-                    Console.WriteLine("Komputer wybra³ kamieñ");
-                    Console.WriteLine("Przegrana! Kamieñ pokonuje no¿yce");
-                }
-            }
-            Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
-            ConsoleKeyInfo cki = Console.ReadKey(); //czekaj a¿ gracz wciœnie przycisk
-            keepPlaying = cki.KeyChar == 't'; //graj dalej tylko wtedy, gdy wciœniêto t
+
+            Console.WriteLine($"Gracz 1 wybra³: {ConvertChoiceToDescription(player1)}, gracz 2 wybra³: {ConvertChoiceToDescription(player2)}");
+            var winner = GetWinner(player1, player2);
+            Console.WriteLine(ConvertWinnerToDescription(winner));
+            
+            Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");            
+            keepPlaying = Console.ReadKey().KeyChar == 't';
             Console.Clear();
         }
     }
 
-    private static int GetChoice()
+    static Choice GetHumanChoice(string playerName)
     {
         while (true)
         {
-            Console.WriteLine("Wybierz: 1 - papier, 2 - kamieñ lub 3 - no¿yce, a nastêpnie wciœnij ENTER");
+            Console.WriteLine($"[{playerName}] Wybierz: 1 - papier, 2 - kamieñ lub 3 - no¿yce, a nastêpnie wciœnij ENTER");
             if (Int32.TryParse(Console.ReadLine(), out int choice) == false || choice < 1 || choice > 3)
             {
-                Console.WriteLine("Musisz wybraæ 1 - papier, 2 - kamieñ lub 3 - no¿yce!");
+                Console.WriteLine($"[{playerName}] Musisz wybraæ 1 - papier, 2 - kamieñ lub 3 - no¿yce!");
                 continue;
             }
-            return choice;
+
+            return ConvertIntToChoice(choice);
         }
+    }
+
+    static Choice GetComputerChoice()
+    {
+        return ConvertIntToChoice(new Random().Next(1, 4));
+    }
+
+    static Choice ConvertIntToChoice(int choice)
+    {
+        if (choice == 1) return Choice.Paper;
+        if (choice == 2) return Choice.Rock;
+        else return Choice.Scissors;
+    }
+
+    static string ConvertChoiceToDescription(Choice choice)
+    {
+        if (choice == Choice.Paper) return "papier";
+        if (choice == Choice.Rock) return "kamieñ";
+        else return "no¿yce";
+    }
+
+    static string ConvertWinnerToDescription(Winner winner)
+    {
+        if (winner == Winner.Player1) return "Gracz 1 wygrywa!";
+        else if (winner == Winner.Player2) return "Gracz 2 wygrywa!";
+        else return "Remis!";
+    }
+
+    static Winner GetWinner(Choice player1, Choice player2)
+    {
+        if (player1 == player2) return Winner.Tie;
+
+        if (player1 == Choice.Rock && player2 == Choice.Scissors
+            || player1 == Choice.Paper && player2 == Choice.Rock
+            || player1 == Choice.Scissors && player2 == Choice.Paper)
+            return Winner.Player1;
+
+        return Winner.Player2;
+    }
+
+    enum Choice
+    {
+        Rock,
+        Paper,
+        Scissors
+    }
+
+    enum Winner
+    {
+        Player1,
+        Player2,
+        Tie
     }
 }
