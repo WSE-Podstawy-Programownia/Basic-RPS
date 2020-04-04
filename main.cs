@@ -27,7 +27,7 @@ class MainClass {
               Console.Clear(); //czyszczenie ekranu
             
             if (c_p1 == c_p2) {//wszystkie remisy
-              Console.WriteLine ("Remis");
+              Console.WriteLine ("Tie");
               gamesRecord[gamesRecordCurrentIndex, 2] = "Tie";
               }
             
