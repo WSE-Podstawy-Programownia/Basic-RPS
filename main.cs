@@ -4,15 +4,13 @@ class MainClass
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
+        Console.WriteLine("Witaj w Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
         bool playWithComputer = GetYesOrNo();
         Console.WriteLine();
 
-        int numberOfGames = 3;
+        int numberOfRecordedGames = 10;
         int gamesRecordCurrentIndex = 0;
-        string[,] gamesRecord = new string[numberOfGames, 3];
-
-        Console.WriteLine($"Startujemy! Zagramy do {numberOfGames}!");
+        string[,] gamesRecord = new string[numberOfRecordedGames, 3];
 
         bool keepPlaying = true;
         while (keepPlaying)
@@ -33,30 +31,26 @@ class MainClass
             var winner = GetWinner(player1, player2);
             Console.WriteLine(ConvertWinnerToDescription(winner));
 
-            gamesRecord[gamesRecordCurrentIndex, 0] = ConvertChoiceToDescription(player1);
-            gamesRecord[gamesRecordCurrentIndex, 1] = ConvertChoiceToDescription(player2);
-            gamesRecord[gamesRecordCurrentIndex, 2] = ConvertWinnerToDescription(winner);
+            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 0] = ConvertChoiceToDescription(player1);
+            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 1] = ConvertChoiceToDescription(player2);
+            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 2] = ConvertWinnerToDescription(winner);
             gamesRecordCurrentIndex++;
-
-            keepPlaying = gamesRecordCurrentIndex < numberOfGames;
-
-            if (keepPlaying)
-            {
-                Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
-                keepPlaying = GetYesOrNo();
-            }
-            else
-            {
-                Console.WriteLine("Rozegralismy wszystkie gry! Nacisnij dowolny klawisz...");
-                Console.ReadKey();
-            }
+            
+            Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
+            keepPlaying = GetYesOrNo();
+            
             Console.Clear();
         }
 
         Console.WriteLine($"Liczba rozegranych gier: {gamesRecordCurrentIndex}");
-        for (int i = 0; i < gamesRecordCurrentIndex; i++)
+        Console.WriteLine("Ostatnie wyniki:");
+        for (int i = 0; i < numberOfRecordedGames; i++)
         {
-            Console.WriteLine($"[Gra {i + 1}] Gracz 1: {gamesRecord[i, 0]}, Gracz 2: {gamesRecord[i, 1]}, Wynik: {gamesRecord[i, 2]}");
+            if (gamesRecordCurrentIndex - i > 0)
+            {
+                var gameIdx = (gamesRecordCurrentIndex - i - 1) % numberOfRecordedGames;
+                Console.WriteLine($"[{i+1}] Gracz 1: {gamesRecord[gameIdx, 0]}, Gracz 2: {gamesRecord[gameIdx, 1]}, Wynik: {gamesRecord[gameIdx, 2]}");
+            }
         }
         Console.WriteLine("Nacisnij dowolny klawisz...");
         Console.ReadKey();
