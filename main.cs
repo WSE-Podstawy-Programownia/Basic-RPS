@@ -5,7 +5,7 @@ class MainClass {
     
     string c_p1; //inicjalizacja zmiennej dla gracza 1
     string c_p2; //inicjalizacja zmiennej dla gracza 2
-    int gamesRecordSize = 3;
+    int gamesRecordSize = 10;
     string[,] gamesRecord = new string[gamesRecordSize,3]; //inicjalizacja tablicy wyników
     int gamesRecordCurrentIndex = 0;
     
@@ -66,6 +66,7 @@ class MainClass {
 
 
     } while (Console.ReadLine() != "t");
+
   Console.WriteLine ("The scores are:");
     for (int i = 0; i < gamesRecordCurrentIndex; i++){
           Console.WriteLine ("Gra #{0}: {1} - {2},{3}.",
