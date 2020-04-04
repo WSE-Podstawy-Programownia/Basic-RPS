@@ -4,14 +4,18 @@ using static System.Console;
 class MainClass {
   public static void Main (string[] args) {
   string[,] Tabelawynikow = new string[10,3];
+
     int TabelawynikowCurrentIndex = 0;
+
+    do {
+
     Console.WriteLine ("Witaj w grze papier, kamień, nożyce ;)");
     Console.WriteLine ("Graczu nr. 1 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");
     string wyborgracza1 = System.Console.ReadLine();
     System.Console.Clear();
     Console.WriteLine ("Graczu nr. 2 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");
     string wyborgracza2 = Console.ReadLine();
-    bool condition= true;
+ 
     if (wyborgracza1 == wyborgracza2)
     {
       Console.WriteLine("Remis");
@@ -52,5 +56,10 @@ Tabelawynikow[TabelawynikowCurrentIndex, 2] = "Remis";
 Tabelawynikow[TabelawynikowCurrentIndex, 2] = "Pierwszy";
 Tabelawynikow[TabelawynikowCurrentIndex, 2] = "Drugi";
 TabelawynikowCurrentIndex += 1;
+
+Console.WriteLine ("Czy chcesz zakończyć rozgrywkę? (t)");
+   } while (Console.ReadLine() != "t");
+
+
 }
 }
