@@ -1,5 +1,4 @@
 using System;
-using System;
 
 class MainClass {
   public static void Main (string[] args) {
@@ -21,7 +20,6 @@ class MainClass {
           Console.Clear(); //czyszczenie ekranu
           Console.WriteLine ("Player 2: choose (1)Rock, (2)Paper or (3)Scissors");//instrukcja dla drugiego gracza
           c_p2=Console.ReadLine();//drugi gracz przypisuje wartość zmiennej
-        string secondPlayerChoiceString = Console.ReadLine();
           gamesRecord[gamesRecordCurrentIndex, 1] = c_p2;//wpisanie do tablicy wyboru gracza 2 
           Console.WriteLine ("Press any key to continue");//komunikat o końcu tury
           Console.ReadKey(); //czekanie na klawisz
@@ -62,8 +60,10 @@ class MainClass {
               gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1";
               }
               gamesRecordCurrentIndex += 1;
+              Console.WriteLine ("Do you want to quit? (t)");
 
-    } while (true);
+
+    } while (Console.ReadLine() != "t");
 
 
 
