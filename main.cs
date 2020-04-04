@@ -9,7 +9,7 @@ class MainClass {
   }
 
   public static void Main (string[] args) {
-    int gamesRecordSize = 10;
+    int gamesRecordSize = 2;
     string[,] gamesRecord = new string[gamesRecordSize,3];
     int gamesRecordCurrentIndex = 0;
     int gamesRecordCurrentSize = 0;
@@ -95,9 +95,16 @@ class MainClass {
       Console.WriteLine ("Czy chcesz zakończyć rozgrywkę? (t)");
     } while (Console.ReadLine() != "t");
     Console.WriteLine ("Uzyskane wyniki to:");
-    for (int i = 0; i < gamesRecordCurrentIndex; i++){
+    for (int i = 0; i < gamesRecordCurrentSize; i++){
+      int currentIndex;
+      if (gamesRecordCurrentSize < gamesRecordSize){
+        currentIndex = 0;
+      }
+      else {
+        currentIndex = gamesRecordCurrentIndex
+      }
       Console.WriteLine ("Gra #{0}: {1} - {2}, wygrał gracz {3}", 
-        i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
+        i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
     }
   }
 }
