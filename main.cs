@@ -4,7 +4,7 @@ class MainClass
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine("Witaj w Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? t/n");
+        Console.WriteLine("Witaj w Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? TAK - t / NIE - n");
         bool playWithComputer = GetYesOrNo();
         Console.WriteLine();
 
@@ -36,8 +36,8 @@ class MainClass
             gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 2] = ConvertWinnerToDescription(winner);
             gamesRecordCurrentIndex++;
             
-            Console.WriteLine("Chcesz zagraæ jeszcze raz? t/n");
-            keepPlaying = GetYesOrNo();
+            Console.WriteLine("Chcesz zagraæ jeszcze raz? TAK - wciœnij dowolny klawisz, NIE - wciœnij n");
+            keepPlaying = WasKeyPressed('n') == false;
             
             Console.Clear();
         }
@@ -54,6 +54,13 @@ class MainClass
         }
         Console.WriteLine("Nacisnij dowolny klawisz...");
         Console.ReadKey();
+    }
+    
+    static bool WasKeyPressed(char key)
+    {
+        var pressedKey = Console.ReadKey().KeyChar;
+        if (pressedKey == key) return true;
+        else return false;
     }
 
     static bool GetYesOrNo()
