@@ -1,2 +1,2 @@
 language = "bash"
-run = ""
+run = "mcs main.cs\nmono main.exe"

@@ -1,25 +1,51 @@
-using System;..
+using System;
 using static System.Console;
 class MainClass {
   public static void Main (string[] args) {
-    while(true){
-   WriteLine (" Witaj w kamiennej masakrze 9000! niech[Gracz pierwszy] poda swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
+   int gamesRecordSize = 10;
+   string[,] gamesRecord = new string[gamesRecordSize,3]; 
+    int gamesRecordCurrentIndex = 0;
+int gamesRecordCurrentSize = 0;
+
+    do {
+   WriteLine (" Witaj w kamiennej masakrze 9000! niech PlayerOne poda swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
    string wyborpierwszegogracza = ReadLine();
-   WriteLine("[Gracz drugi] prosze podac swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
+   WriteLine("Doktor Biceps prosze podac swoj typ:\n(1) kamien\n(2) papier\n(3) nozyce");
 string wybordrugiegogracza = ReadLine();
-if (wyborpierwszegogracza == wybordrugiegogracza){WriteLine ("Remis");}
+if (wyborpierwszegogracza == wybordrugiegogracza){
+  WriteLine ("Remis");
+  gamesRecord[gamesRecordCurrentIndex, 2] = "nie przelala sie krew";}
 if (wyborpierwszegogracza == "1" && wybordrugiegogracza == "2")
-{WriteLine ("wygral Gracz drugi");}
+{WriteLine ("wygral Doktor Biceps");gamesRecord[gamesRecordCurrentIndex, 2] = "Doktor Biceps obronil swe wlosci";}
 if (wyborpierwszegogracza == "1" && wybordrugiegogracza == "3")
-{WriteLine ("wygral Gracz pierwszy");}
+{WriteLine ("wygral PlayerONE");gamesRecord[gamesRecordCurrentIndex, 2] = "playerone destroy the game";}
 if (wyborpierwszegogracza == "2" && wybordrugiegogracza == "1")
-{WriteLine ("wygral Gracz pierwszy");}
+{WriteLine ("wygral PlayerONE");gamesRecord[gamesRecordCurrentIndex, 2] = "playerone destroy the game";}
 if (wyborpierwszegogracza == "2" && wybordrugiegogracza == "3")
-{WriteLine ("wygral Gracz drugi");}
+{WriteLine ("wygral Doktor Biceps");gamesRecord[gamesRecordCurrentIndex, 2] = "Doktor Biceps obronil swe wlosci";}
 if (wyborpierwszegogracza == "3" && wybordrugiegogracza == "1")
-{WriteLine ("wygral Gracz drugi");}
+{WriteLine ("wygral Doktor Biceps");gamesRecord[gamesRecordCurrentIndex, 2] = "Doktor Biceps obronil swe wlosci";}
 if (wyborpierwszegogracza == "3" && wybordrugiegogracza == "2")
-{WriteLine ("wygral Gracz pierwszy");}
+{WriteLine ("wygral PlayerONE");gamesRecord[gamesRecordCurrentIndex, 2] = "playerone destroy the game";}
 ReadKey();
 Clear();
-}}}
+gamesRecord[gamesRecordCurrentIndex, 0] = wyborpierwszegogracza;
+gamesRecord[gamesRecordCurrentIndex, 1] = wybordrugiegogracza;
+gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize; 
+if (gamesRecordCurrentSize < gamesRecordSize){
+  gamesRecordCurrentSize++;
+}
+ Console.WriteLine ("Doktor Biceps, czy chcesz się znowu upokorzyć? Wpisz PB żeby walczyć o czarne złoto");
+} while (Console.ReadLine() != "PB");
+for (int i = 0; i < gamesRecordCurrentSize; i++){
+  int currentIndex;
+  if (gamesRecordCurrentSize < gamesRecordSize){
+    currentIndex = 0;
+  }
+  else {
+    currentIndex = gamesRecordCurrentIndex
+  ;}
+  Console.WriteLine ("Gra #{0}: {1} - {2}, wygrał gracz {3}",
+    i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
+}
+}}
