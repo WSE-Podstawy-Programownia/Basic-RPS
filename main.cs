@@ -2,110 +2,114 @@ using System;
 using static System.Console;
 
 class MainClass {
-  enum Choice {
-    Rock,
-    Paper,
-    Scissors,
-    Error
-  }
+
+  static void DisplayWelcomeMessage (){
+   WriteLine ("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!\n(click any key to continue)");
+}
+
+  static string GetPlayerInput (){
+   // Variable declaration
+   string rawInput;
+   string properInput;
+   WriteLine ("Choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+   rawInput = ReadLine();
+   while (rawInput != "1" && rawInput != "2" && rawInput != "3") {
+   WriteLine ("Wrong input. Please enter correct one.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+   rawInput = ReadLine();
+   }
+   if (rawInput == "1") { properInput = "Rock"; }
+  else if (rawInput == "2") { properInput = "Paper"; }
+  else { properInput = "Scissors"; }
+  return properInput;
+}
+
+
+static string DetermineWinner (string playerOne, string playerTwo){
+if (playerOne == playerTwo){
+  WriteLine ("It's a draw!");
+  return "Draw";
+}
+else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
+         (playerOne == "Paper" && playerTwo == "Rock") ||
+         (playerOne == "Scissors" && playerTwo == "Paper")){
+  Console.WriteLine ("Player One won!");
+  return "Player One won";
+}
+else {
+  Console.WriteLine ("Player Two won!");
+  return "Player Two won";
+}
+
+}
+
+
+static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
+int currentIndex;
+if (gamesRecordCurrentSize < gamesRecordSize){
+  currentIndex = 0;
+}
+else {
+  currentIndex = lastRecordIndex;
+}
+WriteLine ("Last games history:");
+for (int i = 0; i < gamesRecordCurrentSize; i++){
+  WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+}
+
+}
+
+
+
+
+
   public static void Main (string[] args) {
+    // declaration and initialization of the global game variables
     int gamesRecordSize = 10;
     string[,] gamesRecord = new string[gamesRecordSize,3];
     int gamesRecordCurrentIndex = 0;
-    do {
-    Console.Clear ();
-    Console.WriteLine ("Hello Player 1, make your choice.");
-    Console.WriteLine ("Press (1) for Rock, (2) for Paper or (3) for Scissors.");
-    Console.WriteLine ("Press Enter to confirm your choice.");
-    string p1input = Console.ReadLine();
-    Choice p1;
-    if (p1input == "1"){
-      p1 = Choice.Rock;
-      gamesRecord[gamesRecordCurrentIndex, 0] = "Rock";
-    }
-    else if (p1input == "2"){
-      p1 = Choice.Paper;
-      gamesRecord[gamesRecordCurrentIndex, 0] = "Paper";
-    }
-    else if (p1input == "3"){
-      p1 = Choice.Scissors;
-      gamesRecord[gamesRecordCurrentIndex, 0] = "Scissors";
-    }
-    else{
-      p1 = Choice.Error;
-      gamesRecord[gamesRecordCurrentIndex, 0] = "Error";
-    }
-    Console.Clear ();
-    Console.WriteLine ("Player 1 selected {0}. Press any key to continue.", p1);
-    Console.ReadKey();
-    Console.Clear ();
-    Console.WriteLine ("Hello Player 2, make your choice.");
-    Console.WriteLine ("Press (1) for Rock, (2) for Paper or (3) for Scissors.");
-    Console.WriteLine ("Press Enter to confirm your choice.");
-    string p2input = Console.ReadLine();
-    Choice p2;
-    if (p2input == "1"){
-      p2 = Choice.Rock;
-      gamesRecord[gamesRecordCurrentIndex, 1] = "Rock";
-    }
-    else if (p2input == "2"){
-      p2 = Choice.Paper;
-      gamesRecord[gamesRecordCurrentIndex, 1] = "Paper";
-    }
-     else if (p2input == "3"){
-      p2 = Choice.Scissors;
-      gamesRecord[gamesRecordCurrentIndex, 1] = "Scissors";
-    }
-    else{
-      p2 = Choice.Error;
-      gamesRecord[gamesRecordCurrentIndex, 1] = "Error";
-    }
-    Console.Clear ();
-    Console.WriteLine ("Player 2 selected {0}. Press any key to continue.", p2);
-    Console.ReadKey();
-    Console.Clear ();
-    if (p1 == Choice.Error && p2 == Choice.Error){
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("You both lose. Try correct inputs next time ;)");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "Nobody won";
-    }
-    else if (p1 == Choice.Error){
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("Player 2 wins. Try correct inputs next time, Player 1 ;)");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
-    }
-    else if (p2 == Choice.Error){
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("Player 1 wins. Try correct inputs next time, Player 2 ;)");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1 won";
-    }
-    else if (p1 == p2){
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("It's a Tie!");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "It was a tie";
-    }
-    else if (p1 == Choice.Rock && p2 == Choice.Scissors
-    || p1 == Choice.Scissors && p2 == Choice.Paper
-    || p1 == Choice.Paper && p2 == Choice.Rock)
-    {
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("Player 1 wins! Congratulations!");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "Player 1 won";
-    }
-    else{
-       Console.WriteLine ("Player 1 selected {0}", p1);
-       Console.WriteLine ("Player 2 selected {0}", p2);
-       Console.WriteLine ("Player 1 wins! Congratulations!");
-       gamesRecord[gamesRecordCurrentIndex, 2] = "Player 2 won";
-    }
-    gamesRecordCurrentIndex += 1;
-      Console.WriteLine ("Press (y) to finish, press eny other key to continue");
+    int gamesRecordCurrentSize = 0;
+    
+   DisplayWelcomeMessage();
 
-} while (Console.ReadLine() != "y");
+    // Use the ReadKey() method to get any key as input
+    ReadKey();
+
+    do {
+      // Clear the console before the round
+      Clear();
+
+      // FirstPlayer makes his choice with data validation
+     string firstPlayerChoiceString = GetPlayerInput();
+     gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
+
+      
+      // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
+      Clear ();
+      
+      // SecondPlayer makes his choice with data validation
+     string secondPlayerChoiceString = GetPlayerInput();
+     gamesRecord[gamesRecordCurrentIndex, 0] = secondPlayerChoiceString;
+      
+      // Clear the console before announcing the winner
+      Clear ();
+
+      // Check the result
+gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+
+
+      // Increment the games index counter and current history size
+      gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+      if (gamesRecordCurrentSize < gamesRecordSize){
+        gamesRecordCurrentSize++;
+      }
+
+      // Ask the players if they want to continue
+      WriteLine("Do you want to player another round? [y]");
+    } while (ReadLine() == "y");
+
+    // Present the games' history
+DisplayGamesHistory (gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+    
   }
 }
