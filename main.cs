@@ -131,19 +131,21 @@ class MainClass
             inputKey = ReadKey(true);
 
             Clear();
-            if (inputKey.Key == ConsoleKey.D1)
+
+            switch (inputKey.Key)
             {
-                PlayGame();
+                case ConsoleKey.D1:
+                    PlayGame();
+                    break;
+                case ConsoleKey.D2:
+                    DisplayWelcomeMessage();
+                    break;
+                case ConsoleKey.D3:
+                    DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+                    break;
+                default:
+                    continue;
             }
-            else if (inputKey.Key == ConsoleKey.D2)
-            {
-                DisplayWelcomeMessage();
-            }
-            else if (inputKey.Key == ConsoleKey.D3)
-            {
-                DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
-            }
-            else { continue; }
 
             WriteLine("(press any key to continue)");
             ReadKey(true);
