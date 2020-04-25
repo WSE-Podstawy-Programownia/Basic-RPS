@@ -1,63 +1,72 @@
 using System;
-
+using static System.Console;
 class MainClass {
-  // enum jako typ tylko do odczytu musi być zdefiniowany przed metodą Main
+  static string DetermineWinner (string playerOne, string playerTwo){
+    if (playerOne == playerTwo){
+      WriteLine ("It's a draw!");
+      return "Draw";
+    }
+    else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
+    (playerOne == "Paper" && playerTwo == "Rock")||
+    (playerOne == "Scissors" && playerTwo == "Paper")){
+      Console.Writeline ("Player One won!");
+      return "Player One won";
+    }
+      else {
+        Console.WriteLine ("Player Two won!");
+        return "player Two won";
+
+        gamesRecord[gamesRecordCurrentIndex, 2] = 
+        DetermineWinner(theFirstPlayerChoiceString, theSecondPlayerChoiceString);
+    }
+  }
+
   enum Choices {
     Rock,
     Paper,
     Scissors
   }
-
-  public static void Main (string[] args) {
-    /* Na początku ciągu znaków umieściłem specjalny znak (verbatim literal), 
-    który pozwala na kontynuację ciągu w wielu liniach */
-    Console.WriteLine (@"Welcome in the game of Rock-Paper-Scissors!
+static void DisplayWelcomeMessage (){
+  WriteLine (@"Welcome in the game of Rock-Paper-Scissors!
     Rules are simple - the first player picks Rock, Paper or Scissors enternig accordingly 1, 2 or 3. Next, the second player makes a choice and score is displayed on screen.
     Press any key to continue..");
+}
+static string GetPlayerInput (string player){
+  string rawInput;
+  string properInput;
+  WriteLine ("{0} Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player);
+    rawInput = ReadLine();
+    while (rawInput != "1" && rawInput != "2" && rawInput != "3"){
+      WriteLine ("Wrong input. Please enter correct choice.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+      rawInput = ReadLine();
+    }
+      if (rawInput == "1") { properInput = "Rock"; }
+      else if (rawInput == "2") { properInput = "Paper"; }
+      else { properInput = "Scissors"; }
+      return properInput;
+  
+}
+  public static void Main (string[] args) {
+   
+   DisplayWelcomeMessage();
     
-    // Poniżej używam funkcji do wczytania klawisza z klawiatury, nie ciągu znaków
     Console.ReadKey();
-    Console.WriteLine (@"[Player 1] Choose
-    (1) Rock
-    (2) Paper
-    (3) Scissors");
-    string theFirstPlayerChoiceString = Console.ReadLine();
-    Choices theFirstPlayerChoice;
-    if (theFirstPlayerChoiceString == "1"){
-      theFirstPlayerChoice = Choices.Rock;
-    }
-    else if (theFirstPlayerChoiceString == "2"){
-      theFirstPlayerChoice = Choices.Paper;
-    }
-    else{
-      theFirstPlayerChoice = Choices.Scissors;
-    }
+    
+    string theFirstPlayerChoiceString = GetPlayerInput("Player One");
+    
     // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
-    Console.WriteLine ("You've chosen: {0}", theFirstPlayerChoice);
+    Console.WriteLine ("You've chosen: {0}", theFirstPlayerChoiceString);
     Console.WriteLine ("Press any key to continue..");
     Console.ReadKey();
 
     // następnie czyścimy konsolę, żeby drugi gracz nie zobaczył wyboru pierwszego
     Console.Clear ();
+
     
-    // drugi gracz ponawia proces pierwszego gracza
-    Console.WriteLine (@"[Player 2] Choose
-    (1) Rock
-    (2) Paper
-    (3) Scissors");
-    string theSecondPlayerChoiceString = Console.ReadLine();
-    Choices theSecondPlayerChoice;
-    if (theSecondPlayerChoiceString == "1"){
-      theSecondPlayerChoice = Choices.Rock;
-    }
-    else if (theSecondPlayerChoiceString == "2"){
-      theSecondPlayerChoice = Choices.Paper;
-    }
-    else{
-      theSecondPlayerChoice = Choices.Scissors;
-    }
+    string theSecondPlayerChoiceString = GetPlayerInput("Player Two");
+    
     // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
-    Console.WriteLine ("You've chosen: {0}", theSecondPlayerChoice);
+    Console.WriteLine ("You've chosen: {0}", theSecondPlayerChoiceString);
     Console.WriteLine ("Press any key to continue..");
     Console.ReadKey();
 
@@ -65,19 +74,19 @@ class MainClass {
     Console.Clear ();
 
     // sprawdzamy wynik i wypisujemy na ekranie
-    if (theFirstPlayerChoice == theSecondPlayerChoice){
-       Console.WriteLine ("Draw!\n{0} - {1}", theFirstPlayerChoice, theSecondPlayerChoice);
+    if (theFirstPlayerChoiceString == theSecondPlayerChoiceString){
+       Console.WriteLine ("Draw!\n{0} - {1}", theFirstPlayerChoiceString, theSecondPlayerChoiceString);
     }
-    else if ((theFirstPlayerChoice == Choices.Rock && theSecondPlayerChoice == Choices.Scissors)
+    else if ((theFirstPlayerChoiceString == "Rock" && theSecondPlayerChoiceString == "Scissors")
             ||
-            (theFirstPlayerChoice == Choices.Scissors && theSecondPlayerChoice == Choices.Paper)
+            (theFirstPlayerChoiceString == "Scissors" && theSecondPlayerChoiceString == "Paper")
             ||
-            (theFirstPlayerChoice == Choices.Paper && theSecondPlayerChoice == Choices.Rock)
+            (theFirstPlayerChoiceString == "Paper" && theSecondPlayerChoiceString == "Rock")
     ){
-      Console.WriteLine ("First player won!\n{0} - {1}", theFirstPlayerChoice, theSecondPlayerChoice);
+      Console.WriteLine ("First player won!\n{0} - {1}", theFirstPlayerChoiceString, theSecondPlayerChoiceString);
     }
     else{
-      Console.WriteLine ("Second player won!\n{0} - {1}", theFirstPlayerChoice, theSecondPlayerChoice);
+      Console.WriteLine ("Second player won!\n{0} - {1}", theFirstPlayerChoiceString, theSecondPlayerChoiceString);
     }
   }
 }
