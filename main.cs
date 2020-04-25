@@ -13,7 +13,7 @@ class MainClass
         int gamesRecordCurrentSize = 0;
 
         // Welcome message to the game
-        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
+        DisplayWelcomeMessage();
 
         // Use the ReadKey() method to get any key as input
         ReadKey();
@@ -99,4 +99,10 @@ class MainClass
             currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
         }
     }
+
+    static void DisplayWelcomeMessage()
+    {
+        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
+    }
+
 }
