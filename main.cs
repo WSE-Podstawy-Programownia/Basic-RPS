@@ -14,7 +14,7 @@ class MainClass
 
         // Welcome message to the game
         DisplayWelcomeMessage();
-
+        
         // Use the ReadKey() method to get any key as input
         ReadKey();
 
@@ -24,41 +24,30 @@ class MainClass
             Clear();
 
             // FirstPlayer makes his choice with data validation
-            string firstPlayerChoiceString;
-            int firstPlayerChoiceInt;
-            do
-            {
-                WriteLine("Player One, make your choice:\n[1] Rock\n[2] Paper\n[3] Scissors");
-            } while (!Int32.TryParse(firstPlayerChoiceString = ReadLine(), out firstPlayerChoiceInt) || !(firstPlayerChoiceInt > 0 && firstPlayerChoiceInt <= 3));
-            // Add the information about the choice to the gamesRecord
+            string firstPlayerChoiceString = GetPlayerInput();
             gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
 
             // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
             Clear();
 
             // SecondPlayer makes his choice with data validation
-            string secondPlayerChoiceString;
-            int secondPlayerChoiceInt;
-            do
-            {
-                WriteLine("Player Two, make your choice:\n[1] Rock\n[2] Paper\n[3] Scissors");
-            } while (!Int32.TryParse(secondPlayerChoiceString = ReadLine(), out secondPlayerChoiceInt) || !(secondPlayerChoiceInt > 0 && secondPlayerChoiceInt <= 3));
+            string secondPlayerChoiceString = GetPlayerInput();
             gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
 
             // Clear the console before announcing the winner
             Clear();
 
             // Check the result
-            if (firstPlayerChoiceInt == secondPlayerChoiceInt)
+            if (firstPlayerChoiceString == secondPlayerChoiceString)
             {
                 WriteLine("It's a draw!");
                 gamesRecord[gamesRecordCurrentIndex, 2] = "Draw";
             }
-            else if ((firstPlayerChoiceInt == 1 && secondPlayerChoiceInt == 3)
+            else if ((firstPlayerChoiceString == "Rock" && secondPlayerChoiceString == "Scissors")
                     ||
-                    (firstPlayerChoiceInt == 2 && secondPlayerChoiceInt == 1)
+                    (firstPlayerChoiceString == "Paper" && secondPlayerChoiceString == "Rock")
                     ||
-                    (firstPlayerChoiceInt == 3 && secondPlayerChoiceInt == 2)
+                    (firstPlayerChoiceString == "Scissors" && secondPlayerChoiceString == "Paper")
             )
             {
                 Console.WriteLine("Player One wins!");
@@ -103,6 +92,26 @@ class MainClass
     static void DisplayWelcomeMessage()
     {
         WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
+    }
+
+    static string GetPlayerInput()
+    {
+        // Variable declaration
+        string rawInput;
+        string properInput;
+        WriteLine("Choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+        rawInput = ReadLine();
+        while (rawInput != "1" && rawInput != "2" && rawInput != "3")
+        {
+            WriteLine("Wrong input. Please enter the correct value.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            rawInput = ReadLine();
+        }
+       
+        if (rawInput == "1") { properInput = "Rock"; }
+        else if (rawInput == "2") { properInput = "Paper"; }
+        else { properInput = "Scissors"; }
+
+        return properInput;
     }
 
 }
