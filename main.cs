@@ -1,145 +1,102 @@
 using System;
+using static System.Console;
 
 class MainClass
 {
+
     public static void Main(string[] args)
     {
-        Console.WriteLine("Witaj w Papier, kamieñ, no¿yce! Chcesz zagraæ z komputerem? TAK - t / NIE - n");
-        bool playWithComputer = GetYesOrNo();
-        Console.WriteLine();
-
-        int numberOfRecordedGames = 10;
+        // declaration and initialization of the global game variables
+        int gamesRecordSize = 10;
+        string[,] gamesRecord = new string[gamesRecordSize, 3];
         int gamesRecordCurrentIndex = 0;
-        string[,] gamesRecord = new string[numberOfRecordedGames, 3];
+        int gamesRecordCurrentSize = 0;
 
-        bool keepPlaying = true;
-        while (keepPlaying)
+        // Welcome message to the game
+        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!\n(click any key to continue)");
+
+        // Use the ReadKey() method to get any key as input
+        ReadKey();
+
+        do
         {
-            Choice player1 = GetHumanChoice("Gracz 1");
-            Choice player2;
+            // Clear the console before the round
+            Clear();
 
-            if (playWithComputer)
+            // FirstPlayer makes his choice with data validation
+            string firstPlayerChoiceString;
+            int firstPlayerChoiceInt;
+            do
             {
-                player2 = GetComputerChoice();
+                WriteLine("Player One, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            } while (!Int32.TryParse(firstPlayerChoiceString = ReadLine(), out firstPlayerChoiceInt) || !(firstPlayerChoiceInt > 0 && firstPlayerChoiceInt <= 3));
+            // Add the information about the choice to the gamesRecord
+            gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
+
+            // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
+            Clear();
+
+            // SecondPlayer makes his choice with data validation
+            string secondPlayerChoiceString;
+            int secondPlayerChoiceInt;
+            do
+            {
+                WriteLine("Player Two, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            } while (!Int32.TryParse(secondPlayerChoiceString = ReadLine(), out secondPlayerChoiceInt) || !(secondPlayerChoiceInt > 0 && secondPlayerChoiceInt <= 3));
+            gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
+
+            // Clear the console before announcing the winner
+            Clear();
+
+            // Check the result
+            if (firstPlayerChoiceInt == secondPlayerChoiceInt)
+            {
+                WriteLine("It's a draw!");
+                gamesRecord[gamesRecordCurrentIndex, 2] = "Draw";
             }
-            else 
+            else if ((firstPlayerChoiceInt == 1 && secondPlayerChoiceInt == 3)
+                    ||
+                    (firstPlayerChoiceInt == 2 && secondPlayerChoiceInt == 1)
+                    ||
+                    (firstPlayerChoiceInt == 3 && secondPlayerChoiceInt == 2)
+            )
             {
-                player2 = GetHumanChoice("Gracz 2");
+                Console.WriteLine("Player One won!");
+                gamesRecord[gamesRecordCurrentIndex, 2] = "Player One won";
             }
-
-            Console.WriteLine($"Gracz 1 wybra³: {ConvertChoiceToDescription(player1)}, gracz 2 wybra³: {ConvertChoiceToDescription(player2)}");
-            var winner = GetWinner(player1, player2);
-            Console.WriteLine(ConvertWinnerToDescription(winner));
-
-            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 0] = ConvertChoiceToDescription(player1);
-            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 1] = ConvertChoiceToDescription(player2);
-            gamesRecord[gamesRecordCurrentIndex % numberOfRecordedGames, 2] = ConvertWinnerToDescription(winner);
-            gamesRecordCurrentIndex++;
-            
-            Console.WriteLine("Chcesz zagraæ jeszcze raz? TAK - wciœnij dowolny klawisz, NIE - wciœnij n");
-            keepPlaying = WasKeyPressed('n') == false;
-            
-            Console.Clear();
-        }
-
-        Console.WriteLine($"Liczba rozegranych gier: {gamesRecordCurrentIndex}");
-        Console.WriteLine("Ostatnie wyniki:");
-        for (int i = 0; i < numberOfRecordedGames; i++)
-        {
-            if (gamesRecordCurrentIndex - i > 0)
+            else
             {
-                var gameIdx = (gamesRecordCurrentIndex - i - 1) % numberOfRecordedGames;
-                Console.WriteLine($"[{i+1}] Gracz 1: {gamesRecord[gameIdx, 0]}, Gracz 2: {gamesRecord[gameIdx, 1]}, Wynik: {gamesRecord[gameIdx, 2]}");
-            }
-        }
-        Console.WriteLine("Nacisnij dowolny klawisz...");
-        Console.ReadKey();
-    }
-    
-    static bool WasKeyPressed(char key)
-    {
-        var pressedKey = Console.ReadKey().KeyChar;
-        if (pressedKey == key) return true;
-        else return false;
-    }
-
-    static bool GetYesOrNo()
-    {
-        while (true)
-        {
-            var pressedKey = Console.ReadKey().KeyChar;
-            if (pressedKey == 't') return true;
-            if (pressedKey == 'n') return false;
-            
-            Console.WriteLine();
-            Console.WriteLine("Wybierz t lub n");
-        }
-    }
-
-    static Choice GetHumanChoice(string playerName)
-    {
-        while (true)
-        {
-            Console.WriteLine($"[{playerName}] Wybierz: 1 - papier, 2 - kamieñ lub 3 - no¿yce, a nastêpnie wciœnij ENTER");
-            if (Int32.TryParse(Console.ReadLine(), out int choice) == false || choice < 1 || choice > 3)
-            {
-                Console.WriteLine($"[{playerName}] Musisz wybraæ 1 - papier, 2 - kamieñ lub 3 - no¿yce!");
-                continue;
+                Console.WriteLine("Player Two won!");
+                gamesRecord[gamesRecordCurrentIndex, 2] = "Player Two won";
             }
 
-            return ConvertIntToChoice(choice);
+            // Increment the games index counter and current history size
+            gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+            if (gamesRecordCurrentSize < gamesRecordSize)
+            {
+                gamesRecordCurrentSize++;
+            }
+
+            // Ask the players if they want to continue
+            WriteLine("Do you want to player another round? [y]");
+        } while (ReadLine() == "y");
+
+        // Present the games' history
+        WriteLine("Last 10 games went:");
+        int currentIndex;
+        if (gamesRecordCurrentSize < gamesRecordSize)
+        {
+            currentIndex = 0;
         }
-    }
-
-    static Choice GetComputerChoice()
-    {
-        return ConvertIntToChoice(new Random().Next(1, 4));
-    }
-
-    static Choice ConvertIntToChoice(int choice)
-    {
-        if (choice == 1) return Choice.Paper;
-        if (choice == 2) return Choice.Rock;
-        else return Choice.Scissors;
-    }
-
-    static string ConvertChoiceToDescription(Choice choice)
-    {
-        if (choice == Choice.Paper) return "papier";
-        if (choice == Choice.Rock) return "kamieñ";
-        else return "no¿yce";
-    }
-
-    static string ConvertWinnerToDescription(Winner winner)
-    {
-        if (winner == Winner.Player1) return "Gracz 1 wygrywa!";
-        else if (winner == Winner.Player2) return "Gracz 2 wygrywa!";
-        else return "Remis!";
-    }
-
-    static Winner GetWinner(Choice player1, Choice player2)
-    {
-        if (player1 == player2) return Winner.Tie;
-
-        if (player1 == Choice.Rock && player2 == Choice.Scissors
-            || player1 == Choice.Paper && player2 == Choice.Rock
-            || player1 == Choice.Scissors && player2 == Choice.Paper)
-            return Winner.Player1;
-
-        return Winner.Player2;
-    }
-
-    enum Choice
-    {
-        Rock,
-        Paper,
-        Scissors
-    }
-
-    enum Winner
-    {
-        Player1,
-        Player2,
-        Tie
+        else
+        {
+            currentIndex = gamesRecordCurrentIndex;
+        }
+        for (int i = 0; i < gamesRecordCurrentSize; i++)
+        {
+            WriteLine("Game #{0}: {1} - {2}, {3}",
+            i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
+            currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+        }
     }
 }
