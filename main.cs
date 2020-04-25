@@ -3,85 +3,85 @@ using static System.Console;
 
 class MainClass
 {
+  static void DisplayGameHistory (string[,] gameRecord, int gameRecordSize, int gameRecordCurrentSize = 10, int lastRecordIndex = 0){
+   int currentIndex;
+  if (gameRecordCurrentSize < gameRecordSize){
+  currentIndex = 0;
+  }
+  else {
+  currentIndex = lastRecordIndex;
+  }
+  WriteLine ("Game score:");
+  for (int i = 0; i < gameRecordCurrentSize; i++){
+  WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gameRecord[currentIndex,0], gameRecord[currentIndex,1], gameRecord[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % gameRecordCurrentSize;
+  }
+}
+  static string DetermineWinner (string playerOne, string playerTwo){
+    if (playerOne == playerTwo){
+    WriteLine ("It's a draw!");
+    return "Draw";
+    }
+    else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
+     (playerOne == "Paper" && playerTwo == "Rock") ||
+     (playerOne == "Scissors" && playerTwo == "Paper")){
+    Console.WriteLine ("Player One won!");
+    return "Player One won";
+    }
+    else {
+    Console.WriteLine ("Player Two won!");
+    return "Player Two won";
+    }
+  }
+  static string GetPlayerInput (string playerNumber){
+   string rawInput;
+   string properInput;
+   WriteLine ("Choose one: \n1 - Rock\n2 - Paper\n3 - Scissors");
+   rawInput = ReadLine();
+   while (rawInput != "1" && rawInput != "2" && rawInput != "3") {
+     WriteLine ("Wrong input. Please enter correct one.\nChoose one:\n[1] Rock\n[2] Paper\n[3] Scissors");
+   rawInput = ReadLine();
+   }
+
+   if (rawInput == "1") { properInput = "Rock"; }
+   else if (rawInput == "2") { properInput = "Paper"; }
+   else { properInput = "Scissors"; }
+
+   WriteLine("Player " + playerNumber + " choose " + properInput);
+
+   return properInput;
+}
+
+  static void DisplayWelcomeMessage (string playerNumber){
+    WriteLine ("Welcome Player " + playerNumber + "!");
+    ReadKey();
+    Clear();
+  }
     public static void Main(string[] args)
     {
-        int gamesRecordSize = 10;
-        int gamesRecordCurrentSize = 0;
-        string[,] gamesRecord = new string[gamesRecordSize, 3];
-        int gamesRecordCurrentIndex = 0;
+        int gameRecordSize = 10;
+        int gameRecordCurrentSize = 0;
+        string[,] gameRecord = new string[gameRecordSize, 3];
+        int gameRecordCurrentIndex = 0;
 
         while (true)
         {
-            string WiadomoscPowitalna = "Player One, choose RPS: \n1 - Rock\n2 - Paper\n3 - Scissors";
-            WriteLine(WiadomoscPowitalna);
-            string inputPlayerOne = ReadLine();
-            gamesRecord[gamesRecordCurrentIndex, 0] = inputPlayerOne;
+            DisplayWelcomeMessage("One");
 
-            if (inputPlayerOne == "1")
-            {
-                WriteLine("Player One choose Rock");
-            }
-            else if (inputPlayerOne == "2")
-            {
-                WriteLine("Player One choose Paper");
-            }
-            else if (inputPlayerOne == "3")
-            {
-                WriteLine("Player One choose Scissors");
-            }
-            else
-            {
-                WriteLine("Player wrote something wrong");
-            }
+            string inputPlayerOne = GetPlayerInput("One");
+            gameRecord[gameRecordCurrentIndex, 0] = inputPlayerOne;
 
-            WriteLine("Player Two, choose RPS:\n(1) Rock\n(2) Paper\n(3) Scissors");
-            string inputPlayerTwo;
-            inputPlayerTwo = ReadLine();
-            gamesRecord[gamesRecordCurrentIndex, 1] = inputPlayerTwo;
-            if (inputPlayerTwo == "1")
+           DisplayWelcomeMessage("Two");
+
+            string inputPlayerTwo = GetPlayerInput("Two");
+            gameRecord[gameRecordCurrentIndex, 1] = inputPlayerTwo;
+
+            gameRecord[gameRecordCurrentIndex, 2] = DetermineWinner(inputPlayerOne, inputPlayerTwo);
+
+            gameRecordCurrentIndex = (gameRecordCurrentIndex + 1) % gameRecordSize;
+            if (gameRecordCurrentSize < gameRecordSize)
             {
-                WriteLine("Player Two choose Rock");
-            }
-            else if (inputPlayerTwo == "2")
-            {
-                WriteLine("Player Two choose Paper");
-            }
-            else if (inputPlayerTwo == "3")
-            {
-                WriteLine("Player Two choose Scissors");
-            }
-            else
-            {
-                WriteLine("Player wrote something wrong");
-            }
-            if (inputPlayerTwo == inputPlayerOne)
-            {
-                WriteLine("Remis");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
-            }
-            else if ((inputPlayerOne == "1" && inputPlayerTwo == "3")
-            || (inputPlayerOne == "2" && inputPlayerTwo == "1")
-            || (inputPlayerOne == "3" && inputPlayerTwo == "2"))
-            {
-                WriteLine("Player One won");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Player One won";
-            }
-            else if ((inputPlayerTwo == "1" && inputPlayerOne == "3")
-            || (inputPlayerTwo == "2" && inputPlayerOne == "1")
-            || (inputPlayerTwo == "3" && inputPlayerOne == "2"))
-            {
-                WriteLine("Player Two won");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Player Two won";
-            }
-            else
-            {
-                WriteLine("Unexpected symbol was written");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Unexpected symbol";
-            }
-            gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-            if (gamesRecordCurrentSize < gamesRecordSize)
-            {
-                gamesRecordCurrentSize++;
+                gameRecordCurrentSize++;
             }
 
             WriteLine("DO you want to exit? [y]");
@@ -92,11 +92,6 @@ class MainClass
             }
             Clear();
         }
-        Console.WriteLine("Game score:");
-
-        for (var i = 0; i < gamesRecordCurrentSize; i++)
-        {
-            Console.WriteLine("Game #{0}: {1} - {2}, {3}", i + 1, gamesRecord[i, 0], gamesRecord[i, 1], gamesRecord[i, 2]);
-        }
+        DisplayGameHistory (gameRecord, gameRecordSize);
     }
 }
