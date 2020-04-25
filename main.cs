@@ -23,6 +23,24 @@ static string GetPlayerInput (){
 return properInput;
 }
 
+static string DetermineWinner (string inputPlayerOne, string inputPlayerTwo){
+if (inputPlayerOne == inputPlayerTwo){
+  WriteLine ("Remis");
+  return "Remis";
+}
+else if ((inputPlayerOne == "Kamień" && inputPlayerTwo == "Nożyce") ||
+         (inputPlayerOne == "Papier" && inputPlayerTwo == "Kamień") ||
+         (inputPlayerOne == "Nożyce" && inputPlayerTwo == "Papier")){
+  Console.WriteLine ("Zwycięstwo gracza pierwszego");
+  return "Zwycięstwo gracza pierwszego";
+}
+else {
+  Console.WriteLine ("Zwycięstwo gracza drugiego");
+  return "Zwycięstwo gracza drugiego";
+}
+
+
+}
 
 
   public static void Main (string[] args) {
@@ -42,25 +60,8 @@ return properInput;
   string inputPlayerTwo = GetPlayerInput();
   tablicawynikow[numerpartii, 1] = inputPlayerTwo;
 
-  if(inputPlayerOne == inputPlayerTwo){
-    WriteLine("Remis");
-    tablicawynikow[numerpartii, 2] = "Remis";
-  }
-  else if((inputPlayerOne == "k" && inputPlayerTwo == "n")
-  | (inputPlayerOne == "p" && inputPlayerTwo == "k")
-  | (inputPlayerOne == "n" && inputPlayerTwo == "p")){
-    WriteLine("Zwycięstwo gracza pierwszego");
-    tablicawynikow[numerpartii, 2] = "Zwycięstwo gracza pierwszego";
-  }
-  else if((inputPlayerOne == "n" && inputPlayerTwo == "k")
-  | (inputPlayerOne == "k" && inputPlayerTwo == "p")
-  | (inputPlayerOne == "p" && inputPlayerTwo == "n")){
-    WriteLine("Zwycięstwo gracza drugiego");
-    tablicawynikow[numerpartii, 2] = "Zwycięstwo gracza drugiego";
-  }
-  else{
-    WriteLine("Wpisano niepoprawne znaki");
-}
+  tablicawynikow[numerpartii, 2] = DetermineWinner(inputPlayerOne, inputPlayerTwo);
+
     WriteLine("Zakończyć grę? [t]");
     string isExit = ReadLine();
     Clear();
