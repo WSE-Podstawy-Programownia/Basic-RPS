@@ -1,81 +1,128 @@
 using System;
 using static System.Console;
 
-class MainClass {
-  public static void Main (string[] args)
-  {
-    int gamesRecordSize = 10;
-    string [,] gamesRecord = new string[gamesRecordSize,3];
-    int gamesRecordCurrentIndex = 0; 
-    int gamesRecordCurrentSize = 0;
-    do 
-    {
-      string wiadomoscPowitalna = "GRACZU pierwszy, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce";
-      WriteLine(wiadomoscPowitalna);
-      string inputPlayerOne;
-      inputPlayerOne = ReadLine();
-      if(inputPlayerOne == "1")
-      {
-        WriteLine("Gracz pierwszy wybrał kamień");
-      }
-      else if(inputPlayerOne == "2")
-      {
-        WriteLine("Gracz pierwszy wybrał papier");
-      }
-      else if(inputPlayerOne == "3")
-      {
-        WriteLine("Gracz pierwszy wybrał nożyce");
-      }
-      else
-      {
-        WriteLine("Gracz wpisał coś niepoprawnego");
-      }
+class MainClass 
+{
 
-      WriteLine("GRACZU drugi, wybierz jedną z możliwości:\n1 - Kamień\n2 - Papier\n3 - Nożyce");
-      string inputPlayerTwo;
-      inputPlayerTwo = ReadLine();
-      
-      if(inputPlayerTwo == "1")
+  int gamesRecordSize = 10;
+  string [,] gamesRecord = new string[gamesRecordSize,3];
+  int gamesRecordCurrentIndex = 0; 
+  int gamesRecordCurrentSize = 0;
+
+  static void WelcomeScreen ()
+  {
+    WriteLine("Witaj w: kamień, papier, nożyce!");
+  }
+  static string GetPlayerOneInput()
+  {
+    string rawInput;
+    string properInput;
+    WriteLine ("GRACZU pierwszy, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce");
+    rawInput = ReadLine();
+    while (rawInput != "1" && rawInput != "2" && rawInput != "3")
+    {
+      WriteLine ("Wpisałeś coś niepoprawnego");
+    }
+    if (rawInput == "1")
+    {
+      properInput = "Kamień";
+      WriteLine("Gracz pierwszy wybrał Kamień");
+    }
+    else if (rawInput == "2")
+    {
+      properInput = "Papier";
+      WriteLine("Gracz pierwszy wybrał Papier");
+    }
+    else if (rawInput == "3")
+    {
+      properInput = "Nożyce";
+      WriteLine("Gracz pierwszy wybrał Nożyce");
+    }
+    return properInput; 
+  }
+
+  static string GetPlayerTwoInput()
+  {
+    string rawInput;
+    string properInput;
+    WriteLine ("GRACZU drugi, wybierz jedną z możliwości: \n1 - Kamień\n2 - Papier\n3 - Nożyce");
+    rawInput = ReadLine();
+    while (rawInput != "1" && rawInput != "2" && rawInput != "3")
+    {
+      WriteLine ("Wpisałeś coś niepoprawnego");
+    }
+    if (rawInput == "1")
+    {
+      properInput = "Kamień";
+      WriteLine("Gracz drugi wybrał Kamień");
+    }
+    else if (rawInput == "2")
+    {
+      properInput = "Papier";
+      WriteLine("Gracz drugi wybrał Papier");
+    }
+    else if (rawInput == "3")
+    {
+      properInput = "Nożyce";
+      WriteLine("Gracz drugi wybrał Nożyce");
+    }
+    return properInput; 
+  }
+
+  static string WhoWon (string playerOne, string playerTwo)
+  {
+    if(playerOne == playerTwo)
       {
-        WriteLine("Gracz drugi wybrał kamień");
-      }
-      else if(inputPlayerTwo == "2")
-      {
-        WriteLine("Gracz drugi wybrał papier");
-      }
-      else if(inputPlayerTwo == "3")
-      {
-        WriteLine("Gracz drugi wybrał nożyce");
-      }
-      else
-      {
-        WriteLine("Gracz wpisał coś niepoprawnego");
-      }
-      
-      if(inputPlayerOne == inputPlayerTwo){
         WriteLine("Remis");
+        return "Remis";
       }
-      else if((inputPlayerOne == "1" && inputPlayerTwo == "3") 
-      || (inputPlayerOne == "2" && inputPlayerTwo == "1")
-      || (inputPlayerOne == "3" && inputPlayerTwo == "2"))
+      else if((playerOne == "Kamień" && inputPlayerTwo == "Nożyce") 
+      || (inputPlayerOne == "Papier" && inputPlayerTwo == "Kamień")
+      || (inputPlayerOne == "Nożyce" && inputPlayerTwo == "Papier"))
       {
         WriteLine("Zwyciestwo gracza pierwszego");
-      }
-      else if((inputPlayerOne == "3" && inputPlayerTwo == "1") 
-      || (inputPlayerOne == "1" && inputPlayerTwo == "2")
-      || (inputPlayerOne == "2" && inputPlayerTwo == "3"))
-      {
-        WriteLine("Zwyciestwo gracza drugi");
+        return "Pierwszy";
       }
       else
       {
-        WriteLine("Wpisano niepoprawne znaki");
+        WriteLine("Zwyciestwo gracza drugiego");
+        return "Drugi";
       }
+  }
+
+  static void ScoreHistory (string [,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0)
+  {
+    int currentIndex; 
+    if (gamesRecordCurrentSize < gamesRecordSize)
+    {
+      currentIndex = 0; 
+    }
+    else 
+    {
+      currentIndex = lastRecordIndex;
+    }
+    WriteLine("Tablica wyników: ");
+    for (int i = 0; i < gamesRecordCurrentIndex; i++)
+    {
+      WriteLine("Game #{0}: \t{1}\t-\t{2}, \t{3}", i+1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
+      currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+    }
+  }
+
+  public static void Main (string[] args)
+  {
+    do 
+    {
+      WelcomeScreen();
+
+      string inputPlayerOne = GetPlayerOneInput();
       gamesRecord[gamesRecordCurrentIndex, 0] = inputPlayerOne;
+
+      string inputPlayerTwo = GetPlayerTwoInput;
       gamesRecord[gamesRecordCurrentIndex, 1] = inputPlayerTwo;
-      gamesRecord[gamesRecordCurrentIndex, 2] = "Pierwszy";
-      gamesRecord[gamesRecordCurrentIndex, 2] = "Drugi";
-      gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
+
+      WhoWon();
+      gamesRecord[gamesRecordCurrentIndex, 2] = WhoWon(inputPlayerOne, inputPlayerTwo);
     
       WriteLine("Czy chcesz zakończyć grę? (t)");
     } while(Console.ReadLine() != "t");
@@ -85,20 +132,9 @@ class MainClass {
     {
       gamesRecordCurrentSize++;
     }
-    
     Clear();
-    WriteLine("Tablica wyników: ");
-    for (int i = 0; i < gamesRecordCurrentIndex; i++)
-    {
-      int currentIndex;
-      if (gamesRecordCurrentSize < gamesRecordSize)
-      {
-        currentIndex = 0;
-      }
-      else
-      {
-        currentIndex = gamesRecordCurrentIndex;
-      }
+
+    ScoreHistory (gamesRecord, gamesRecordCurrentSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
 
       WriteLine("Gra #{0}: {1} - {2}, wygrał gracz {3}", i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
     }
