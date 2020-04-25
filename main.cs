@@ -2,14 +2,16 @@ using System;
 using static System.Console;
 
 class MainClass {
+  static void DisplayWelcomeMessage (){
+  WriteLine ("Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+}
   public static void Main (string[] args) {
 
     string[,] tablicawynikow = new string[10,3];
     int numerpartii = 0;
 
     while(true){
-    string wiadomoscPowitalna = "Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce ";
-    WriteLine(wiadomoscPowitalna);
+    DisplayWelcomeMessage();  
     string inputPlayerOne;
     inputPlayerOne = ReadLine();
 
