@@ -8,10 +8,10 @@ class MainClass {
 static string GetPlayerInput (){
   string rawInput;
   string properInput="";
-  WriteLine ("Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+  WriteLine ("Wybór:\nk =Kamień\np = Papier\nn = Nożyce");
   rawInput = ReadLine();
   while (rawInput != "k" && rawInput != "p" && rawInput != "n") {
-  WriteLine ("Błędny wybór! Spróbuj jeszcze raz. Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+  WriteLine ("Błędny wybór! Spróbuj jeszcze raz. Wybór:\nk =Kamień\np = Papier\nn = Nożyce");
   rawInput = ReadLine();
   }
 
@@ -80,13 +80,8 @@ for (int i = 0; i < tablicawynikowrozmiarobecny; i++){
     Clear();
     
     if(isExit == "t"){
-      Console.WriteLine ("Wyniki:");
-        for (int p = 0; p < numerpartii+1; ++p){
-          
-        Console.WriteLine ("Partia #{0}: {1} - {2}. Wynik: {3}",
-        p+1, tablicawynikow[p,0], tablicawynikow[p,1], tablicawynikow[p,2]);
-         }  
-        Console.ReadLine (); {break;}
+    DisplayGamesHistory (tablicawynikow, numerpartii);
+
       }
     
     
