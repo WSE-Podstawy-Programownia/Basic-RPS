@@ -3,15 +3,13 @@ using static System.Console;
 
 class MainClass
 {
+    static int gamesRecordSize = 10;
+    static string[,] gamesRecord = new string[gamesRecordSize, 3];
+    static int gamesRecordCurrentIndex = 0;
+    static int gamesRecordCurrentSize = 0;
 
     public static void Main(string[] args)
     {
-        // declaration and initialization of the global game variables
-        int gamesRecordSize = 10;
-        string[,] gamesRecord = new string[gamesRecordSize, 3];
-        int gamesRecordCurrentIndex = 0;
-        int gamesRecordCurrentSize = 0;
-
         // Welcome message to the game
         DisplayWelcomeMessage();
         
