@@ -3,8 +3,28 @@ using static System.Console;
 
 class MainClass {
   static void DisplayWelcomeMessage (){
-  WriteLine ("Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+  WriteLine ("Witaj w grze Kamień,Papier,Nożyce!");
 }
+static string GetPlayerInput (){
+  string rawInput;
+  string properInput="";
+  WriteLine ("Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+  rawInput = ReadLine();
+  while (rawInput != "k" && rawInput != "p" && rawInput != "n") {
+  WriteLine ("Błędny wybór! Spróbuj jeszcze raz. Wybór P1:\nk =Kamień\np = Papier\nn = Nożyce");
+  rawInput = ReadLine();
+  }
+
+  if (rawInput == "k") { properInput = "Kamień"; }
+  else if (rawInput == "p") { properInput = "Papier"; }
+  else { properInput = "Nożyce"; }
+
+
+return properInput;
+}
+
+
+
   public static void Main (string[] args) {
 
     string[,] tablicawynikow = new string[10,3];
@@ -12,49 +32,15 @@ class MainClass {
 
     while(true){
     DisplayWelcomeMessage();  
-    string inputPlayerOne;
-    inputPlayerOne = ReadLine();
-
-   if(inputPlayerOne == "k"){
-     tablicawynikow [numerpartii, 0] = "Kamień";
-     WriteLine("Gracz pierwszy wybrał kamień");
-   }
-   else if (inputPlayerOne == "p"){
-     tablicawynikow [numerpartii, 0] = "Papier";
-     WriteLine("Gracz pierwszy wybrał papier");
-     }
-  else if (inputPlayerOne == "n"){
-    tablicawynikow [numerpartii, 0] = "Nożyce";
-    WriteLine("Gracz pierwszy wybrał nożyce");
-    }
-   else{
-     tablicawynikow [numerpartii, 0] = "Błędny wybór";
-     WriteLine("Błędny wybór");
-   }
+    
+  string inputPlayerOne = GetPlayerInput();
+  tablicawynikow[numerpartii, 0] = inputPlayerOne;
   WriteLine("Naciśnij dowolny klawisz, żeby przejść do P2");
   ReadKey();
   Clear();
 
-   WriteLine("Wybór P2:\nk = Kamień\np = Papier\nn = Nożyce ");
-    string inputPlayerTwo;
-    inputPlayerTwo = ReadLine();
-
-  if(inputPlayerTwo == "k"){
-      tablicawynikow [numerpartii, 1] = "Kamień";
-      WriteLine("Gracz drugi wybrał kamień");
-   }
-   else if (inputPlayerTwo == "p"){
-     tablicawynikow [numerpartii, 1] = "Papier";
-     WriteLine("Gracz drugi wybrał papier");
-     }
-  else if (inputPlayerTwo == "n"){
-    tablicawynikow [numerpartii, 1] = "Nożyce";
-    WriteLine("Gracz drugi wybrał nożyce");
-    }
-   else{
-    tablicawynikow [numerpartii, 1] = "Błędny wybór";
-     WriteLine("Błędny wybór");
-  }
+  string inputPlayerTwo = GetPlayerInput();
+  tablicawynikow[numerpartii, 1] = inputPlayerTwo;
 
   if(inputPlayerOne == inputPlayerTwo){
     WriteLine("Remis");
