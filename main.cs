@@ -38,8 +38,21 @@ else {
   Console.WriteLine ("Zwycięstwo gracza drugiego");
   return "Zwycięstwo gracza drugiego";
 }
+}
 
-
+static void DisplayGamesHistory (string[,] tablicawynikow, int tablicawynikowrozmiar, int tablicawynikowrozmiarobecny = 10, int ostatniwynik = 0){
+  int numerpartii;
+if (tablicawynikowrozmiarobecny < tablicawynikowrozmiar){
+  numerpartii = 0;
+}
+else {
+  numerpartii = ostatniwynik;
+}
+WriteLine ("Wyniki");
+for (int i = 0; i < tablicawynikowrozmiarobecny; i++){
+  WriteLine ("Gra #{0}:\t{1}\t-\t{2},\t{3}", i+1, tablicawynikow[numerpartii,0], tablicawynikow[numerpartii,1], tablicawynikow[numerpartii,2]);
+  numerpartii = (numerpartii + 1) % tablicawynikowrozmiarobecny;
+}
 }
 
 
