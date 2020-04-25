@@ -1,9 +1,17 @@
 using System;
 using static System.Console;
 public class MainClass{
+
+  static void DisplayWelcomeMessage (){
+  WriteLine ("Witaj w grze papier, kamień i nożyczki.");
+}
+
+
+
   public static void Main(string[] args) {
     
     string kolejnaGra;
+    DisplayWelcomeMessage();
   
   do{
     string rozmiarGry;
