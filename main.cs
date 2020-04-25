@@ -52,27 +52,12 @@ class MainClass
         } while (ReadLine() == "y");
 
         // Present the games' history
-        WriteLine("Last 10 games results:");
-        int currentIndex;
-        if (gamesRecordCurrentSize < gamesRecordSize)
-        {
-            currentIndex = 0;
-        }
-        else
-        {
-            currentIndex = gamesRecordCurrentIndex;
-        }
-        for (int i = 0; i < gamesRecordCurrentSize; i++)
-        {
-            WriteLine("Game #{0}: {1} - {2}, {3}",
-            i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
-            currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
-        }
+        DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
     }
 
     static void DisplayWelcomeMessage()
     {
-        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
+        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\n\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
     }
 
     static string GetPlayerInput()
@@ -116,5 +101,25 @@ class MainClass
         }
     }
 
+    static void DisplayGamesHistory(string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0)
+    {
+        int currentIndex;
+        if (gamesRecordCurrentSize < gamesRecordSize)
+        {
+            currentIndex = 0;
+        }
+        else
+        {
+            currentIndex = lastRecordIndex;
+        }
+
+        WriteLine("Last games history:");
+        for (int i = 0; i < gamesRecordCurrentSize; i++)
+        {
+            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
+            currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+        }
+
+    }
 
 }
