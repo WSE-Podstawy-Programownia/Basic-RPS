@@ -5,6 +5,28 @@ public class MainClass{
   static void DisplayWelcomeMessage (){
   WriteLine ("Witaj w grze papier, kamień i nożyczki.");
 }
+static string GetPlayerInput (){
+  string rawInput;
+  string properInput;
+
+  WriteLine ("Witaj graczu pierwszy! Wybierz:\n(k) Kamień\n(p) Papier\n(n) Nożyczki");
+
+  rawInput = ReadLine();
+while (rawInput != "k" && rawInput != "p" && rawInput != "n") {
+  WriteLine ("Wrong input. Please enter correct one.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+  rawInput = ReadLine();
+}
+
+if (rawInput == "k") { properInput = "Rock"; }
+else if (rawInput == "p") { properInput = "Paper"; }
+else { properInput = "Scissors"; }
+
+return properInput;
+
+
+
+
+}
 
 
 
@@ -35,7 +57,7 @@ public class MainClass{
                   do{
                     inputPlayerOne = ReadLine();
                       if(inputPlayerOne != "k" && inputPlayerOne != "p" && inputPlayerOne != "n"){
-                        Console.WriteLine("wcisnij klawisz k, p lub n, gnojcu");
+                        Console.WriteLine("wcisnij klawisz k, p lub n");
                       }
                   }while (inputPlayerOne != "k" && inputPlayerOne != "p" && inputPlayerOne != "n");
             WriteLine("Naciśnij cokolwiek");
@@ -47,7 +69,7 @@ public class MainClass{
                   do{
                     inputPlayerTwo = ReadLine();
                       if(inputPlayerTwo != "k" && inputPlayerTwo != "p" && inputPlayerTwo != "n"){
-                        Console.WriteLine("wcisnij klawisz k, p lub n, pajacu");
+                        Console.WriteLine("wcisnij przycisk k, p lub n");
                       }
                   }while (inputPlayerTwo != "k" && inputPlayerTwo != "p" && inputPlayerTwo != "n");
             WriteLine("Naciśnij cokolwiek");
