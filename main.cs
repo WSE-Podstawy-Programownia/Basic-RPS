@@ -16,7 +16,7 @@ class MainClass
   WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gameRecord[currentIndex,0], gameRecord[currentIndex,1], gameRecord[currentIndex,2]);
   currentIndex = (currentIndex + 1) % gameRecordCurrentSize;
   }
-}
+  }
   static string DetermineWinner (string playerOne, string playerTwo){
     if (playerOne == playerTwo){
     WriteLine ("It's a draw!");
@@ -57,41 +57,63 @@ class MainClass
     ReadKey();
     Clear();
   }
+  static int gameRecordSize = 10;
+  static int gameRecordCurrentSize = 0;
+  static string[,] gameRecord = new string[gameRecordSize, 3];
+  static int gameRecordCurrentIndex = 0;
+
+  static void PlayGame(){
+    Clear();
+    DisplayWelcomeMessage("One");
+
+   string firstPlayerChoiceString = GetPlayerInput("One");
+   gameRecord[gameRecordCurrentIndex, 0] = firstPlayerChoiceString;
+   Clear ();
+    DisplayWelcomeMessage("Two");
+
+   string secondPlayerChoiceString = GetPlayerInput("Two");
+   gameRecord[gameRecordCurrentIndex, 1] = secondPlayerChoiceString;
+   Clear ();
+   gameRecord[gameRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+   gameRecordCurrentIndex = (gameRecordCurrentIndex + 1) % gameRecordSize;
+   if (gameRecordCurrentSize < gameRecordSize){
+      gameRecordCurrentSize++;
+    }
+    WriteLine("Do you want to play another round? [y]");
+    if (ReadKey(true).Key == ConsoleKey.Y){
+      PlayGame();
+    }
+  }
+
+  static void MainMenuLoop (){
+      ConsoleKeyInfo inputKey;
+        do
+        {
+            Clear();
+            WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Game Score\n\t[ESC] Exit");
+            inputKey = ReadKey(true);
+        if (inputKey.Key == ConsoleKey.D1)
+        {
+            PlayGame();
+        }
+        else if (inputKey.Key == ConsoleKey.D2)
+        {
+            WriteLine("No rules, anarchy!");
+            WriteLine("(click any key to continue)");
+            ReadKey(true);
+        }
+        else if (inputKey.Key == ConsoleKey.D3)
+        {
+            DisplayGameHistory(gameRecord, gameRecordSize, gameRecordCurrentSize, gameRecordCurrentIndex);
+
+            WriteLine("(click any key to continue)");
+            ReadKey(true);
+        }
+        }
+        while (inputKey.Key != ConsoleKey.Escape);
+   }
     public static void Main(string[] args)
     {
-        int gameRecordSize = 10;
-        int gameRecordCurrentSize = 0;
-        string[,] gameRecord = new string[gameRecordSize, 3];
-        int gameRecordCurrentIndex = 0;
-
-        while (true)
-        {
-            DisplayWelcomeMessage("One");
-
-            string inputPlayerOne = GetPlayerInput("One");
-            gameRecord[gameRecordCurrentIndex, 0] = inputPlayerOne;
-
-           DisplayWelcomeMessage("Two");
-
-            string inputPlayerTwo = GetPlayerInput("Two");
-            gameRecord[gameRecordCurrentIndex, 1] = inputPlayerTwo;
-
-            gameRecord[gameRecordCurrentIndex, 2] = DetermineWinner(inputPlayerOne, inputPlayerTwo);
-
-            gameRecordCurrentIndex = (gameRecordCurrentIndex + 1) % gameRecordSize;
-            if (gameRecordCurrentSize < gameRecordSize)
-            {
-                gameRecordCurrentSize++;
-            }
-
-            WriteLine("DO you want to exit? [y]");
-            string isExit = ReadLine();
-            if (isExit == "y")
-            {
-                break;
-            }
-            Clear();
-        }
-        DisplayGameHistory (gameRecord, gameRecordSize);
+      MainMenuLoop();  
     }
 }
