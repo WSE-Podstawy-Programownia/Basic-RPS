@@ -11,48 +11,6 @@ class MainClass
     public static void Main(string[] args)
     {
         MainMenuLoop();
-
-        //// Welcome message to the game
-        //DisplayWelcomeMessage();
-        
-        //// Use the ReadKey() method to get any key as input
-        //ReadKey();
-
-        //do
-        //{
-        //    // Clear the console before the round
-        //    Clear();
-
-        //    // FirstPlayer makes his choice with data validation
-        //    string firstPlayerChoiceString = GetPlayerInput();
-        //    gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
-
-        //    // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
-        //    Clear();
-
-        //    // SecondPlayer makes his choice with data validation
-        //    string secondPlayerChoiceString = GetPlayerInput();
-        //    gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
-
-        //    // Clear the console before announcing the winner
-        //    Clear();
-
-        //    // Check the result
-        //    gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
-
-        //    // Increment the games index counter and current history size
-        //    gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-        //    if (gamesRecordCurrentSize < gamesRecordSize)
-        //    {
-        //        gamesRecordCurrentSize++;
-        //    }
-
-        //    // Ask the players if they want to continue
-        //    WriteLine("Do you want to play again? [y]");
-        //} while (ReadLine() == "y");
-
-        //// Present the games' history
-        //DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
     }
 
     static void DisplayWelcomeMessage()
