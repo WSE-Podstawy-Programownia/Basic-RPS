@@ -1,6 +1,10 @@
 using System;
  
 class MainClass {
+
+
+
+  
   // enum jako typ tylko do odczytu musi być zdefiniowany przed metodą Main
   enum Choices {
     Kamień,
@@ -8,46 +12,118 @@ class MainClass {
     Nożyce
   }
  
+
+
+//zdefiniowanie funkcji 
+static void DisplayWelcomeMessage (){
+  Console.WriteLine("Tekst który wyświetlamy na powitanie");
+}
+
+
+
+//Zadanie 1.B
+static string GetPlayerInput (){
+  // wnętrze funkcji
+  // Variable declaration
+string rawInput;
+string properInput;
+Console.WriteLine ("Choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+rawInput = Console.ReadLine();
+//pętla
+while (rawInput != "1" && rawInput != "2" && rawInput != "3") {
+  Console.WriteLine ("Wrong input. Please enter correct one.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+  rawInput = Console.ReadLine();
+}
+//postać opisowa
+if (rawInput == "1") { properInput = "Rock"; }
+else if (rawInput == "2") { properInput = "Paper"; }
+else { properInput = "Scissors"; }
+return properInput;
+}
+
+
+
+
+//Zadanie 1.C
+
+static string DetermineWinner (string playerOne, string playerTwo){
+  // wnętrze funkcji
+  if (playerOne == playerTwo){
+  Console.WriteLine ("It's a draw!");
+  return "Draw";
+}
+else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
+         (playerOne == "Paper" && playerTwo == "Rock") ||
+         (playerOne == "Scissors" && playerTwo == "Paper")){
+  Console.WriteLine ("Player One won!");
+  return "Player One won";
+}
+else {
+  Console.WriteLine ("Player Two won!");
+  return "Player Two won";
+}
+
+}
+
+//Koniec Funkcji Zadania 1C
+
+
+
+//Zadanie 1D
+
+static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
+  // wnętrze funkcji
+int currentIndex;
+if (gamesRecordCurrentSize < gamesRecordSize){
+  currentIndex = 0;
+}
+else {
+  currentIndex = lastRecordIndex;
+}
+Console.WriteLine ("Last games history:");
+for (int i = 0; i < gamesRecordCurrentSize; i++){
+  Console.WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+}
+
+}
+
+//Koniec Zadania 1D
+
+
   public static void Main (string[] args) {
  
     //Komendy do utworzenia tablicy
-   int gameRecordSize = 10;
-  string[,] gamesRecord = new string[gameRecordSize,3];
-  int gamesRecordCurrentIndex = 0;
-  int gamesRecordCurrentSize = 0;
+  static int gameRecordSize = 10;
+  static string[,] gamesRecord = new string[gameRecordSize,3];
+  static int gamesRecordCurrentIndex = 0;
+  static int gamesRecordCurrentSize = 0;
  
-  //zadanie 2
+//Zadanie 2
+static void MainMenuLoop (){
+  // wnętrze funkcji
+  WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+  ConsoleKeyInfo inputKey;
+do {
+  inputKey = ReadKey(true);
+} while (inputKey.Key != ConsoleKey.Escape);
+}
+//Zadanie 2
+
+
+
+  
   do {
  
  
-    /* Na początku ciągu znaków umieściłem specjalny znak (verbatim literal),
-    który pozwala na kontynuację ciągu w wielu liniach */
-    Console.WriteLine (@"Witaj w grze Kamień-Papier-Nożyce!
-   Zasady są proste - gracz pierwszy wybiera Kamień, Papier lub Nożyce
-   wpisując odpowiednio 1, 2 lub 3. Następnie to samo wpisuje gracz drugi
-   i na ekranie wyświetli się wynik.
-   Naciśnij dowolny klawisz aby kontynuować..");
+
+   DisplayWelcomeMessage();
+
    
     // Poniżej używam funkcji do wczytania klawisza z klawiatury, nie ciągu znaków
     Console.ReadKey();
-    Console.WriteLine (@"[Gracz 1] Wybierz
-   (1) Kamień
-   (2) Papier
-   (3) Nożyce");
-    string firstPlayerChoiceString = Console.ReadLine();
-     gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
-    Choices firstPlayerChoice;
-    if (firstPlayerChoiceString == "1"){
-      firstPlayerChoice = Choices.Kamień;
-    }
-    else if (firstPlayerChoiceString == "2"){
-      firstPlayerChoice = Choices.Papier;
-    }
-    else{
-      firstPlayerChoice = Choices.Nożyce;
-    }
-    // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
-    Console.WriteLine ("Wybrałeś: {0}", firstPlayerChoice);
+string firstPlayerChoice = GetPlayerInput();
+gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoice;
     Console.WriteLine ("Naciśnij dowolny klawisz aby kontynuować..");
     Console.ReadKey();
  
@@ -55,23 +131,8 @@ class MainClass {
     Console.Clear ();
    
     // drugi gracz ponawia proces pierwszego gracza
-    Console.WriteLine (@"[Gracz 2] Wybierz
-   (1) Kamień
-   (2) Papier
-   (3) Nożyce");
-    string secondPlayerChoiceString = Console.ReadLine();
-gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
- 
-    Choices secondPlayerChoice;
-    if (secondPlayerChoiceString == "1"){
-      secondPlayerChoice = Choices.Kamień;
-    }
-    else if (secondPlayerChoiceString == "2"){
-      secondPlayerChoice = Choices.Papier;
-    }
-    else{
-      secondPlayerChoice = Choices.Nożyce;
-    }
+   string secondPlayerChoice = GetPlayerInput();
+gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoice;
     // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
  
     Console.WriteLine ("Wybrałeś: {0}", secondPlayerChoice);
@@ -82,33 +143,8 @@ gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
     Console.Clear ();
  
     // sprawdzamy wynik i wypisujemy na ekranie
-    if (firstPlayerChoice == secondPlayerChoice){
-       Console.WriteLine ("Remis!\n{0} - {1}", firstPlayerChoice, secondPlayerChoice);
- 
-  gamesRecord[gamesRecordCurrentIndex, 2] = "Remis";
- 
- 
-    }
-    else if ((firstPlayerChoice == Choices.Kamień && secondPlayerChoice == Choices.Nożyce)
-            ||
-            (firstPlayerChoice == Choices.Nożyce && secondPlayerChoice == Choices.Papier)
-            ||
-            (firstPlayerChoice == Choices.Papier && secondPlayerChoice == Choices.Kamień)
-    )
-    {
-      Console.WriteLine ("Pierwszy gracz wygrał!\n{0} - {1}", firstPlayerChoice, secondPlayerChoice);
- 
-gamesRecord[gamesRecordCurrentIndex, 2] = "Pierwszy";
- 
- 
-    }
-    else
-    {
-      Console.WriteLine ("Drugi gracz wygrał!\n{0} - {1}", firstPlayerChoice, secondPlayerChoice);
- 
-gamesRecord[gamesRecordCurrentIndex, 2] = "Drugi";
- 
-    }
+   gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoice, secondPlayerChoice);
+
 gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gameRecordSize;
 if (gamesRecordCurrentSize < gameRecordSize){
   gamesRecordCurrentSize++;
@@ -118,13 +154,10 @@ if (gamesRecordCurrentSize < gameRecordSize){
    Console.WriteLine ("Czy chcesz zakończyć rozgrywkę? (t)");
 }
 while (Console.ReadLine() != "t");
-    Console.WriteLine ("Uzyskane wyniki to:");
-     for (int i = 0; i < gamesRecordCurrentSize; i++){
-           
-      Console.WriteLine ("Gra #{0}: {1} - {2}, wygrał gracz {3}",
-      i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
-    }
+
+    DisplayGamesHistory (gamesRecord, gameRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
  
  
   }
+  
 }
