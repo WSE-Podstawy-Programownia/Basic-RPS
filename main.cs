@@ -38,26 +38,7 @@ class MainClass
             Clear();
 
             // Check the result
-            if (firstPlayerChoiceString == secondPlayerChoiceString)
-            {
-                WriteLine("It's a draw!");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Draw";
-            }
-            else if ((firstPlayerChoiceString == "Rock" && secondPlayerChoiceString == "Scissors")
-                    ||
-                    (firstPlayerChoiceString == "Paper" && secondPlayerChoiceString == "Rock")
-                    ||
-                    (firstPlayerChoiceString == "Scissors" && secondPlayerChoiceString == "Paper")
-            )
-            {
-                Console.WriteLine("Player One wins!");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Player One wins";
-            }
-            else
-            {
-                Console.WriteLine("Player Two wins!");
-                gamesRecord[gamesRecordCurrentIndex, 2] = "Player Two wins";
-            }
+            gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
 
             // Increment the games index counter and current history size
             gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
@@ -113,5 +94,27 @@ class MainClass
 
         return properInput;
     }
+
+    static string DetermineWinner(string playerOne, string playerTwo)
+    {
+        if (playerOne == playerTwo)
+        {
+            WriteLine("It's a draw!");
+            return "Draw";
+        }
+        else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
+         (playerOne == "Paper" && playerTwo == "Rock") ||
+         (playerOne == "Scissors" && playerTwo == "Paper"))
+        {
+            Console.WriteLine("Player One wins!");
+            return "Player One wins";
+        }
+        else
+        {
+            Console.WriteLine("Player Two wins!");
+            return "Player Two wins";
+        }
+    }
+
 
 }
