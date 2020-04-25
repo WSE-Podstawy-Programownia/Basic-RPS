@@ -10,52 +10,54 @@ class MainClass
 
     public static void Main(string[] args)
     {
-        // Welcome message to the game
-        DisplayWelcomeMessage();
+        MainMenuLoop();
+
+        //// Welcome message to the game
+        //DisplayWelcomeMessage();
         
-        // Use the ReadKey() method to get any key as input
-        ReadKey();
+        //// Use the ReadKey() method to get any key as input
+        //ReadKey();
 
-        do
-        {
-            // Clear the console before the round
-            Clear();
+        //do
+        //{
+        //    // Clear the console before the round
+        //    Clear();
 
-            // FirstPlayer makes his choice with data validation
-            string firstPlayerChoiceString = GetPlayerInput();
-            gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
+        //    // FirstPlayer makes his choice with data validation
+        //    string firstPlayerChoiceString = GetPlayerInput();
+        //    gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
 
-            // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
-            Clear();
+        //    // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
+        //    Clear();
 
-            // SecondPlayer makes his choice with data validation
-            string secondPlayerChoiceString = GetPlayerInput();
-            gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
+        //    // SecondPlayer makes his choice with data validation
+        //    string secondPlayerChoiceString = GetPlayerInput();
+        //    gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
 
-            // Clear the console before announcing the winner
-            Clear();
+        //    // Clear the console before announcing the winner
+        //    Clear();
 
-            // Check the result
-            gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+        //    // Check the result
+        //    gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
 
-            // Increment the games index counter and current history size
-            gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-            if (gamesRecordCurrentSize < gamesRecordSize)
-            {
-                gamesRecordCurrentSize++;
-            }
+        //    // Increment the games index counter and current history size
+        //    gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+        //    if (gamesRecordCurrentSize < gamesRecordSize)
+        //    {
+        //        gamesRecordCurrentSize++;
+        //    }
 
-            // Ask the players if they want to continue
-            WriteLine("Do you want to play again? [y]");
-        } while (ReadLine() == "y");
+        //    // Ask the players if they want to continue
+        //    WriteLine("Do you want to play again? [y]");
+        //} while (ReadLine() == "y");
 
-        // Present the games' history
-        DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+        //// Present the games' history
+        //DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
     }
 
     static void DisplayWelcomeMessage()
     {
-        WriteLine("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\n\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n(press any key to continue)");
+        WriteLine("Welcome to Rock-Paper-Scissors!\nThe rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\n\nAfter both players have chosen, the winner is determined. After each game the application will ask the players if they want to continue, and if the player reponds with anything else than [y]es, the game ends and presents the record of the last up to 10 games.\n\nHave fun!\n");
     }
 
     static string GetPlayerInput()
@@ -116,6 +118,63 @@ class MainClass
         {
             WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
             currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+        }
+    }
+
+    static void MainMenuLoop()
+    {
+        ConsoleKeyInfo inputKey;
+        do
+        {
+            Clear();
+            WriteLine("Rock-Paper-Scissors Menu:\n\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            inputKey = ReadKey(true);
+
+            Clear();
+            if (inputKey.Key == ConsoleKey.D1)
+            {
+                PlayGame();
+            }
+            else if (inputKey.Key == ConsoleKey.D2)
+            {
+                DisplayWelcomeMessage();
+            }
+            else if (inputKey.Key == ConsoleKey.D3)
+            {
+                DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+            }
+            else { continue; }
+
+            WriteLine("(press any key to continue)");
+            ReadKey(true);
+
+        } while (inputKey.Key != ConsoleKey.Escape);
+
+    }
+
+    static void PlayGame()
+    {
+        Clear();
+       
+        string firstPlayerChoiceString = GetPlayerInput();
+        gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
+        Clear();
+        
+        string secondPlayerChoiceString = GetPlayerInput();
+        gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
+        Clear();
+        
+        gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+        gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+        if (gamesRecordCurrentSize < gamesRecordSize)
+        {
+            gamesRecordCurrentSize++;
+        }
+        
+        WriteLine("Do you want to play again? [y]");
+        if (ReadKey(true).Key == ConsoleKey.Y)
+        {
+            PlayGame();
         }
 
     }
