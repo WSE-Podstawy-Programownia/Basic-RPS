@@ -59,23 +59,27 @@ class MainClass
         }
     }
 
-    static void DisplayGamesHistory(string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0)
+    static void DisplayGamesHistory(string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0, bool reverse = false)
     {
         int currentIndex;
         if (gamesRecordCurrentSize < gamesRecordSize)
         {
-            currentIndex = 0;
+            currentIndex = reverse ? gamesRecordCurrentSize - 1 : 0;
         }
         else
         {
-            currentIndex = lastRecordIndex;
+            currentIndex = reverse ? lastRecordIndex - 1 : lastRecordIndex;
         }
+
+        int step = reverse ? -1 : 1;
 
         WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
-            currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", 
+                reverse ? gamesRecordCurrentSize - i : i + 1, 
+                gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
+            currentIndex = (gamesRecordCurrentSize + currentIndex + step) % gamesRecordCurrentSize;
         }
     }
 
@@ -85,7 +89,7 @@ class MainClass
         do
         {
             Clear();
-            WriteLine("Rock-Paper-Scissors Menu:\n\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            WriteLine("Rock-Paper-Scissors Menu:\n\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[4] Display last games' record reversed\n\t[ESC] Exit");
             inputKey = ReadKey(true);
 
             Clear();
@@ -99,7 +103,10 @@ class MainClass
                     DisplayWelcomeMessage();
                     break;
                 case ConsoleKey.D3:
-                    DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+                    DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex, false);
+                    break;
+                case ConsoleKey.D4:
+                    DisplayGamesHistory(gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex, true);
                     break;
                 default:
                     continue;
