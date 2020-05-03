@@ -74,6 +74,24 @@ static string DetermineWinner(string c_p1, string c_p2){
               return "";
             
 }
+
+static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
+int currentIndex;
+if (gamesRecordCurrentSize < gamesRecordSize){
+  currentIndex = 0;
+}
+else {
+  currentIndex = lastRecordIndex;
+  }
+
+ Console.WriteLine ("The scores are:");
+   for (int i = 0; i < gamesRecordCurrentSize; i++){
+      Console.WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
+      currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
+}
+
+}
+
   
   
   public static void Main (string[] args) {
@@ -83,6 +101,7 @@ static string DetermineWinner(string c_p1, string c_p2){
     int gamesRecordSize = 10;
     string[,] gamesRecord = new string[gamesRecordSize,3]; //inicjalizacja tablicy wyników
     int gamesRecordCurrentIndex = 0;
+    int gamesRecordCurrentSize = 10;
     
     do {
     
@@ -101,16 +120,15 @@ static string DetermineWinner(string c_p1, string c_p2){
               Console.Clear(); //czyszczenie ekranu
               gamesRecord[gamesRecordCurrentIndex,2]= DetermineWinner(c_p1, c_p2);
                      
-              gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
+              //gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
               Console.WriteLine ("Do you want to quit? (t)");
 
     } while (Console.ReadLine() != "t");
 
-  Console.WriteLine ("The scores are:");
-    for (int i = 0; i < gamesRecordCurrentIndex; i++){
-          Console.WriteLine ("Game #{0}: {1} - {2},{3}.",
-            i+1, gamesRecord[i,0], gamesRecord[i,1], gamesRecord[i,2]);
+       DisplayGamesHistory (gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+
+
 }
 
-  }
+  
 }
