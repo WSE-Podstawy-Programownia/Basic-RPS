@@ -43,6 +43,16 @@ class MainClass
         }
     }
 
+    static void Display(string[,] gamesRecord, int gamesRecordCurrentIndex)
+    {
+        Console.WriteLine("|Game No\t|Player 1\t|Player 2\t|Winner");
+        for (int i = 0; i < gamesRecordCurrentIndex; ++i)
+        {
+            Console.WriteLine($"|{i + 1}\t\t|{gamesRecord[i, 0]}\t|{gamesRecord[i, 1]}\t|{gamesRecord[i, 2]}");
+        }
+
+    }
+
     public static void Main(string[] args)
     {
         ReadMe();
@@ -67,11 +77,8 @@ class MainClass
             Console.WriteLine("Do you want to quit? (y)");
         } while (gamesRecordCurrentIndex < 10 && Console.ReadLine() != "y");
 
-        Console.WriteLine("|Game No\t|Player 1\t|Player 2\t|Winner");
-        for (int i = 0; i < gamesRecordCurrentIndex; ++i)
-        {
-            Console.WriteLine($"|{i + 1}\t\t|{gamesRecord[i, 0]}\t|{gamesRecord[i, 1]}\t|{gamesRecord[i, 2]}");
-        }
+        Display(gamesRecord, gamesRecordCurrentIndex);
+
     }
 
 }
