@@ -1,1 +1,1 @@
-
+Link do prezentacji, w ramach której tworzony jest ten program: https://docs.google.com/presentation/d/1tOWHvZ3qeMCXWYZ9n9kLQekK7WLit36BIpl8TDybP-8/edit#slide=id.g72a0a2d42e_0_494
