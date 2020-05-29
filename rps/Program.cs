@@ -5,9 +5,6 @@ class MainClass
     static void ReadMe()
     {
         Console.WriteLine("Welcome! You're playing rock, paper, scissors game! Game rules: Scissors beat paper, paper beats rock, rock beats scissors. The game ends when you beat an opponent three times. Good luck! Ready! Steady! Go! Press any key to continue");
-        Console.ReadKey();
-        Console.Clear();
-
     }
 
     static int GetPlayerInput(int playerIndex)
@@ -50,35 +47,63 @@ class MainClass
         {
             Console.WriteLine($"|{i + 1}\t\t|{gamesRecord[i, 0]}\t|{gamesRecord[i, 1]}\t|{gamesRecord[i, 2]}");
         }
+    }
 
+    static void PlayGame()
+    {
+
+        int playerOneChoice = GetPlayerInput(1);
+        gamesRecord[gamesRecordCurrentIndex, 0] = lookupTable[playerOneChoice - 1];
+
+        int playerTwoChoice = GetPlayerInput(2);
+        gamesRecord[gamesRecordCurrentIndex, 1] = lookupTable[playerTwoChoice - 1];
+
+        gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(playerOneChoice, playerTwoChoice);
+
+        gamesRecordCurrentIndex++;
+
+        Console.WriteLine("Do you want to play another round? [y]");
+        if (Console.ReadKey(true).Key == ConsoleKey.Y)
+        {
+            PlayGame();
+        }
+
+    }
+
+    static void MainMenuLoop()
+    {
+        ConsoleKeyInfo inputKey;
+        do
+        {
+            Console.Clear();
+            Console.WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            inputKey = Console.ReadKey(true);
+
+            if (inputKey.Key == ConsoleKey.D1)
+            {
+                PlayGame();
+            }
+            else if (inputKey.Key == ConsoleKey.D2)
+            {
+                ReadMe();
+            }
+            else if (inputKey.Key == ConsoleKey.D3)
+            {
+                Display(gamesRecord, gamesRecordCurrentIndex);
+            }
+            Console.WriteLine("Press ENTER to continue...");
+            Console.ReadKey();
+
+        } while (inputKey.Key != ConsoleKey.Escape);
     }
 
     public static void Main(string[] args)
     {
-        ReadMe();
-
-        string[,] gamesRecord = new string[10, 3];
-        int gamesRecordCurrentIndex = 0;
-
-        string[] lookupTable = new string[] { "rock\t", "paper\t", "scissors" };
-
-        do
-        {
-
-            int playerOneChoice = GetPlayerInput(1);
-            gamesRecord[gamesRecordCurrentIndex, 0] = lookupTable[playerOneChoice - 1];
-
-            int playerTwoChoice = GetPlayerInput(2);
-            gamesRecord[gamesRecordCurrentIndex, 1] = lookupTable[playerTwoChoice - 1];
-
-            gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(playerOneChoice, playerTwoChoice);
-
-            gamesRecordCurrentIndex++;
-            Console.WriteLine("Do you want to quit? (y)");
-        } while (gamesRecordCurrentIndex < 10 && Console.ReadLine() != "y");
-
-        Display(gamesRecord, gamesRecordCurrentIndex);
-
+        MainMenuLoop();
     }
+
+    static string[,] gamesRecord = new string[10, 3];
+    static int gamesRecordCurrentIndex = 0;
+    static string[] lookupTable = new string[] { "rock\t", "paper\t", "scissors" };
 
 }
