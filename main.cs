@@ -93,20 +93,50 @@ for (int i = 0; i < gamesRecordCurrentSize; i++){
 
   public static void Main (string[] args) {
  
-    //Komendy do utworzenia tablicy
+    //Komendy do utworzenia tablicy //zadanie 2 - zmiana na static
   static int gameRecordSize = 10;
   static string[,] gamesRecord = new string[gameRecordSize,3];
   static int gamesRecordCurrentIndex = 0;
   static int gamesRecordCurrentSize = 0;
  
-//Zadanie 2
+
+
+
+
+
+//Zadanie 2b
+
+
+
+
 static void MainMenuLoop (){
   // wnętrze funkcji
-  WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
   ConsoleKeyInfo inputKey;
-do {
+  
+  do {
+  Clear();
+  WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
   inputKey = ReadKey(true);
+
+if (inputKey.Key == ConsoleKey.D1){
+  WriteLine("Mockup for option 1");
+}
+else if (inputKey.Key == ConsoleKey.D2){
+ DisplayWelcomeMessage();
+
+}
+else if (inputKey.Key == ConsoleKey.D3){
+  DisplayGamesHistory (gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+
+}
+
+else { continue; }
+WriteLine ("(click any key to continue)");
+ReadKey(true);
+
+
 } while (inputKey.Key != ConsoleKey.Escape);
+
 }
 //Zadanie 2
 
