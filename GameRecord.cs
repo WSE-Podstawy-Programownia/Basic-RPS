@@ -1,5 +1,6 @@
 using System;
-using static System.Console
+using static System.Console;
+
 class GameRecord {
  int gameRecordSize;
  string[,] gameRecord;
@@ -21,5 +22,18 @@ public void AddRecord (string playerOneChoice, string playerTwoChoice, string re
     gameRecordCurrentSize++;
   }
 }
-
+ public void DisplayGameHistory (int lastRecordIndex = 0){
+   int currentIndex;
+  if (gameRecordCurrentSize < gameRecordSize){
+  currentIndex = 0;
+  }
+  else {
+  currentIndex = lastRecordIndex;
+  }
+  WriteLine ("Game score:");
+  for (int i = 0; i < gameRecordCurrentSize; i++){
+  WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gameRecord[currentIndex,0], gameRecord[currentIndex,1], gameRecord[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % gameRecordCurrentSize;
+  }
+  }
 }
