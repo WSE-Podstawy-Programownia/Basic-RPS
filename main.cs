@@ -144,6 +144,7 @@ class MainClass {
   WriteLine(playerOne.playerName);
   Player playerTwo = new Player();
   WriteLine(playerTwo.playerName);
+  GamesRecord gamesRecord = new GamesRecord();
 
   }
 }
