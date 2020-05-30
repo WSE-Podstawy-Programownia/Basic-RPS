@@ -3,7 +3,7 @@ using static System.Console;
 
 class GamesRecord
 {
-    int gamesRecordSize;
+    public int gamesRecordSize;
     string[,] gamesRecord;
     int gamesRecordCurrentIndex;
     int gamesRecordCurrentSize;
