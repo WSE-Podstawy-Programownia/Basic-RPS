@@ -9,6 +9,8 @@ class MainClass {
   }
 
   public static void Main (string[] args) {
+    Player player;
+    Game game;
     int gamesRecordSize = 2;
     string[,] gamesRecord = new string[gamesRecordSize,3];
     int gamesRecordCurrentIndex = 0;
@@ -101,7 +103,7 @@ class MainClass {
         currentIndex = 0;
       }
       else {
-        currentIndex = gamesRecordCurrentIndex
+        currentIndex = gamesRecordCurrentIndex;
       }
       Console.WriteLine ("Gra #{0}: {1} - {2}, wygrał gracz {3}", 
         i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
