@@ -29,7 +29,7 @@ class GamesRecord
     }
   }
 
-  static void DisplayGamesHistory ()
+  public void DisplayGamesHistory ()
   {
     int currentIndex;
     if (gamesRecordCurrentSize < gamesRecordSize){
