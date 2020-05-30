@@ -26,7 +26,7 @@ else { properInput = "Nożyce"; }
 return properInput;
 }
 
-static string DetermineWinner (string playerOne, string playerTwo){
+static string DetermineWinner (string wyborgracza1String, string wyborgracza2String){
  
    /* if (wyborgracza1String == wyborgracza2String)
     {
