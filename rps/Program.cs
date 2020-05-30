@@ -99,7 +99,9 @@ class MainClass
 
     public static void Main(string[] args)
     {
-        MainMenuLoop();
+        // MainMenuLoop();
+        Player playerOne = new Player("Player One");
+        Console.WriteLine(playerOne.playerName);
     }
 
     static string[,] gamesRecord = new string[10, 3];
