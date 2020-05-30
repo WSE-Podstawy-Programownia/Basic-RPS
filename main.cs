@@ -153,6 +153,17 @@ class MainClass {
 
 
   public static void Main (string[] args) {
-    MainMenuLoop();
+    // MainMenuLoop();
+      Player playerOne = new Player();
+      Player playerOne = new Player("Player One");
+      WriteLine(playerOne.playerName);
+
+      Player playerTwo = new Player();
+      WriteLine(playerTwo.playerName);
+
+      GamesRecord gamesRecord = new GamesRecord();
+
+
+
   }
 }
