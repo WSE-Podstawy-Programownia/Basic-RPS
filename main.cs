@@ -5,6 +5,25 @@ class MainClass {
   static void DisplayWelcomeMessage (){
   WriteLine ("Witaj w grze papier, kamień, nożyce ;)");}
 
+  static void DisplayGamesHistory (string[,] Tabelawynikow, int TabelawynikowSize, int TabelawynikowCurrentSize = 10, int OstatniwynikIndex = 0){
+  int currentIndex;
+if (TabelawynikowCurrentSize < TabelawynikowSize){
+  currentIndex = 0;
+}
+else {
+  currentIndex = OstatniwynikIndex;
+}
+
+WriteLine ("Ostatnie wyniki:");
+for (int i = 0; i < TabelawynikowCurrentSize; i++){
+  WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, Tabelawynikow[currentIndex,0], Tabelawynikow[currentIndex,1], Tabelawynikow[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % TabelawynikowCurrentSize;
+}
+
+
+}
+
+
   static string wyborgraczaInput (string player){
   // wnętrze funkcji
   string rawInput;
@@ -85,9 +104,9 @@ else {
 }
 
 
-  public static void Main (string[] args) {
+  /*public static void Main (string[] args) {
     int TabelawynikowSize = 10;
-  string[,] Tabelawynikow = new string[TabelawynikowSize,3];
+  string[,] Tabelawynikow = new string[TabelawynikowSize,3];*/
 
   
 
@@ -126,17 +145,17 @@ Tabelawynikow[TabelawynikowCurrentIndex, 2] = "Drugi";
 TabelawynikowCurrentIndex += 1;
 */
 
-Tabelawynikow[TabelawynikowCurrentIndex, 2] = DetermineWinner(wyborgracza1StringString, wyborgracza2StringString);
+Tabelawynikow[TabelawynikowCurrentIndex, 2] = DetermineWinner(wyborgracza1String, wyborgracza2String);
 
 
 Console.WriteLine ("Czy chcesz zakończyć rozgrywkę? (t)");
    } while (Console.ReadLine() != "t");
 
-int TabelawynikowIndex = 0;
-int TabelawynikowCurrentSize = 0;
+/*int TabelawynikowIndex = 0;
+int TabelawynikowCurrentSize = 0;*/
 
 
-for (int i = 0; i < TabelawynikowIndex; i++){
+/*for (int i = 0; i < TabelawynikowIndex; i++){
   Console.WriteLine ("Gra #{0}: {1} - {2}, wygrał gracz {3}",
     i+1, Tabelawynikow[i,0], Tabelawynikow[i,1], Tabelawynikow[i,2]);
 }
@@ -161,6 +180,9 @@ for (int i = 0; i < TabelawynikowCurrentSize; i++){
     i+1, Tabelawynikow[currentIndex,0], Tabelawynikow[currentIndex,1], Tabelawynikow[currentIndex,2]);
     currentIndex = (currentIndex + 1) % TabelawynikowCurrentSize;
 }
+*/
+
+DisplayGamesHistory (Tabelawynikow, TabelawynikowSize, TabelawynikowCurrentSize, TabelawynikowCurrentIndex);
 
 
 }
