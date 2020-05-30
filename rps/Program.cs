@@ -100,7 +100,7 @@ class MainClass
     public static void Main(string[] args)
     {
         // MainMenuLoop();
-        Player playerOne = new Player("Player One");
+        Player playerOne = new Player();
         Console.WriteLine(playerOne.playerName);
     }
 
