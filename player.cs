@@ -7,8 +7,13 @@ class Player {
    this.playerName = playerName;
    }
   public void SetPlayerName () {
-   Write("Please enter player name: ");
-   playerName = ReadLine();
+    do
+    {
+      Clear();
+      Write("Please enter player name: ");
+      playerName = ReadLine();
+    }
+    while(playerName.Length == 0 || playerName.Length > 10);
   }
   public Player () {
    SetPlayerName();
