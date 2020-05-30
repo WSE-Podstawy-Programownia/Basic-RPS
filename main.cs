@@ -5,6 +5,7 @@ class MainClass {
   static void DisplayWelcomeMessage (){
   WriteLine ("Witaj w grze papier, kamień, nożyce ;)");}
 
+
   static void DisplayGamesHistory (string[,] Tabelawynikow, int TabelawynikowSize, int TabelawynikowCurrentSize = 10, int OstatniwynikIndex = 0){
   int currentIndex;
 if (TabelawynikowCurrentSize < TabelawynikowSize){
@@ -113,9 +114,9 @@ else {
 
     int TabelawynikowCurrentIndex = 0;
 
-    do {
+do {
 
-      DisplayWelcomeMessage();
+  DisplayWelcomeMessage();
     /*Console.WriteLine ("Witaj w grze papier, kamień, nożyce ;)");*/
     /*Console.WriteLine ("Graczu nr. 1 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");*/
 
@@ -181,8 +182,6 @@ for (int i = 0; i < TabelawynikowCurrentSize; i++){
     currentIndex = (currentIndex + 1) % TabelawynikowCurrentSize;
 }
 */
-
-DisplayGamesHistory (Tabelawynikow, TabelawynikowSize, TabelawynikowCurrentSize, TabelawynikowCurrentIndex);
 
 
 }
