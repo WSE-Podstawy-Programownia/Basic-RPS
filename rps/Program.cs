@@ -102,6 +102,7 @@ class MainClass
         // MainMenuLoop();
         Player playerOne = new Player();
         Console.WriteLine(playerOne.playerName);
+        GamesRecord gamesRecord = new GamesRecord();
     }
 
     static string[,] gamesRecord = new string[10, 3];
