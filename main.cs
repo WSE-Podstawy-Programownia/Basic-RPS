@@ -118,6 +118,6 @@ class MainClass
      WriteLine(playerOne.playerName);
      Player playerTwo = new Player();
      WriteLine(playerTwo.playerName);
-
+   GameRecord gameRecord = new GameRecord();
     }
 }
