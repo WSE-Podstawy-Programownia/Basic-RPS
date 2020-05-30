@@ -59,4 +59,24 @@ class Game
             return $"{playerTwo.playerName} wins!";
         }
     }
+
+    public void Play()
+    {
+        Clear();
+        string firstPlayerChoiceString = GetPlayerInput(playerOne);
+
+        Clear();
+        string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+
+        Clear();
+
+        string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+        gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+
+        WriteLine("Do you want to play another round? [y]");
+        if (ReadKey(true).Key == ConsoleKey.Y)
+        {
+            Play();
+        }
+    }
 }
