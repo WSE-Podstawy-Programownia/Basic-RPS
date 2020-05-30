@@ -69,9 +69,9 @@ static string DetermineWinner (string wyborgracza1String, string wyborgracza2Str
   return "Remis";
 }
 
-else if ((wyborgracza1String == "2" && playerTwo == "3") ||
-         (wyborgracza1String == "1" && playerTwo == "2") ||
-         (wyborgracza1String == "3" && playerTwo == "1")){
+else if ((wyborgracza1String == "2" && wyborgracza2String == "3") ||
+         (wyborgracza1String == "1" && wyborgracza2String == "2") ||
+         (wyborgracza1String == "3" && wyborgracza2String == "1")){
   Console.WriteLine ("Wygrał gracz nr 1!");
   return "Wygrał gracz nr 1";
 }
