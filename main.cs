@@ -108,7 +108,10 @@ ReadKey(true);
 }
 
 public static void Main (string[] args) {
-MainMenuLoop();
-    
+// MainMenuLoop();
+  Player playerOne = new Player("Player One");
+  WriteLine(playerOne.playerName);
+
+ 
   }
 }
