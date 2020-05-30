@@ -116,5 +116,8 @@ class MainClass
     {
      Player playerOne = new Player("Player One");
      WriteLine(playerOne.playerName);
+     Player playerTwo = new Player();
+     WriteLine(playerTwo.playerName);
+
     }
 }
