@@ -25,6 +25,21 @@ public void AddRecord (string playerOneChoice, string playerTwoChoice, string re
   }
 }
 
+public void DisplayGamesHistory () {
+  int displayRecordIndex;
+  if (gamesRecordCurrentSize < gamesRecordSize){
+    displayRecordIndex = 0;
+  }
+  else {
+    displayRecordIndex = gamesRecordCurrentIndex;
+  }
+  WriteLine ("Last games history:");
+  for (int i = 0; i < gamesRecordCurrentSize; i++){
+    WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[displayRecordIndex,0], gamesRecord[displayRecordIndex,1], gamesRecord[displayRecordIndex,2]);
+    displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
+  }
+}
+
 
 }
 
