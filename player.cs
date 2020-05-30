@@ -1,7 +1,7 @@
 using System;
 using static System.Console;
 
-class Player {
+public class Player {
   public string playerName;
 
  public Player (string playerName) {
