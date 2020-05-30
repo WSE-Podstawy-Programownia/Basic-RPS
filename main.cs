@@ -9,6 +9,8 @@ class MainClass {
   static int gamesRecordCurrentIndex = 0;
   static int gamesRecordCurrentSize = 0;
 
+  GamesRecord gamesRecord - new GamesRecord(15);
+
   static void DisplayWelcomeMessage (){
     WriteLine ("Welcome to a simple Rock-Paper-Scissors game. \nThe rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
   }
@@ -52,23 +54,6 @@ class MainClass {
     else{
       Console.WriteLine ("Player Two won!");
       return "Player Two won";
-    }
-  }
-
-  static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
-    int currentIndex;
-    if (gamesRecordCurrentSize < gamesRecordSize){
-      currentIndex = 0;
-    }
-    else {
-      currentIndex = lastRecordIndex;
-    }
-
-    WriteLine ("Last games history:");
-    for (int i = 0; i < gamesRecordCurrentSize; i++){
-        WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}",
-        i+1, gamesRecord[currentIndex,0], gamesRecord[currentIndex,1], gamesRecord[currentIndex,2]);
-        currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
     }
   }
 
