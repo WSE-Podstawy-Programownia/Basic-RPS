@@ -10,7 +10,9 @@ class MainClass
 
     public static void Main(string[] args)
     {
-        MainMenuLoop();
+        //MainMenuLoop();
+        Player playerOne = new Player("Player One");
+        WriteLine(playerOne.playerName);
     }
 
     static void DisplayWelcomeMessage()
@@ -30,7 +32,7 @@ class MainClass
             WriteLine("Wrong input. Please enter the correct value.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
             rawInput = ReadLine();
         }
-       
+
         if (rawInput == "1") { properInput = "Rock"; }
         else if (rawInput == "2") { properInput = "Paper"; }
         else { properInput = "Scissors"; }
@@ -76,8 +78,8 @@ class MainClass
         WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", 
-                reverse ? gamesRecordCurrentSize - i : i + 1, 
+            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}",
+                reverse ? gamesRecordCurrentSize - i : i + 1,
                 gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
             currentIndex = (gamesRecordCurrentSize + currentIndex + step) % gamesRecordCurrentSize;
         }
@@ -122,22 +124,22 @@ class MainClass
     static void PlayGame()
     {
         Clear();
-       
+
         string firstPlayerChoiceString = GetPlayerInput();
         gamesRecord[gamesRecordCurrentIndex, 0] = firstPlayerChoiceString;
         Clear();
-        
+
         string secondPlayerChoiceString = GetPlayerInput();
         gamesRecord[gamesRecordCurrentIndex, 1] = secondPlayerChoiceString;
         Clear();
-        
+
         gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
         gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
         if (gamesRecordCurrentSize < gamesRecordSize)
         {
             gamesRecordCurrentSize++;
         }
-        
+
         WriteLine("Do you want to play again? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
         {
