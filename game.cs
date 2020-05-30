@@ -14,6 +14,14 @@ class Game
         MainMenuLoop();
     }
 
+    public Game(string playerOneName, string playerTwoName, int gamesRecordSize)
+    {
+        playerOne = new Player(playerOneName);
+        playerTwo = new Player(playerTwoName);
+        gamesRecord = new GamesRecord(gamesRecordSize);
+        MainMenuLoop();
+    }
+
     public void DisplayRules(bool withWelcomeMessage = true)
     {
         if (withWelcomeMessage)
