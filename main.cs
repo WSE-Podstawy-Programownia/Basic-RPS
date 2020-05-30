@@ -26,39 +26,6 @@ else { properInput = "Nożyce"; }
 return properInput;
 }
 
-
-
-
-  public static void Main (string[] args) {
-    int TabelawynikowSize = 10;
-  string[,] Tabelawynikow = new string[TabelawynikowSize,3];
-
-  
-
-
-    int TabelawynikowCurrentIndex = 0;
-
-    do {
-
-      DisplayWelcomeMessage();
-    /*Console.WriteLine ("Witaj w grze papier, kamień, nożyce ;)");*/
-    /*Console.WriteLine ("Graczu nr. 1 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");*/
-
-   
-
-string wyborgracza1String = wyborgraczaInput("Gracz1");
-Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;
-
-    /*Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;*/
-    /*Console.WriteLine ("Graczu nr. 2 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");
-    string wyborgracza2String = Console.ReadLine();
-    Tabelawynikow[TabelawynikowCurrentIndex, 1] = wyborgracza2String;*/
-
-
-
-string wyborgracza2String = wyborgraczaInput("Gracz2");
-Tabelawynikow[TabelawynikowCurrentIndex, 1] = wyborgracza2String;
-
 static string DetermineWinner (string playerOne, string playerTwo){
  
    /* if (wyborgracza1String == wyborgracza2String)
@@ -116,6 +83,39 @@ else {
 
 
 }
+
+
+  public static void Main (string[] args) {
+    int TabelawynikowSize = 10;
+  string[,] Tabelawynikow = new string[TabelawynikowSize,3];
+
+  
+
+
+    int TabelawynikowCurrentIndex = 0;
+
+    do {
+
+      DisplayWelcomeMessage();
+    /*Console.WriteLine ("Witaj w grze papier, kamień, nożyce ;)");*/
+    /*Console.WriteLine ("Graczu nr. 1 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");*/
+
+   
+
+string wyborgracza1String = wyborgraczaInput("Gracz1");
+Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;
+
+    /*Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;*/
+    /*Console.WriteLine ("Graczu nr. 2 proszę wybrać papier (naciśnij 1) / kamień (naciśnij 2) / nożyce (naciśnij 3)");
+    string wyborgracza2String = Console.ReadLine();
+    Tabelawynikow[TabelawynikowCurrentIndex, 1] = wyborgracza2String;*/
+
+
+
+string wyborgracza2String = wyborgraczaInput("Gracz2");
+Tabelawynikow[TabelawynikowCurrentIndex, 1] = wyborgracza2String;
+
+
 
 
 /* 
