@@ -113,7 +113,7 @@ public static void Main (string[] args) {
   WriteLine(playerOne.playerName);
 Player playerTwo = new Player();
 WriteLine(playerTwo.playerName);
-GamesRecord gamesRecord = new GamesRecord(15);
+// GamesRecord gamesRecord = new GamesRecord(15);
  
   }
 }
