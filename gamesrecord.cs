@@ -10,6 +10,7 @@ class GamesRecord
 
     public GamesRecord(int recordSize = 10)
     {
+        if (recordSize < 1) recordSize = 10;
         gamesRecordSize = recordSize;
         gamesRecord = new string[gamesRecordSize, 3];
         gamesRecordCurrentIndex = 0;
