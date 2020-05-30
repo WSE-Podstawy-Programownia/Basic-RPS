@@ -24,9 +24,7 @@ class MainClass {
     Scissors
   };
 static void DisplayWelcomeMessage (){
-  WriteLine (@"Welcome in the game of Rock-Paper-Scissors!
-    Rules are simple - the first player picks Rock, Paper or Scissors enternig accordingly 1, 2 or 3. Next, the second player makes a choice and score is displayed on screen.
-    Press any key to continue..");
+  WriteLine ("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
 }
 static string GetPlayerInput (string player){
   string rawInput;
@@ -41,35 +39,13 @@ static string GetPlayerInput (string player){
       else if (rawInput == "2") { properInput = "Paper"; }
       else { properInput = "Scissors"; }
       return properInput;
-}
+  }
     
   public static void Main (string[] args) {
-   
-   DisplayWelcomeMessage();
-    
-    Console.ReadKey();
-    
-    string theFirstPlayerChoiceString = GetPlayerInput("Player One");
-    gamesRecord[gamesRecordCurrentIndex, 0] = theFirstPlayerChoiceString;
-    // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
-    Console.WriteLine ("You've chosen: {0}", theFirstPlayerChoiceString);
-    Console.WriteLine ("Press any key to continue..");
-    Console.ReadKey();
-
-    // następnie czyścimy konsolę, żeby drugi gracz nie zobaczył wyboru pierwszego
-    Console.Clear ();
-
-    
-    string theSecondPlayerChoiceString = GetPlayerInput("Player Two");
-     gamesRecord[gamesRecordCurrentIndex, 1] = theSecondPlayerChoiceString;
-    // tutaj zastosujemy jedną z cech enuma, czyli jego literlną możliwość wypisania własnej nazwy
-    Console.WriteLine ("You've chosen: {0}", theSecondPlayerChoiceString);
-    Console.WriteLine ("Press any key to continue..");
-    Console.ReadKey();
-
-    Console.Clear ();
-    DisplayGamesHistory (gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex);
+  Game game = new Game();
   }
+}
+
    static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
       int currentIndex;
       if (gamesRecordCurrentSize < gamesRecordSize){
@@ -84,7 +60,7 @@ static string GetPlayerInput (string player){
         currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
         }
        }
-       static int gamesRecordSize = 0;
+       static int gamesRecordSize = 10;
     static string[,] gamesRecord = new string[gamesRecordSize, 3];
     static int gamesRecordCurrentIndex = 0;
     static int gamesRecordCurrentSize = 0;
@@ -92,9 +68,7 @@ static string GetPlayerInput (string player){
     static void MainMenuLoop (){
       WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
       ConsoleKeyInfo inputKey;
-      do {
-        inputKey = ReadKey(true);
-      } while (inputKey.Key != ConsoleKey.Escape);
+
       do {
         Clear();
         WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
