@@ -114,6 +114,7 @@ class MainClass
    }
     public static void Main(string[] args)
     {
-      MainMenuLoop();  
+     Player playerOne = new Player("Player One");
+     WriteLine(playerOne.playerName);
     }
 }
