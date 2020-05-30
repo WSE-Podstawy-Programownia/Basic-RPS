@@ -9,6 +9,7 @@ public Game () {
   playerOne = new Player ();
   playerTwo = new Player ();
   gamesRecord = new GamesRecord ();
+    MainMenuLoop ();
 }
 
 public void DisplayRules (bool withWelcomeMessage = true) {
@@ -68,8 +69,28 @@ WriteLine("Do you want to play another round? [y]");
 if (ReadKey(true).Key == ConsoleKey.Y){
   Play();
 }
+}
 
 
+public void MainMenuLoop (){
+  ConsoleKeyInfo inputKey;
+  do {
+    Clear();
+    WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+    inputKey = ReadKey(true);
+    if (inputKey.Key == ConsoleKey.D1){
+      Play();
+    }
+    else if (inputKey.Key == ConsoleKey.D2){
+      DisplayRules(false);
+    }
+    else if (inputKey.Key == ConsoleKey.D3){
+      gamesRecord.DisplayGamesHistory();
+    }
+    else { continue; }
+    WriteLine ("(click any key to continue)");
+    ReadKey(true);
+  } while (inputKey.Key != ConsoleKey.Escape);
 }
 
 
