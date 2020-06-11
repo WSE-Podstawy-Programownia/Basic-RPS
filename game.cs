@@ -4,8 +4,34 @@ class Game {
   Player playerOne, playerTwo;
   GamesRecord gamesRecord;
   public Game () {
-    playerOne = new Player ();
-    playerTwo = new Player ();
+    
+    while(true)
+    {
+      try
+      {
+        playerOne = new Player ();
+      }
+      catch (Exception e)
+      {
+        continue;
+      }
+      break;
+    }
+    
+    while(true)
+    {
+      try
+      {
+		    playerTwo = new Player ();
+      }
+      catch (Exception e)
+      {
+        continue;
+      }
+      break;
+    }
+    
+    
     gamesRecord = new GamesRecord ();
     MainMenuLoop ();
   }

@@ -44,7 +44,6 @@ static string GetPlayerInput (string player){
   public static void Main (string[] args) {
   Game game = new Game();
   }
-}
 
    static void DisplayGamesHistory (string[,] gamesRecord, int gamesRecordSize, int gamesRecordCurrentSize = 10, int lastRecordIndex = 0){
       int currentIndex;

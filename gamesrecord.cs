@@ -6,7 +6,41 @@ class GamesRecord {
   int gamesRecordCurrentIndex;
   int gamesRecordCurrentSize;
 
+  public GamesRecord()
+  {
+    while(true)
+    {
+    	WriteLine("Please enter number of games.");
+      try
+      {
+        string playerInput = ReadLine();
+        int recordSize = Int32.Parse(playerInput);
+        if (recordSize < 1)
+        {
+          continue;
+        }
+      }
+      catch (Exception e)
+      {
+				continue;
+      }
+      break;
+    }
+    
+    gamesRecord = new string[gamesRecordSize, 3];
+    gamesRecordCurrentIndex = 0;
+    gamesRecordCurrentSize = 0;
+  }
+
   public GamesRecord (int recordSize = 10) {
+    if (recordSize < 1)
+        {
+          gamesRecordSize = 10;
+        }
+      	else
+        {
+          gamesRecordSize = recordSize;
+        }
     gamesRecordSize = recordSize;
     gamesRecord = new string[gamesRecordSize, 3];
     gamesRecordCurrentIndex = 0;
