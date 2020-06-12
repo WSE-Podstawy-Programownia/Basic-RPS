@@ -20,6 +20,7 @@ class GamesRecord {
     }
     gamesRecordCurrentIndex = 0;
     gamesRecordCurrentSize = 0;
+    
   }
 
   public void AddRecord (string playerOneChoice, string playerTwoChoice, string result) {
