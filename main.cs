@@ -181,38 +181,11 @@ static void PlayGame (){
   
   public static void Main (string[] args) {
     
-    //string c_p1; //inicjalizacja zmiennej dla gracza 1
-    //string c_p2; //inicjalizacja zmiennej dla gracza 2
-    /*int gamesRecordSize = 10;
-    string[,] gamesRecord = new string[gamesRecordSize,3]; //inicjalizacja tablicy wyników
-    int gamesRecordCurrentIndex = 0;
-    int gamesRecordCurrentSize = 10;
-    
-    do {
-    
-          DisplayWelcomeMessage();
-                 
-          c_p1 = GetPlayerInput();//pierwszy gracz przypisuje wartość zmiennej
-          gamesRecord[gamesRecordCurrentIndex, 0] = c_p1; //wpisanie wyboru pierwszego gracza do odpowiedniego miesjca w tablicy
-          
-        
-          Console.Clear(); //czyszczenie ekranu
-          
-          c_p2=GetPlayerInput();//drugi gracz przypisuje wartość zmiennej
-          gamesRecord[gamesRecordCurrentIndex, 1] = c_p2;//wpisanie do tablicy wyboru gracza 2 
-          
-          
-              Console.Clear(); //czyszczenie ekranu
-              gamesRecord[gamesRecordCurrentIndex,2]= DetermineWinner(c_p1, c_p2);
-                     
-              //gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-              Console.WriteLine ("Do you want to quit? (t)");
+       // MainMenuLoop();
+  Player playerOne = new Player();
+  playerOne.playerName = "Player One";
+  WriteLine(playerOne.playerName);
 
-    } while (Console.ReadLine() != "t");
-
-       DisplayGamesHistory (gamesRecord, gamesRecordSize, gamesRecordCurrentSize, gamesRecordCurrentIndex); */
-
-       MainMenuLoop();
 
 
 }
