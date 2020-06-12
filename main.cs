@@ -174,21 +174,24 @@ static void PlayGame (){
                 PlayGame();
                 
                 }
-
 }
 
-  
-  
-  public static void Main (string[] args) {
+
+public static void Main (string[] args) {
     
-       // MainMenuLoop();
+//MainMenuLoop();
   Player playerOne = new Player();
-  playerOne.playerName = "Player One";
-  WriteLine(playerOne.playerName);
+  Console.WriteLine(playerOne.playerName);
+
+  Player playerTwo = new Player();
+  Console.WriteLine(playerTwo.playerName);
+
+  GamesRecord gamesRecord = new GamesRecord();
+
+
 
 
 
 }
 
-  
 }
