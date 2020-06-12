@@ -19,14 +19,16 @@ class GamesRecord
             try
             {
                 string playerInput = Console.ReadLine();
-                int recordSize = Int32.Parse(playerInput);
-                if (recordSize < 1)
+                gamesRecordSize = Int32.Parse(playerInput);
+                if (gamesRecordSize < 1)
                 {
+                    WriteLine("The number of games must be positive.");
                     continue;
                 }
             }
             catch (Exception e)
             {
+                WriteLine(e.Message);
                 continue;
             }
             break;
