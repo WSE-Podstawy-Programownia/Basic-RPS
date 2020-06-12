@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>basic_rps_1</RootNamespace>
+    <RootNamespace>basic-rps</RootNamespace>
   </PropertyGroup>
 
 </Project>
