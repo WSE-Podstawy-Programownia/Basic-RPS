@@ -1,4 +1,5 @@
 ﻿using System;
+using static System.Console;
 
 class MainClass
 {
@@ -53,14 +54,11 @@ class MainClass
     {
 
         int playerOneChoice = GetPlayerInput(1);
-        gamesRecord[gamesRecordCurrentIndex, 0] = lookupTable[playerOneChoice - 1];
-
         int playerTwoChoice = GetPlayerInput(2);
-        gamesRecord[gamesRecordCurrentIndex, 1] = lookupTable[playerTwoChoice - 1];
 
-        gamesRecord[gamesRecordCurrentIndex, 2] = DetermineWinner(playerOneChoice, playerTwoChoice);
+        string winner = DetermineWinner(playerOneChoice, playerTwoChoice);
 
-        gamesRecordCurrentIndex++;
+        gamesRecord.AddRecord(playerOneChoice, playerTwoChoice, winner);
 
         Console.WriteLine("Do you want to play another round? [y]");
         if (Console.ReadKey(true).Key == ConsoleKey.Y)
@@ -89,7 +87,7 @@ class MainClass
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                Display(gamesRecord, gamesRecordCurrentIndex);
+                gamesRecord.DisplayGamesHistory();
             }
             Console.WriteLine("Press ENTER to continue...");
             Console.ReadKey();
@@ -99,13 +97,39 @@ class MainClass
 
     public static void Main(string[] args)
     {
-        // MainMenuLoop();
-        Player playerOne = new Player();
-        Console.WriteLine(playerOne.playerName);
-        GamesRecord gamesRecord = new GamesRecord();
+        Player playerOne;
+        Player playerTwo;
+        while(true)
+        {
+        try
+        {
+            playerOne = new Player();
+        }
+        catch (Exception e)
+        {
+            WriteLine(e.Message);
+            continue;
+        }
+        break;
+        }
+        
+        while(true)
+        {
+        try
+        {
+            playerTwo = new Player();
+        }
+        catch (Exception e)
+        {
+            WriteLine(e.Message);
+            continue;
+        }
+        break;
+        }
+        MainMenuLoop();
     }
 
-    static string[,] gamesRecord = new string[10, 3];
+    static GamesRecord gamesRecord = new GamesRecord();
     static int gamesRecordCurrentIndex = 0;
     static string[] lookupTable = new string[] { "rock\t", "paper\t", "scissors" };
 
