@@ -7,6 +7,7 @@ class GameRecord
     string[,] gameRecord;
     int gameRecordCurrentIndex;
     int gameRecordCurrentSize;
+
     public GameRecord(int recordSize = 10)
     {
         try

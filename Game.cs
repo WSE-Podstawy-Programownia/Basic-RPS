@@ -5,6 +5,7 @@ class Game
 {
     Player playerOne, playerTwo;
     GameRecord gameRecord;
+
     public Game()
     {
         playerOne = new Player();

@@ -4,10 +4,12 @@ using static System.Console;
 class Player
 {
     public string playerName;
+
     public Player(string playerName)
     {
         this.playerName = playerName;
     }
+
     public void SetPlayerName()
     {
         do
@@ -18,9 +20,9 @@ class Player
         }
         while (playerName.Length == 0 || playerName.Length > 10);
     }
+
     public Player()
     {
         SetPlayerName();
     }
-
 }
