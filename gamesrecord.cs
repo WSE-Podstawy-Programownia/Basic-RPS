@@ -7,11 +7,17 @@ class GamesRecord {
  int gamesRecordCurrentIndex;
  int gamesRecordCurrentSize;
 
-    public GamesRecord (int recordSize = 10) {
+    public GamesRecord (int recordSize = 0) {
+      try{
       gamesRecordSize = recordSize;
       gamesRecord = new string[gamesRecordSize,3];
-      gamesRecordCurrentIndex = 0;
+      }
+      catch (OverflowException e){
+      Console.WriteLine("OverflowException during GamesRecord initialization: \"{0}\"\nrecordSize given was [{1}]\nSetting recordSize to 10", e.Message, recordSize);
+      }
+            gamesRecordCurrentIndex = 0;
       gamesRecordCurrentSize = 0;
+      
     }
 
 public void AddRecord (string c_p1, string c_p2, string result) {
