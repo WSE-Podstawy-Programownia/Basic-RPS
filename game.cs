@@ -3,24 +3,23 @@ using static System.Console;
 
 class Game
 {
+    bool aiPlayer;
     Player playerOne, playerTwo;
     GamesRecord gamesRecord;
 
     public Game()
     {
         DisplayWelcome();
-        playerOne = new Player();
-        playerTwo = new Player();
+        playerOne = Player.CreateHumanPlayer();
+        if (aiPlayer)
+        {
+            playerTwo = Player.CreateAiPlayer();
+        }
+        else
+        {
+            playerTwo = Player.CreateHumanPlayer();
+        }
         gamesRecord = new GamesRecord();
-        MainMenuLoop();
-    }
-
-    public Game(string playerOneName, string playerTwoName, int gamesRecordSize)
-    {
-        DisplayWelcome(); 
-        playerOne = new Player(playerOneName);
-        playerTwo = new Player(playerTwoName);
-        gamesRecord = new GamesRecord(gamesRecordSize);
         MainMenuLoop();
     }
 
@@ -39,27 +38,13 @@ class Game
     public void DisplayWelcome()
     {
         WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
-    }
+        WriteLine("Do you want to play with the computer? yes - [y], no - [n]");
+        aiPlayer = ReadKey(true).Key != ConsoleKey.N;
 
-    public string GetPlayerInput(Player player)
-    {
-        string rawInput;
-        string properInput;
-        WriteLine($"{player.playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
-        rawInput = ReadLine();
-        while (rawInput != "1" && rawInput != "2" && rawInput != "3")
-        {
-            WriteLine($"Wrong input. Please enter correct one.\n{player.playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
-            rawInput = ReadLine();
-        }
-        if (rawInput == "1") { properInput = "Rock"; }
-        else if (rawInput == "2") { properInput = "Paper"; }
-        else { properInput = "Scissors"; }
-        return properInput;
     }
 
     public string DetermineWinner(string playerOneChoice, string playerTwoChoice)
-    {
+    {                
         if (playerOneChoice == playerTwoChoice)
         {
             WriteLine("It's a draw!");
@@ -82,15 +67,16 @@ class Game
     public void Play()
     {
         Clear();
-        string firstPlayerChoiceString = GetPlayerInput(playerOne);
+        string playerOneChoiceString = playerOne.GetPlayerInput();
 
         Clear();
-        string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+        string playerTwoChoiceString = playerTwo.GetPlayerInput();
 
         Clear();
 
-        string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
-        gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+        WriteLine($"{playerOne.playerName} chose {playerOneChoiceString}, {playerTwo.playerName} chose {playerTwoChoiceString}.");
+        string gameResult = DetermineWinner(playerOneChoiceString, playerTwoChoiceString);
+        gamesRecord.AddRecord(playerOneChoiceString, playerTwoChoiceString, gameResult);
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
