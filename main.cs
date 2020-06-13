@@ -2,9 +2,14 @@ using System;
 using static System.Console;
 
 class MainClass {
-  static void Main(){
-    MainMenuLoop();
-  }
+  public static void Main (string[] args) {
+  // MainMenuLoop();
+ Player Gracz1 = new Player("Gracz 1");
+  WriteLine(Gracz1.GraczImie);
+  Player Gracz2 = new Player();
+WriteLine(Gracz2.GraczImie);
+
+}
   static void DisplayWelcomeMessage (){
   WriteLine ("Witaj w grze papier, kamień, nożyce ;)");}
 

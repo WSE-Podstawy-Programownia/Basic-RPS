@@ -1,20 +1,15 @@
 using System;
 using static System.Console;
 
-class MainClass {
-  public static void Main (string[] args){
 
-    Game game = new Game();
-  }
-}
 
 class Game {
   Player gracz1, gracz2;
  GamesRecord Tabelawynikow;
 
  public Game () {
-  gracz1- = new Player ();
   gracz1 = new Player ();
+  gracz2 = new Player ();
   Tabelawynikow = new GamesRecord ();
 }
 
