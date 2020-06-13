@@ -8,6 +8,7 @@ class Game
 
     public Game()
     {
+        DisplayWelcome();
         playerOne = new Player();
         playerTwo = new Player();
         gamesRecord = new GamesRecord();
@@ -16,19 +17,16 @@ class Game
 
     public Game(string playerOneName, string playerTwoName, int gamesRecordSize)
     {
+        DisplayWelcome(); 
         playerOne = new Player(playerOneName);
         playerTwo = new Player(playerTwoName);
         gamesRecord = new GamesRecord(gamesRecordSize);
         MainMenuLoop();
     }
 
-    public void DisplayRules(bool withWelcomeMessage = true)
+    public void DisplayRules()
     {
         Clear();
-        if (withWelcomeMessage)
-        {
-            WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
-        }
         WriteLine("The rules are very simple - each player chooses Rock, Paper or Scissors by pressing the button of their choice:\n" +
             "[1] Rock\n[2] Paper\n[3] Scissors\nand confirming it by pressing Enter.\n" +
             "\nAfter both players have chosen, the winner is determined. " +
@@ -36,6 +34,11 @@ class Game
             "and if the player reponds with anything else than [y]es, " +
             $"the game ends and presents the record of the last up to {gamesRecord.gamesRecordSize} games.\n\n" +
             "Have fun!\n");
+    }
+
+    public void DisplayWelcome()
+    {
+        WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
     }
 
     public string GetPlayerInput(Player player)
@@ -110,7 +113,7 @@ class Game
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                DisplayRules(false);
+                DisplayRules();
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
