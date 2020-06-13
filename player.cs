@@ -4,22 +4,28 @@ using static System.Console;
 class Player
 {
     private const int maxPlayerNameLength = 20;
-    public string playerName;
+    public string Name { get; private set; }
+    public int Health { get; private set; }
+    public int Strength { get; private set; }
     private bool isAi;
 
-    public static Player CreateHumanPlayer()
+    public static Player CreateHumanPlayer(int health, int strength)
     {
         var player = new Player();
-        player.SetPlayerName();
+        player.SetName();
         player.isAi = false;
+        player.Health = health;
+        player.Strength = strength;
         return player;
     }
 
-    public static Player CreateAiPlayer()
+    public static Player CreateAiPlayer(int health, int strength)
     {
         var player = new Player();
-        player.playerName = "Computer";
+        player.Name = "Computer";
         player.isAi = true;
+        player.Health = health;
+        player.Strength = strength;
         return player;
     }
     
@@ -27,18 +33,18 @@ class Player
     {        
     }
     
-    private void SetPlayerName()
+    private void SetName()
     {
         Write("Please enter player name: ");
         var newPlayerName = ReadLine();
         if (String.IsNullOrWhiteSpace(newPlayerName) || newPlayerName.Length > maxPlayerNameLength)
         {
             WriteLine($"Player name cannot be empty or have more than {maxPlayerNameLength} characters.");
-            SetPlayerName();
+            SetName();
         }
         else
         {
-            playerName = newPlayerName;
+            Name = newPlayerName;
         }
     }
 
@@ -56,13 +62,12 @@ class Player
 
     private string GetHumanPlayerInput()
     {
-        string rawInput;
-        string properInput;
-        WriteLine($"{playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+        string rawInput;        
+        WriteLine($"{Name}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
         rawInput = ReadLine();
         while (rawInput != "1" && rawInput != "2" && rawInput != "3")
         {
-            WriteLine($"Wrong input. Please enter correct one.\n{playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            WriteLine($"Wrong input. Please enter correct one.\n{Name}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
             rawInput = ReadLine();
         }
         return ConvertChoiceIntToChoiceString(Int32.Parse(rawInput));
@@ -78,5 +83,20 @@ class Player
         if (choice == 1) { return "Rock"; }
         else if (choice == 2) { return "Paper"; }
         else { return "Scissors"; }        
+    }
+
+    public int GetHitStrength()
+    {
+        return new Random().Next(1, Strength + 1);
+    }
+
+    public void TakeHit(int hitStrength)
+    {
+        Health -= hitStrength;
+    }
+
+    public bool IsDead()
+    {
+        return Health <= 0;
     }
 }

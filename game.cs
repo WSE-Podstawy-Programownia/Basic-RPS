@@ -7,17 +7,19 @@ class Game
     Player playerOne, playerTwo;
     GamesRecord gamesRecord;
 
+    private const int PLAYER_HEALTH = 100, PLAYER_STRENGTH = 50;
+
     public Game()
     {
         DisplayWelcome();
-        playerOne = Player.CreateHumanPlayer();
+        playerOne = Player.CreateHumanPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
         if (aiPlayer)
         {
-            playerTwo = Player.CreateAiPlayer();
+            playerTwo = Player.CreateAiPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
         }
         else
         {
-            playerTwo = Player.CreateHumanPlayer();
+            playerTwo = Player.CreateHumanPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
         }
         gamesRecord = new GamesRecord();
         MainMenuLoop();
@@ -44,24 +46,40 @@ class Game
     }
 
     public string DetermineWinner(string playerOneChoice, string playerTwoChoice)
-    {                
+    {
+        string result;
         if (playerOneChoice == playerTwoChoice)
         {
             WriteLine("It's a draw!");
-            return "Draw";
+            result = "Draw";
         }
         else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||
                 (playerOneChoice == "Paper" && playerTwoChoice == "Rock") ||
                 (playerOneChoice == "Scissors" && playerTwoChoice == "Paper"))
-        {
-            WriteLine($"{playerOne.playerName} wins!");
-            return $"{playerOne.playerName} wins!";
+        {                                    
+            result = Skirmish(playerOne, playerTwo);
         }
         else
         {
-            WriteLine($"{playerTwo.playerName} wins!");
-            return $"{playerTwo.playerName} wins!";
+            result = Skirmish(playerTwo, playerOne);
         }
+        PrintHealthBars();
+        return result;
+    }
+
+    private string Skirmish(Player winner, Player loser)
+    {
+        var hitStrength = winner.GetHitStrength();
+        loser.TakeHit(hitStrength);
+        var result = $"{winner.Name} wins! {loser.Name} took {hitStrength} hit points, health drops to {loser.Health}";            
+        WriteLine(result);
+        return result;
+    }
+
+    private void PrintHealthBars()
+    {
+        WriteLine($"{playerOne.Name} health: {playerOne.Health}");
+        WriteLine($"{playerTwo.Name} health: {playerTwo.Health}");
     }
 
     public void Play()
@@ -74,9 +92,18 @@ class Game
 
         Clear();
 
-        WriteLine($"{playerOne.playerName} chose {playerOneChoiceString}, {playerTwo.playerName} chose {playerTwoChoiceString}.");
+        WriteLine($"{playerOne.Name} chose {playerOneChoiceString}, {playerTwo.Name} chose {playerTwoChoiceString}.");
         string gameResult = DetermineWinner(playerOneChoiceString, playerTwoChoiceString);
         gamesRecord.AddRecord(playerOneChoiceString, playerTwoChoiceString, gameResult);
+
+        if (playerOne.IsDead() || playerTwo.IsDead())
+        {
+            WriteLine("Game finished!");
+            gamesRecord.DisplayGamesHistory();
+            WriteLine("Press any key...");
+            Console.ReadKey();
+            Environment.Exit(0);
+        }
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
