@@ -9,45 +9,46 @@ public class Game
     public Game()
     {
         WriteLine("Set up Player 1:");
-        while(true)
+        while (true)
         {
-        try
-        {
-            playerOne = new Player();
+            try
+            {
+                playerOne = new Player();
+            }
+            catch (Exception e)
+            {
+                WriteLine(e.Message);
+                continue;
+            }
+            break;
         }
-        catch (Exception e)
-        {
-            WriteLine(e.Message);
-            continue;
-        }
-        break;
-        }
-        
+
         WriteLine("Set up Player 2:");
-        while(true)
+        while (true)
         {
-        try
-        {
-            playerTwo = new Player();
-        }
-        catch (Exception e)
-        {
-            WriteLine(e.Message);
-            continue;
-        }
-        break;
+            try
+            {
+                playerTwo = new Player();
+            }
+            catch (Exception e)
+            {
+                WriteLine(e.Message);
+                continue;
+            }
+            break;
         }
 
         gamesRecord = new GamesRecord();
         MainMenuLoop();
     }
 
-    public void DisplayRules (bool withWelcomeMessage = true) {
+    public void DisplayRules(bool withWelcomeMessage = true)
+    {
         if (withWelcomeMessage)
         {
-            WriteLine ("Welcome to a simple Rock-Paper-Scissors game!");
+            WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
         }
-        WriteLine ("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
+        WriteLine("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
     }
 
 
@@ -57,7 +58,7 @@ public class Game
         bool playerOneParseSuccess;
         do
         {
-            Console.WriteLine($"[Player {player.playerName}] Enter your choice:\n(1) rock\n(2) paper\n(3) scissors");
+            Console.WriteLine($"[Player {player.PlayerName}] Enter your choice:\n(1) rock\n(2) paper\n(3) scissors");
             playerOneParseSuccess = Int32.TryParse(Console.ReadLine(), out playerChoice);
         } while (!playerOneParseSuccess || playerChoice <= 0 || playerChoice >= 4);
 
@@ -69,8 +70,8 @@ public class Game
         int difference = playerOneChoice - playerTwoChoice;
         if (difference == 1 || difference == -2)
         {
-            Console.WriteLine(playerOne.playerName);
-            return playerOne.playerName;
+            Console.WriteLine(playerOne.PlayerName);
+            return playerOne.PlayerName;
         }
         else if (difference == 0)
         {
@@ -79,8 +80,8 @@ public class Game
         }
         else
         {
-            Console.WriteLine(playerTwo.playerName);
-            return playerTwo.playerName;
+            Console.WriteLine(playerTwo.PlayerName);
+            return playerTwo.PlayerName;
         }
     }
 
@@ -88,7 +89,7 @@ public class Game
     {
         Clear();
         int playerOneChoice = GetPlayerInput(playerOne);
-        
+
         Clear();
         int playerTwoChoice = GetPlayerInput(playerTwo);
 
@@ -104,13 +105,52 @@ public class Game
 
     }
 
+    void DuelMode()
+    {
+        playerOne.SetPlayerHealth();
+        playerOne.SetPlayerDamage();
+        playerTwo.SetPlayerHealth();
+        playerTwo.SetPlayerDamage();
+
+        while (playerOne.Health > 0 && playerTwo.Health > 0)
+        {
+            WriteLine($"{playerOne.PlayerName}: {playerOne.Health} HP.");
+            WriteLine($"{playerTwo.PlayerName}: {playerTwo.Health} HP.");
+            WriteLine("Press ENTER to continue...");
+            ReadLine();
+            Clear();
+            int playerOneChoice = GetPlayerInput(playerOne);
+
+            Clear();
+            int playerTwoChoice = GetPlayerInput(playerTwo);
+
+            string winner = DetermineWinner(playerOneChoice, playerTwoChoice);
+            if (playerOne.PlayerName == winner)
+            {
+                playerTwo.Health -= playerOne.Damage;
+            }
+            else if (playerTwo.PlayerName == winner)
+            {
+                playerOne.Health -= playerTwo.Damage;
+            }
+        }
+        if (playerOne.Health <= 0)
+        {
+            WriteLine($"{playerTwo.PlayerName} won!");
+        } 
+        else if (playerTwo.Health <= 0)
+        {
+            WriteLine($"{playerOne.PlayerName} won!");
+        }
+    }
+
     void MainMenuLoop()
     {
         ConsoleKeyInfo inputKey;
         do
         {
             Console.Clear();
-            Console.WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            Console.WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[4] Duel Mode\n\t[ESC] Exit");
             inputKey = Console.ReadKey(true);
 
             if (inputKey.Key == ConsoleKey.D1)
@@ -124,6 +164,10 @@ public class Game
             else if (inputKey.Key == ConsoleKey.D3)
             {
                 gamesRecord.DisplayGamesHistory();
+            }
+            else if (inputKey.Key == ConsoleKey.D4)
+            {
+                DuelMode();
             }
             Console.WriteLine("Press ENTER to continue...");
             Console.ReadKey();
