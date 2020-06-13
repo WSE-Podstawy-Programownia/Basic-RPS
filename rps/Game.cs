@@ -38,7 +38,7 @@ public class Game
         break;
         }
 
-        gamesRecord = new GamesRecord ();
+        gamesRecord = new GamesRecord();
         MainMenuLoop();
     }
 

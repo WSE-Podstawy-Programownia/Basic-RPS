@@ -38,21 +38,26 @@ class GamesRecord
         gamesRecordCurrentIndex = 0;
         gamesRecordCurrentSize = 0;
     }
-    public GamesRecord(int recordSize)
+    public GamesRecord(int recordSize = 10)
     {
-        if (recordSize < 1)
-        {
-            gamesRecordSize = 10;
-            //throw new Exception("recordSize must be at least 1");
-        }
-        else
+        try
         {
             gamesRecordSize = recordSize;
+            gamesRecord = new string[gamesRecordSize, 3];
         }
-        gamesRecord = new string[recordSize, 3];
+        catch (OverflowException e)
+        {
+            WriteLine("OverflowException during GamesRecord initialization: \"{0}\"\nrecordSize given was [{1}]\nSetting recordSize to 10", e.Message, recordSize);
+            WriteLine("Press Enter to continue");
+            ReadLine();
+            gamesRecordSize = 10;
+            gamesRecord = new string[gamesRecordSize, 3];
+
+        }
         gamesRecordCurrentIndex = 0;
         gamesRecordCurrentSize = 0;
     }
+
 
     public void AddRecord(int playerOneChoice, int playerTwoChoice, string result)
     {
@@ -64,7 +69,7 @@ class GamesRecord
         gamesRecordCurrentSize = System.Math.Min(gamesRecordCurrentSize + 1, gamesRecordSize);
     }
 
-    public void DisplayGamesHistory ()
+    public void DisplayGamesHistory()
     {
         int displayRecordIndex;
         if (gamesRecordCurrentSize < gamesRecordSize)
@@ -75,10 +80,10 @@ class GamesRecord
         {
             displayRecordIndex = gamesRecordCurrentIndex;
         }
-        WriteLine ("Last games history:");
+        WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[displayRecordIndex,0], gamesRecord[displayRecordIndex,1], gamesRecord[displayRecordIndex,2]);
+            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[displayRecordIndex, 0], gamesRecord[displayRecordIndex, 1], gamesRecord[displayRecordIndex, 2]);
             displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
         }
     }
