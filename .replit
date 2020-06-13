@@ -1,2 +1,0 @@
-language = "csharp"
-run = "mcs main.cs\nmono main.exe"

@@ -89,16 +89,17 @@ for (int i = 0; i < gamesRecordCurrentSize; i++){
 }
 
 //Koniec Zadania 1D
-
-
-  public static void Main (string[] args) {
- 
-    //Komendy do utworzenia tablicy //zadanie 2 - zmiana na static
   static int gameRecordSize = 10;
   static string[,] gamesRecord = new string[gameRecordSize,3];
   static int gamesRecordCurrentIndex = 0;
   static int gamesRecordCurrentSize = 0;
  
+
+  public static void Main (string[] args) {
+ 
+    //Komendy do utworzenia tablicy //zadanie 2 - zmiana na static
+  
+ Console.ReadLine ();
 
 
 
@@ -108,7 +109,7 @@ for (int i = 0; i < gamesRecordCurrentSize; i++){
 
 
 
-
+/*
 static void MainMenuLoop (){
   // wnętrze funkcji
   ConsoleKeyInfo inputKey;
@@ -189,5 +190,6 @@ while (Console.ReadLine() != "t");
  
  
   }
-  
+  */
+}
 }
