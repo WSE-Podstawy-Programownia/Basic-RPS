@@ -5,6 +5,62 @@ class MainClass {
   static void DisplayWelcomeMessage (){
   WriteLine ("Witaj w grze papier, kamień, nożyce ;)");}
 
+static void PlayGame (){
+ Clear();
+string wyborgracza1String = GetPlayerInput("Gracz 1");
+Tabelawynikow[TabelawynikowCurrentIndex, 0] = wyborgracza1String;
+Clear ();
+string wyborgracza2String = GetPlayerInput("Gracz 2");
+Tabelawynikow[TabelawynikowCurrentIndex, 1] = wyborgracza2String;
+Clear ();
+Tabelawynikow[TabelawynikowCurrentIndex, 2] = DetermineWinner(wyborgracza1String, wyborgracza2String);
+TabelawynikowCurrentIndex = (TabelawynikowCurrentIndex + 1) % TabelawynikowSize;
+if (TabelawynikowCurrentSize < TabelawynikowSize){
+  TabelawynikowCurrentSize++;
+WriteLine("Czy chcesz zagrać kolejną rundę [t]");
+if (ReadKey(true).Key == ConsoleKey.T){
+  PlayGame();
+}
+
+
+}
+
+}
+
+
+
+
+
+static int TabelawynikowSize = 10;
+static string[,] Tabelawynikow = new string[TabelawynikowSize,3];
+static int TabelawynikowCurrentIndex = 0;
+static int TabelawynikowCurrentSize = 0;
+
+static void MainMenuLoop (){
+  WriteLine ("Papier, kamień, nożyce Menu:\n\t[1] Zagraj\n\t[2] Pokaż zasady\n\t[3] Wyświetl historię ostatnich gier\n\t[ESC] Wyjdź");
+}
+
+ConsoleKeyInfo inputKey;
+
+do {
+  Clear();
+  WriteLine (Papier, kamień, nożyce Menu:\n\t[1] Zagraj\n\t[2] Pokaż zasady\n\t[3] Wyświetl historię ostatnich gier\n\t[ESC] Wyjdź");
+  inputKey = ReadKey(true);
+  if (inputKey.Key == ConsoleKey.D1){
+  PlayGame();
+}
+else if (inputKey.Key == ConsoleKey.D2){
+  DisplayWelcomeMessage();
+}
+else if (inputKey.Key == ConsoleKey.D3){
+  DisplayGamesHistory (Tabelawynikow, TabelawynikowSize, TabelawynikowCurrentSize, TabelawynikowCurrentIndex);
+}
+
+else { continue; }
+WriteLine ("(Kliknij jakikolwiek przycisk, aby kontynuować)");
+ReadKey(true);
+
+} while (inputKey.Key != ConsoleKey.Escape);
 
   static void DisplayGamesHistory (string[,] Tabelawynikow, int TabelawynikowSize, int TabelawynikowCurrentSize = 10, int OstatniwynikIndex = 0){
   int currentIndex;
@@ -148,6 +204,13 @@ TabelawynikowCurrentIndex += 1;
 
 Tabelawynikow[TabelawynikowCurrentIndex, 2] = DetermineWinner(wyborgracza1String, wyborgracza2String);
 
+WriteLine ("Historia ostatnich gier:");
+for (int i = 0; i < TabelawynikowCurrentSize; i++){
+  WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, Tabelawynikow[currentIndex,0], Tabelawynikow[currentIndex,1], Tabelawynikow[currentIndex,2]);
+  currentIndex = (currentIndex + 1) % TabelawynikowCurrentSize;
+}
+
+DisplayGamesHistory (Tabelawynikow, TabelawynikowSize, TabelawynikowCurrentSize, TabelawynikowCurrentIndex);
 
 Console.WriteLine ("Czy chcesz zakończyć rozgrywkę? (t)");
    } while (Console.ReadLine() != "t");
