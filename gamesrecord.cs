@@ -7,7 +7,7 @@ string[,] gamesRecord;
 int gamesRecordCurrentIndex;
 int gamesRecordCurrentSize;
 
-public GamesRecord (int recordSize = 10) {
+public GamesRecord (int recordSize = -2) {
   try {
     gamesRecordSize = recordSize;
     gamesRecord = new string[gamesRecordSize,3];
