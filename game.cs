@@ -14,7 +14,7 @@ public class Game {
 
 public Game () {
   playerOne = new Player ();
-  playerTwo = new Player ();
+  playerTwo = new AIPlayer ();
   gamesRecord = new GamesRecord ();
 
 }
