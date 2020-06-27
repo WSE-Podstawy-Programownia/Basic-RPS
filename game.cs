@@ -1,10 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using static System.Console;
 
 class Game
 {
     Player playerOne, playerTwo;
     public GamesRecord gamesRecord;
+    Dictionary<string, string> inputTable = new Dictionary<string, string>()
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
 
     public Game()
     {
