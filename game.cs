@@ -3,25 +3,24 @@ using static System.Console;
 
 class Game
 {
-    bool aiPlayer;
     Player playerOne, playerTwo;
     GamesRecord gamesRecord;
-
-    private const int PLAYER_HEALTH = 100, PLAYER_STRENGTH = 50;
 
     public Game()
     {
         DisplayWelcome();
-        playerOne = Player.CreateHumanPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
-        if (aiPlayer)
-        {
-            playerTwo = Player.CreateAiPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
-        }
-        else
-        {
-            playerTwo = Player.CreateHumanPlayer(PLAYER_HEALTH, PLAYER_STRENGTH);
-        }
+        playerOne = new Player();
+        playerTwo = new Player();
         gamesRecord = new GamesRecord();
+        MainMenuLoop();
+    }
+
+    public Game(string playerOneName, string playerTwoName, int gamesRecordSize)
+    {
+        DisplayWelcome(); 
+        playerOne = new Player(playerOneName);
+        playerTwo = new Player(playerTwoName);
+        gamesRecord = new GamesRecord(gamesRecordSize);
         MainMenuLoop();
     }
 
@@ -40,70 +39,58 @@ class Game
     public void DisplayWelcome()
     {
         WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
-        WriteLine("Do you want to play with the computer? yes - [y], no - [n]");
-        aiPlayer = ReadKey(true).Key != ConsoleKey.N;
+    }
 
+    public string GetPlayerInput(Player player)
+    {
+        string rawInput;
+        string properInput;
+        WriteLine($"{player.playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+        rawInput = ReadLine();
+        while (rawInput != "1" && rawInput != "2" && rawInput != "3")
+        {
+            WriteLine($"Wrong input. Please enter correct one.\n{player.playerName}, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            rawInput = ReadLine();
+        }
+        if (rawInput == "1") { properInput = "Rock"; }
+        else if (rawInput == "2") { properInput = "Paper"; }
+        else { properInput = "Scissors"; }
+        return properInput;
     }
 
     public string DetermineWinner(string playerOneChoice, string playerTwoChoice)
     {
-        string result;
         if (playerOneChoice == playerTwoChoice)
         {
             WriteLine("It's a draw!");
-            result = "Draw";
+            return "Draw";
         }
         else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||
                 (playerOneChoice == "Paper" && playerTwoChoice == "Rock") ||
                 (playerOneChoice == "Scissors" && playerTwoChoice == "Paper"))
-        {                                    
-            result = Skirmish(playerOne, playerTwo);
+        {
+            WriteLine($"{playerOne.playerName} wins!");
+            return $"{playerOne.playerName} wins!";
         }
         else
         {
-            result = Skirmish(playerTwo, playerOne);
+            WriteLine($"{playerTwo.playerName} wins!");
+            return $"{playerTwo.playerName} wins!";
         }
-        PrintHealthBars();
-        return result;
-    }
-
-    private string Skirmish(Player winner, Player loser)
-    {
-        var hitStrength = winner.GetHitStrength();
-        loser.TakeHit(hitStrength);
-        var result = $"{winner.Name} wins! {loser.Name} took {hitStrength} hit points, health drops to {loser.Health}";            
-        WriteLine(result);
-        return result;
-    }
-
-    private void PrintHealthBars()
-    {
-        WriteLine($"{playerOne.Name} health: {playerOne.Health}");
-        WriteLine($"{playerTwo.Name} health: {playerTwo.Health}");
     }
 
     public void Play()
     {
         Clear();
-        string playerOneChoiceString = playerOne.GetPlayerInput();
+        string firstPlayerChoiceString = GetPlayerInput(playerOne);
 
         Clear();
-        string playerTwoChoiceString = playerTwo.GetPlayerInput();
+        string secondPlayerChoiceString = GetPlayerInput(playerTwo);
 
         Clear();
 
-        WriteLine($"{playerOne.Name} chose {playerOneChoiceString}, {playerTwo.Name} chose {playerTwoChoiceString}.");
-        string gameResult = DetermineWinner(playerOneChoiceString, playerTwoChoiceString);
-        gamesRecord.AddRecord(playerOneChoiceString, playerTwoChoiceString, gameResult);
-
-        if (playerOne.IsDead() || playerTwo.IsDead())
-        {
-            WriteLine("Game finished!");
-            gamesRecord.DisplayGamesHistory();
-            WriteLine("Press any key...");
-            Console.ReadKey();
-            Environment.Exit(0);
-        }
+        string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+        gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
