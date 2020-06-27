@@ -54,3 +54,22 @@ public string DetermineWinner (string wyborgracza1, string wyborgracza2){
 
 }
 
+public void Play () {
+  Clear ();
+  string wyborgracza1String = GetPlayerInput(gracz1);
+
+  Clear ();
+  string wyborgracza2String = GetPlayerInput(gracz2);
+
+  Clear ();
+
+  string wynikgry = DetermineWinner(wyborgracza1String, wyborgracza2String);
+
+  Tabelawynikow.AddRecord(wyborgracza1String, wyborgracza2ChoiceString, wynikgry);
+
+  WriteLine("Czy chcesz kontynuować? [t]");
+  if (ReadKey(true).Key == ConsoleKey.T){
+      Play();
+}
+
+}
