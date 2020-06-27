@@ -35,12 +35,19 @@ class GameController {
                 //dodawanie po zakończeniu rozgrywki instrukcji dodającą GamesRecord trzymany w obiekcie klasy
                 // GameController z obiektem Game, który właśnie skończył wykonywać swoją metodę Play
             }
-
+            
+            //dostępnienie graczowi odpowiedniego wyboru w menu gry.  single/multi
             else if (inputKey.Key == ConsoleKey.D2){
-                DisplayRules(false);
+                game = new Game(true);
+                game.Play();
+                gamesRecord += game.gamesRecord;
             }
 
             else if (inputKey.Key == ConsoleKey.D3){
+                DisplayRules(false);
+            }
+
+            else if (inputKey.Key == ConsoleKey.D4){
                 gamesRecord.DisplayGamesHistory();
         }
 
