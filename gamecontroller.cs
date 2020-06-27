@@ -22,6 +22,7 @@ class GameController
             {
                 game = new Game();
                 game.Play();
+                gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
@@ -35,6 +36,7 @@ class GameController
             WriteLine("(Press any key to continue)");
             ReadKey(true);
         } while (inputKey.Key != ConsoleKey.Escape);
+
     }
 
     public void DisplayRules()
