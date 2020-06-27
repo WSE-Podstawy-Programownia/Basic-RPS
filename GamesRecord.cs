@@ -10,10 +10,15 @@ class GamesRecord {
  int TabelawynikowCurrentSize;
 
 public GamesRecord (int recordSize = 10) {
-  TabelawynikowSize = recordSize;
-  Tabelawynikow = new string[TabelawynikowSize,3];
-  TabelawynikowCurrentIndex = 0;
-  TabelawynikowCurrentSize = 0;
+  try {
+    TabelawynikowSize = recordSize;
+    Tabelawynikow = new string[TabelawynikowSize,3];
+  }
+  catch (OverflowException e){
+    WriteLine("OverflowException during GamesRecord initialization: \"{0}\"\nrecordSize given was [{1}]\nSetting recordSize to 10", e.Message, recordSize);
+  }
+    TabelawynikowCurrentIndex = 0;
+    TabelawynikowCurrentSize = 0;
 }
 
 
