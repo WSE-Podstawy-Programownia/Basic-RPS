@@ -1,8 +1,14 @@
 using System;
+using System.Collections.Generic;
 using static System.Console;
 
 class Game
 {
+    Dictionary<string, string> inputTable = new Dictionary<string, string>(){
+        {"1", "Rock"},
+        {"2", "Paper"},
+        {"3", "Scissors"}
+    };
     Player playerOne, playerTwo;
     public GameRecord gameRecord;
 
@@ -33,40 +39,38 @@ class Game
 
         return properInput;
     }
-    public string DetermineWinner(Player playerOne, string playerOneInput, Player playerTwo, string playerTwoInput)
+    public string DetermineWinner(Player playerOne, Player playerTwo)
     {
-        if (playerOneInput == playerTwoInput)
+        if (playerOne.lastInput == playerTwo.lastInput)
         {
             WriteLine("It's a draw!");
             return "Draw";
         }
-        else if ((playerOneInput == "Rock" && playerTwoInput == "Scissors") ||
-         (playerOneInput == "Paper" && playerTwoInput == "Rock") ||
-         (playerOneInput == "Scissors" && playerTwoInput == "Paper"))
+        else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+         (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+         (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper"))
         {
-            string result = "Player " + playerOne.playerName + " won!";
-            Console.WriteLine(result);
-            return result;
+            Console.WriteLine("{0} won!", playerOne.playerName);
+            return String.Format("{0} won!", playerOne.playerName);
         }
         else
         {
-            string result = "Player " + playerTwo.playerName + " won!";
-            Console.WriteLine(result);
-            return result;
+            Console.WriteLine("{0} won!", playerTwo.playerName);
+            return String.Format("{0} won!", playerTwo.playerName);
         }
     }
     public void Play()
     {
         Clear();
-        string firstPlayerChoiceString = GetPlayerInput(playerOne);
+        playerOne.GetInput(inputTable);
 
         Clear();
-        string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+        playerTwo.GetInput(inputTable);
 
         Clear();
-        string gameResult = DetermineWinner(playerOne, firstPlayerChoiceString, playerTwo, secondPlayerChoiceString);
+        string gameResult = DetermineWinner(playerOne, playerTwo);
 
-        gameRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+        gameRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
