@@ -24,6 +24,21 @@ class GameRecord
         gameRecordCurrentIndex = 0;
         gameRecordCurrentSize = 0;
     }
+
+    public static GameRecord operator +(GameRecord a, GameRecord b)
+    {
+        int displayRecordIndex;
+        if (b.gameRecordCurrentSize < b.gameRecordSize) displayRecordIndex = 0;
+        else displayRecordIndex = b.gameRecordCurrentIndex;
+        for (int i = 0; i < b.gameRecordCurrentSize; i++)
+        {
+            a.AddRecord(b.gameRecord[displayRecordIndex, 0],
+            b.gameRecord[displayRecordIndex, 1],
+            b.gameRecord[displayRecordIndex, 2]);
+            displayRecordIndex = (displayRecordIndex + 1) % b.gameRecordCurrentSize;
+        }
+        return a;
+    }
     public void AddRecord(string playerOneChoice, string playerTwoChoice, string result)
     {
         gameRecord[gameRecordCurrentIndex, 0] = playerOneChoice;
