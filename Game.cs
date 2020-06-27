@@ -52,24 +52,52 @@ public string DetermineWinner (string wyborgracza1, string wyborgracza2){
 }
 
 
-}
-
 public void Play () {
   Clear ();
-  string wyborgracza1String = GetPlayerInput(gracz1);
+  string wyborgracza1 = GetPlayerInput(gracz1);
 
   Clear ();
-  string wyborgracza2String = GetPlayerInput(gracz2);
+  string wyborgracza2 = GetPlayerInput(gracz2);
 
   Clear ();
 
-  string wynikgry = DetermineWinner(wyborgracza1String, wyborgracza2String);
+  string wynikgry = DetermineWinner(wyborgracza1, wyborgracza2);
 
-  Tabelawynikow.AddRecord(wyborgracza1String, wyborgracza2ChoiceString, wynikgry);
+  Tabelawynikow.AddRecord(wyborgracza1, wyborgracza2, wynikgry);
 
   WriteLine("Czy chcesz kontynuować? [t]");
   if (ReadKey(true).Key == ConsoleKey.T){
       Play();
 }
+
+
+public void MainMenuLoop (){
+
+ConsoleKeyInfo inputKey;
+
+  do {
+    Clear();
+    WriteLine ("Papier, kamień, nożyce Menu:\n\t[1] Zagraj\n\t[2] Pokaż zasady\n\t[3] Wyświetl historię ostatnich gier\n\t[ESC] Wyjdź");
+    inputKey = ReadKey(true);
+    if (inputKey.Key == ConsoleKey.D1){
+    Play();
+    }
+    else if (inputKey.Key == ConsoleKey.D2){
+    DisplayRules(false);
+    }
+    else if (inputKey.Key == ConsoleKey.D3){
+     Tabelawynikow.DisplayGamesHistory();
+    }
+
+    else { continue; }
+    WriteLine ("(Kliknij jakikolwiek przycisk, aby kontynuować)");
+    ReadKey(true);
+
+    } while (inputKey.Key != ConsoleKey.Escape);
+  }
+
+}
+
+
 
 }
