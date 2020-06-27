@@ -33,7 +33,7 @@ class Player
         }
     }
 
-    public void GetInput(Dictionary<string, string> inputTable)
+    virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
         WriteLine("{0}, Choose:", playerName);
