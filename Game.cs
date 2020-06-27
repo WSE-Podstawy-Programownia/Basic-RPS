@@ -11,6 +11,7 @@ class Game {
    gracz1 = new Player ();
     gracz2 = new Player ();
     Tabelawynikow = new GamesRecord ();
+    MainMenuLoop ();
 }
 
   public void DisplayRules (bool withWelcomeMessage = true) {

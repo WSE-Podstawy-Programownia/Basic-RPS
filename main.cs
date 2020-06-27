@@ -8,6 +8,7 @@ class MainClass {
   WriteLine(Gracz1.GraczImie);
   Player Gracz2 = new Player();
 WriteLine(Gracz2.GraczImie);
+Game game = new Game ();
 
 }
   static void DisplayWelcomeMessage (){
