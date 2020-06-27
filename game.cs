@@ -8,7 +8,7 @@ public Game () {
     playerOne = new Player ();
   playerTwo = new Player ();
   gamesRecord = new GamesRecord ();
-  MainMenuLoop ();
+  //MainMenuLoop ();
 }
 public void DisplayRules (bool withWelcomeMessage = true) {
   if (withWelcomeMessage) {
