@@ -32,6 +32,11 @@ return properInput;
 
   public static void Main(string[] args) {
     
+  Player playerOne = new Player();
+  playerOne.playerName = "Player One";
+  WriteLine(playerOne.playerName);
+
+    
     string kolejnaGra;
     DisplayWelcomeMessage();
   
