@@ -21,17 +21,22 @@ public void MainMenuLoop (){
   ConsoleKeyInfo inputKey;
   do {
     Clear();
-    WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
-    inputKey = ReadKey(true);
+  WriteLine ("Rock-Paper-Scissors Menu:\n[1] Player vs Player\n[2] Player vs AI\n[3] Show rules\n[4] Display last games' record\n[ESC] Exit");
+  inputKey = ReadKey(true);
   if (inputKey.Key == ConsoleKey.D1){
     game = new Game();
     game.Play();
     gamesRecord += game.gamesRecord;
     }
-    else if (inputKey.Key == ConsoleKey.D2){
+     else if (inputKey.Key == ConsoleKey.D2){
+            game = new Game(true);
+            game.Play();
+            gamesRecord += game.gamesRecord;
+        }
+    else if (inputKey.Key == ConsoleKey.D3){
       DisplayRules(false);
     }
-    else if (inputKey.Key == ConsoleKey.D3){
+    else if (inputKey.Key == ConsoleKey.D4){
       gamesRecord.DisplayGamesHistory();
     }
     else { continue; }
