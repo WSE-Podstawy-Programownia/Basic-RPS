@@ -3,7 +3,8 @@ using static System.Console;
 
 class Game {
   Player playerOne, playerTwo;
-  GamesRecord gamesRecord;
+  public GamesRecord gamesRecord;
+  // upublicznianie obiektu - 1c-53
 
   public Game () {
     playerOne = new Player ();
