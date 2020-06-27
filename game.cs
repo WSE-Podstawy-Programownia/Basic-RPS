@@ -1,8 +1,15 @@
 using System;
 using static System.Console;
+using System.Collections.Generic;
 
 public class Game {
   public Player playerOne, playerTwo;
+  Dictionary<string, string> inputTable = new Dictionary<string, string> () 
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
   public GamesRecord gamesRecord;
 
 public Game () {
