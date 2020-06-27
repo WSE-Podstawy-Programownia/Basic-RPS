@@ -1,18 +1,20 @@
 using System;
 using static System.Console;
-
+using System.Collections.Generic;
+using System.Linq;
 class Game {
   Player playerOne, playerTwo;
- GamesRecord gamesRecord;
+ public GamesRecord gamesRecord;
 
 
+Dictionary<string, string> inputTable = new Dictionary<string, string> () 
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
 
-public void DisplayRules (bool withWelcomeMessage = true) {
-  if (withWelcomeMessage) {
-    WriteLine ("Welcome to a simple Rock-Paper-Scissors game!");
-  }
-  WriteLine ("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
-}
+
 
 public string GetPlayerInput (Player player){
   string rawInput;
@@ -31,69 +33,54 @@ public string GetPlayerInput (Player player){
 
 
 
-public string DetermineWinner (string playerOneChoice, string playerTwoChoice){
-  if (playerOneChoice == playerTwoChoice){
+public string DetermineWinner (Player playerOne, Player playerTwo){
+  if (playerOne.lastInput == playerTwo.lastInput){
       WriteLine ("It's a draw!");
       return "Draw";
   }
-  else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||
-          (playerOneChoice == "Paper" && playerTwoChoice == "Rock") ||
-          (playerOneChoice == "Scissors" && playerTwoChoice == "Paper")){
-    Console.WriteLine ("Player One won!");
-    return "Player One won";
+  else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+          (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+          (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
+    Console.WriteLine ("{0} won!", playerOne.playerName);
+    return String.Format("{0} won!", playerOne.playerName);
   }
   else{
-    Console.WriteLine ("Player Two won!");
-    return "Player Two won";
+    Console.WriteLine ("{0} won!", playerTwo.playerName);
+    return String.Format("{0} won!", playerTwo.playerName);
   }
 }
+
 
 public void Play () {
 
   Clear ();
-  string firstPlayerChoiceString = GetPlayerInput(playerOne);
+
+    playerOne.GetInput(inputTable);
 
   Clear ();
-  string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+
+  playerTwo.GetInput(inputTable);
 
   Clear ();
 
 
-string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+string gameResult = DetermineWinner(playerOne, playerTwo);
 
-gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+ gamesRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);
 
 WriteLine("Do you want to play another round? [y]");
 if (ReadKey(true).Key == ConsoleKey.Y){
   Play();
 }
 }
-
-public void MainMenuLoop (){
-  ConsoleKeyInfo inputKey;
-  do {
-    Clear();
-    WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
-    inputKey = ReadKey(true);
-    if (inputKey.Key == ConsoleKey.D1){
-      Play();
-    }
-    else if (inputKey.Key == ConsoleKey.D2){
-      DisplayRules(false);
-    }
-    else if (inputKey.Key == ConsoleKey.D3){
-      gamesRecord.DisplayGamesHistory();
-    }
-    else { continue; }
-    WriteLine ("(click any key to continue)");
-    ReadKey(true);
-  } while (inputKey.Key != ConsoleKey.Escape);
-}
-public Game () {
+ 
+public Game (bool singleplayer = false) {
   playerOne = new Player ();
-  playerTwo = new Player ();
+  if (singleplayer) playerTwo = new AIPlayer ();
+  else playerTwo = new Player ();
   gamesRecord = new GamesRecord ();
-  MainMenuLoop ();
 }
+
+
 
 }
