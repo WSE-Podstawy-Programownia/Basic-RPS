@@ -1,14 +1,28 @@
 using System;
 using static System.Console;
+using System.Collections.Generic;
+using System.Linq;
 
 class Game {
+  
+   //dodawanie slownika
+ Dictionary<string, string> inputTable = new Dictionary<string, string> () 
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
+
   Player playerOne, playerTwo;
   public GamesRecord gamesRecord;
   // upublicznianie obiektu - 1c-53
 
+
+
+
   public Game () {
     playerOne = new Player ();
-    playerTwo = new Player ();
+    playerTwo = new AIPlayer ();
     gamesRecord = new GamesRecord ();
     // MainMenuLoop (); 
   }
@@ -38,35 +52,40 @@ class Game {
     return properInput;
   }
 
-  public string DetermineWinner (string playerOneChoice, string playerTwoChoice){
-    if (playerOneChoice == playerTwoChoice){
+// modyfikacja determineWinner 2c - 63
+  public string DetermineWinner (Player playerOne, Player playerTwo){
+    if (playerOne.lastInput == playerTwo.lastInput){
         WriteLine ("It's a draw!");
         return "Draw";
     }
-
-    else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||(playerOneChoice == "Paper" && playerTwoChoice == "Rock") ||(playerOneChoice == "Scissors" && playerTwoChoice == "Paper")){
-      Console.WriteLine ("Player One won!");
-      return "Player One won";
+    else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+            (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+            (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
+      Console.WriteLine ("{0} won!", playerOne.playerName);
+      return String.Format("{0} won!", playerOne.playerName);
     }
-
     else{
-      Console.WriteLine ("Player Two won!");
-      return "Player Two won";
+      Console.WriteLine ("{0} won!", playerTwo.playerName);
+      return String.Format("{0} won!", playerTwo.playerName);
     }
   }
 
+
   public void Play () {
     Clear ();
-    string firstPlayerChoiceString = GetPlayerInput(playerOne);
+
+    playerOne.GetInput(inputTable);
+    // string firstPlayerChoiceString = GetPlayerInput(playerOne);
 
     Clear ();
-    string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+
+    playerTwo.GetInput(inputTable);
+    // string secondPlayerChoiceString = GetPlayerInput(playerTwo);
 
     Clear ();
 
-    string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
-
-    gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+    string gameResult = DetermineWinner(playerOne, playerTwo);
+    gamesRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);  //2c-62, pozbycie sie stringow
 
     WriteLine("Do you want to play another round? [y]");
     if (ReadKey(true).Key == ConsoleKey.Y){
