@@ -3,7 +3,7 @@ using static System.Console;
 
 public class Game {
   public Player playerOne, playerTwo;
-  GamesRecord gamesRecord;
+  public GamesRecord gamesRecord;
 
 public Game () {
   playerOne = new Player ();
