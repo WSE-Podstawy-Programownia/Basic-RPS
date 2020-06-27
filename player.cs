@@ -8,11 +8,12 @@ class Player {
    public Player (string playerName) {
    this.playerName = playerName;
   }
+
   public void SetPlayerName () {
     Write("Please enter player name: ");
     playerName = ReadLine();
   }
-  public void GetInput (Dictionary<string, string> inputTable) {
+  virtual public void GetInput (Dictionary<string, string> inputTable) {
     string rawInput;
   WriteLine ("{0}, Choose:", playerName);
   foreach(KeyValuePair<string, string> entry in inputTable) {
