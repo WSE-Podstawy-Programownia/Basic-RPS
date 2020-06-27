@@ -5,7 +5,7 @@ using static System.Console;
 class Player
 {
     public string lastInput;
-    public void GetInput(Dictionary<string, string> inputTable)
+    virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
         WriteLine("{0}, Choose:", playerName);
