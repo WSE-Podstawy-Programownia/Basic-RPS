@@ -44,7 +44,7 @@ class Player
         rawInput = ReadLine();
         while (!inputTable.TryGetValue(rawInput, out lastInput))
         {
-            WriteLine("Wrong input. Please enter correct one.");
+            WriteLine($"Wrong input. Please enter one of {String.Join(", ", inputTable.Keys)}.");
             rawInput = ReadLine();
         }
     }
