@@ -18,7 +18,7 @@ public Player () {
   SetPlayerName();
 }
 
- public void GetInput (Dictionary<string, string> inputTable) {
+ virtual public void GetInput (Dictionary<string, string> inputTable) {
 
       string rawInput;
   
