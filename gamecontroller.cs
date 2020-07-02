@@ -20,10 +20,8 @@ class GameController {
 
   do {
      Console.Clear();
-    
-     Console.WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
-       
-      inputKey = Console.ReadKey(true);
+            Console.WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            inputKey = Console.ReadKey(true);
 
       if (inputKey.Key == ConsoleKey.D1){
             game = new Game();
@@ -32,6 +30,7 @@ class GameController {
         }
 
       else if (inputKey.Key == ConsoleKey.D2){
+            game = new Game();
             game.DisplayRules(false);
         }
       else if (inputKey.Key == ConsoleKey.D3){
