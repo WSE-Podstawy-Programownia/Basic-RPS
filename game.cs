@@ -14,12 +14,17 @@ Player playerOne, playerTwo;
     };
 
 
-public Game () {
+
+ 
+ public Game (bool singleplayer = false) {
   playerOne = new Player ();
-  playerTwo = new AIPlayer ();
+  if (singleplayer) playerTwo = new AIPlayer ();
+  else playerTwo = new Player ();
   gamesRecord = new GamesRecord ();
-  //MainMenuLoop ();
 }
+
+   //MainMenuLoop ();
+
 public void DisplayRules (bool withWelcomeMessage = true) {
   if (withWelcomeMessage) {
     Console.WriteLine ("Welcome to a simple Rock-Paper-Scissors game!");
