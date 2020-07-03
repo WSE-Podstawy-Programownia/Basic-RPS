@@ -2,11 +2,24 @@ using System.Collections.Generic;
 using static System.Console;
 
 class Player {
-  public string playerName;
-  public string lastInput;
-  
-  public Player () {
-    SetPlayerName();
+  protected string playerName;
+  private string lastInput;
+
+  public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+  }
+
+  public string LastInput { get => lastInput; set => lastInput = value; }
+
+  public Player (bool invokeNameInput = true) {
+    if (invokeNameInput) {
+      SetPlayerName();
+    }
   }
 
   public Player (string playerName) {
