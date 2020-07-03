@@ -1,17 +1,49 @@
 using System;
+using System.Collections.Generic;
 using static System.Console;
-class Player
+public class Player
 {
-    public string PlayerName { get; set; }
+    public string PlayerName;
 
+    public string LastInput;
 
     private readonly int maxNameLength = 20;
+    
+    public Player(string playerName)
+    {
+        this.PlayerName = playerName;
+    }
+    public Player()
+    {
+        SetPlayerName();
+    }
+
+    public virtual void GetInput(Dictionary<int, string> inputTable)
+    {
+        int playerChoice;
+        bool playerParseSuccess;
+
+        do
+        {
+            WriteLine($"{PlayerName}, choose:");
+            foreach (var entry in inputTable)
+            {
+                WriteLine($"[{entry.Key}] {entry.Value}");
+            }
+            
+            playerParseSuccess = Int32.TryParse(Console.ReadLine(), out playerChoice);
+        } while (!inputTable.TryGetValue(playerChoice, out LastInput));
+
+    }
+
+
     public int Damage { get; set; }
+
     public int Health { get; set; }
 
     public void SetPlayerDamage()
     {
-         while (true)
+        while (true)
         {
             Console.WriteLine($"{PlayerName}, please choose your damage.");
             try
@@ -35,7 +67,7 @@ class Player
 
     public void SetPlayerHealth()
     {
-         while (true)
+        while (true)
         {
             Console.WriteLine($"{PlayerName}, please choose your health.");
             try
@@ -64,16 +96,6 @@ class Player
         {
             throw new Exception("Invalid player name.");
         }
-    }
-
-    // public string playerName;
-    public Player(string playerName)
-    {
-        this.PlayerName = playerName;
-    }
-    public Player()
-    {
-        SetPlayerName();
     }
 
 }

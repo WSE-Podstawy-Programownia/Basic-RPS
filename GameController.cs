@@ -1,13 +1,26 @@
 using System;
+using System.Collections.Generic;
 using static System.Console;
 class GameController
 {
     Game game;
     GamesRecord gamesRecord;
+        
+    Dictionary<ConsoleKey, string> menuOptions = new Dictionary<ConsoleKey, string> ()
+    {
+        {ConsoleKey.D1, "Player vs Player"},
+        {ConsoleKey.D2, "Player vs AI"},
+        {ConsoleKey.D3, "Show rukes"},
+        {ConsoleKey.D4, "Display the record of recent games"},
+        {ConsoleKey.D5, "Duel Mode"},
+        {ConsoleKey.Escape, "Exit"},
+    };
+    
     public GameController()
     {
-        gamesRecord = new GamesRecord();
+        gamesRecord = new GamesRecord(100);
     }
+
 
     public void DisplayRules(bool withWelcomeMessage = true)
     {
@@ -23,7 +36,13 @@ class GameController
         do
         {
             Console.Clear();
-            Console.WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[4] Duel Mode\n\t[ESC] Exit");
+            Console.WriteLine("Rock-Paper-Scissors Menu:");
+
+            foreach (var k in menuOptions)
+            {
+                Console.WriteLine($"\t{k.Key.ToString()}: {k.Value}");
+            }
+
             inputKey = Console.ReadKey(true);
 
             if (inputKey.Key == ConsoleKey.D1)
@@ -32,16 +51,21 @@ class GameController
                 game.PlayGame();
                 gamesRecord += game.gamesRecord;
             }
-
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                DisplayRules();
+                game = new Game(true);
+                game.PlayGame();
+                gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                gamesRecord.DisplayGamesHistory();
+                DisplayRules();
             }
             else if (inputKey.Key == ConsoleKey.D4)
+            {
+                gamesRecord.DisplayGamesHistory();
+            }
+            else if (inputKey.Key == ConsoleKey.D5)
             {
                 game = new Game();
                 game.DuelMode();

@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 
 
-class GamesRecord
+public class GamesRecord
 {
     public static GamesRecord operator +(GamesRecord a, GamesRecord b)
     {
@@ -31,7 +31,7 @@ class GamesRecord
 
         while (true)
         {
-            Console.WriteLine("Please enter number of games.");
+            Console.WriteLine("Please capacity of games record.");
             try
             {
                 string playerInput = Console.ReadLine();
@@ -107,7 +107,7 @@ class GamesRecord
         WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[displayRecordIndex, 0], gamesRecord[displayRecordIndex, 1], gamesRecord[displayRecordIndex, 2]);
+            WriteLine("Game #{0}: {1}-\t{2}{3}", i + 1, gamesRecord[displayRecordIndex, 0].PadRight(12), gamesRecord[displayRecordIndex, 1].PadRight(12), gamesRecord[displayRecordIndex, 2].PadRight(16));
             displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
         }
     }
