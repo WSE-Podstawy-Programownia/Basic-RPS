@@ -46,6 +46,18 @@ class GamesRecord {
     gamesRecordCurrentIndex = 0;
     gamesRecordCurrentSize = 0;
   }
+  public static GamesRecord operator +(GamesRecord a, GamesRecord b) {
+  int displayRecordIndex;
+  if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
+  else displayRecordIndex = b.gamesRecordCurrentIndex;
+  for (int i = 0; i < b.gamesRecordCurrentSize; i++){
+    a.AddRecord(b.gamesRecord[displayRecordIndex,0], 
+    b.gamesRecord[displayRecordIndex,1], 
+    b.gamesRecord[displayRecordIndex,2]);
+    displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
+  }
+  return a;
+}
   public void DisplayGamesHistory (){
       int currentIndex;
       if (gamesRecordCurrentSize < gamesRecordSize){

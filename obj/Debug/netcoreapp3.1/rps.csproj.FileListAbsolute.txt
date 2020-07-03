@@ -1,0 +1,12 @@
+/Users/kyuu/Desktop/basic-rps/bin/Debug/netcoreapp3.1/rps.deps.json
+/Users/kyuu/Desktop/basic-rps/bin/Debug/netcoreapp3.1/rps.runtimeconfig.json
+/Users/kyuu/Desktop/basic-rps/bin/Debug/netcoreapp3.1/rps.runtimeconfig.dev.json
+/Users/kyuu/Desktop/basic-rps/bin/Debug/netcoreapp3.1/rps.dll
+/Users/kyuu/Desktop/basic-rps/bin/Debug/netcoreapp3.1/rps.pdb
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.csprojAssemblyReference.cache
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.AssemblyInfoInputs.cache
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.AssemblyInfo.cs
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.csproj.CoreCompileInputs.cache
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.dll
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.pdb
+/Users/kyuu/Desktop/basic-rps/obj/Debug/netcoreapp3.1/rps.genruntimeconfig.cache
