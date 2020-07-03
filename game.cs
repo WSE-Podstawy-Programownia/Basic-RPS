@@ -1,82 +1,107 @@
 using System;
+using System.Collections.Generic;
 using static System.Console;
-class Game {
-  Player playerOne, playerTwo;
-  public GamesRecord gamesRecord;
-  public Game () {
-    
-    while(true)
-    {
-      try
-      {
-        playerOne = new Player ();
-      }
-      catch (Exception e)
-      {
-        continue;
-      }
-      break;
-    }
-    
-    while(true)
-    {
-      try
-      {
-		    playerTwo = new Player ();
-      }
-      catch (Exception e)
-      {
-        continue;
-      }
-      break;
-    }
-    
-    
-    gamesRecord = new GamesRecord ();
-  }
-  public string GetPlayerInput (Player player){
-  string rawInput;
-  string properInput;
-  WriteLine ("{0} Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player.playerName);
-    rawInput = ReadLine();
-    while (rawInput != "1" && rawInput != "2" && rawInput != "3"){
-      WriteLine ("Wrong input. Please enter correct choice.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
-      rawInput = ReadLine();
-    }
-      if (rawInput == "1") { properInput = "Rock"; }
-      else if (rawInput == "2") { properInput = "Paper"; }
-      else { properInput = "Scissors"; }
-      return properInput;
-  }
-  public string DetermineWinner (string playerOneChoice, string playerTwoChoice){
-    if (playerOneChoice == playerTwoChoice){
-      WriteLine ("It's a draw!");
-      return "Draw";
-    }
-    else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||
-    (playerOneChoice == "Paper" && playerTwoChoice == "Rock")||
-    (playerOneChoice == "Scissors" && playerTwoChoice == "Paper")){
-      Console.WriteLine ("Player One won!");
-      return "Player One won";
-    }
-    else {
-        Console.WriteLine ("Player Two won!");
-        return "player Two won";
-    }
-  }
-  public void Play () {
-    Clear ();
-    string firstPlayerChoiceString = GetPlayerInput(playerOne);
-    Clear ();
-    string secondPlayerChoiceString = GetPlayerInput(playerTwo);
-    Clear ();
+class Game
+{
+    Player playerOne, playerTwo;
+    public GamesRecord gamesRecord;
 
-    string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
-    gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+    Dictionary<string, string> inputTable = new Dictionary<string, string>()
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
 
-    WriteLine("Do you want to play another round? [y]");
-    if (ReadKey(true).Key == ConsoleKey.Y){
-    Play();
+    public Game(bool singleplayer = false)
+    {
+
+        while (true)
+        {
+            try
+            {
+                playerOne = new Player();
+            }
+            catch (Exception e)
+            {
+                continue;
+            }
+            break;
+        }
+
+        while (true)
+        {
+            try
+            {
+                if (singleplayer) playerTwo = new AIPlayer();
+                else playerTwo = new Player();
+            }
+            catch (Exception e)
+            {
+                continue;
+            }
+            break;
+        }
+
+
+        gamesRecord = new GamesRecord();
     }
-  }
+    public string GetPlayerInput(Player player)
+    {
+        string rawInput;
+        string properInput;
+        WriteLine("{0} Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player.playerName);
+        rawInput = ReadLine();
+        while (rawInput != "1" && rawInput != "2" && rawInput != "3")
+        {
+            WriteLine("Wrong input. Please enter correct choice.\nChoose:\n[1] Rock\n[2] Paper\n[3] Scissors");
+            rawInput = ReadLine();
+        }
+        if (rawInput == "1") { properInput = "Rock"; }
+        else if (rawInput == "2") { properInput = "Paper"; }
+        else { properInput = "Scissors"; }
+        return properInput;
+    }
+
+    public string DetermineWinner(Player playerOne, Player playerTwo)
+    {
+        if (playerOne.lastInput == playerTwo.lastInput)
+        {
+            WriteLine("It's a draw!");
+            return "Draw";
+        }
+        else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+                (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+                (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper"))
+        {
+            Console.WriteLine("{0} won!", playerOne.playerName);
+            return String.Format("{0} won!", playerOne.playerName);
+        }
+        else
+        {
+            Console.WriteLine("{0} won!", playerTwo.playerName);
+            return String.Format("{0} won!", playerTwo.playerName);
+        }
+    }
+
+
+    public void Play()
+    {
+        Clear();
+        // string firstPlayerChoiceString = GetPlayerInput(playerOne);
+        playerOne.GetInput(inputTable);
+        Clear();
+        // string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+        playerTwo.GetInput(inputTable);
+        Clear();
+
+        string gameResult = DetermineWinner(playerOne, playerTwo);
+        gamesRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);
+
+        WriteLine("Do you want to play another round? [y]");
+        if (ReadKey(true).Key == ConsoleKey.Y)
+        {
+            Play();
+        }
+    }
 }
