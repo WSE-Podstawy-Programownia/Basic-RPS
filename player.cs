@@ -28,9 +28,12 @@ public class Player {
    this.playerName = playerName;
   }
 
-  public Player () {
-  SetPlayerName();
+public Player (bool invokeNameInput = true) {
+  if (invokeNameInput) {
+    SetPlayerName();
+  }
 }
+
 
 public void SetPlayerName () {
   Write("Please enter player name: ");
