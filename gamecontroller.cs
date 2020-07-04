@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 
 class GameController {
- Game game;
+ GameRPS game;
     GamesRecord gamesRecord;   
 
 public GameController () {
@@ -24,12 +24,12 @@ public void MainMenuLoop (){
   WriteLine ("Rock-Paper-Scissors Menu:\n[1] Player vs Player\n[2] Player vs AI\n[3] Show rules\n[4] Display last games' record\n[ESC] Exit");
   inputKey = ReadKey(true);
   if (inputKey.Key == ConsoleKey.D1){
-    game = new Game();
+    game = new GameRPS();
     game.Play();
     gamesRecord += game.gamesRecord;
     }
      else if (inputKey.Key == ConsoleKey.D2){
-            game = new Game(true);
+            game = new GameRPS(true);
             game.Play();
             gamesRecord += game.gamesRecord;
         }

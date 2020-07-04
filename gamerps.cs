@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 using System.Collections.Generic;
 
-public class Game {
+public class GameRPS {
   public Player playerOne, playerTwo;
   Dictionary<string, string> inputTable = new Dictionary<string, string> () 
     {
@@ -12,7 +12,7 @@ public class Game {
     };
   public GamesRecord gamesRecord;
 
-public Game (bool singleplayer = false) {
+public GameRPS (bool singleplayer = false) {
   playerOne = new Player ();
   if (singleplayer) playerTwo = new AIPlayer ();
   else playerTwo = new Player ();
