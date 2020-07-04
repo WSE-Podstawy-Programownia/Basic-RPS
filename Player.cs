@@ -3,12 +3,23 @@ using System.Collections.Generic;
 using static System.Console;
 public class Player
 {
-    public string PlayerName;
+    protected string playerName;
 
     public string LastInput;
+    public string PlayerName
+    {
+        get
+        {
+            return playerName;
+        }
+        set
+        {
+            playerName = value;
+        }
+    }
 
     private readonly int maxNameLength = 20;
-    
+
     public Player(string playerName)
     {
         this.PlayerName = playerName;
@@ -30,7 +41,7 @@ public class Player
             {
                 WriteLine($"[{entry.Key}] {entry.Value}");
             }
-            
+
             playerParseSuccess = Int32.TryParse(Console.ReadLine(), out playerChoice);
         } while (!inputTable.TryGetValue(playerChoice, out LastInput));
 
