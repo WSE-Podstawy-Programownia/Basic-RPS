@@ -1,13 +1,16 @@
 using System;
-using static System.Console;
 using System.Collections.Generic;
+using static System.Console;
 class Player {
   public string playerName;
   public string lastInput; // pole zrobimy publiczne, żeby mieć do niego dostęp z obiektu Game
+
+  public Player (){
+    SetPlayerName ();
+  }
   public Player (string playerName) {
     this.playerName = playerName;
   }
-
   public void SetPlayerName () {
     Write("Please enter player name: ");
     playerName = ReadLine();
@@ -27,8 +30,5 @@ class Player {
       WriteLine ("Wrong input. Please enter correct one.");
       rawInput = ReadLine();
     }
-  }
-  public Player () {
-    SetPlayerName();
   }
 }

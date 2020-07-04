@@ -23,6 +23,20 @@ class GamesRecord {
     gamesRecordCurrentSize = 0;
   }
  
+ public static GamesRecord operator +(GamesRecord a, GamesRecord b) {
+    // zastosowanie przeciazenia operatora
+
+    int displayRecordIndex;
+    if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
+    else displayRecordIndex = b.gamesRecordCurrentIndex;
+    for (int i = 0; i < b.gamesRecordCurrentSize; i++){
+      a.AddRecord(b.gamesRecord[displayRecordIndex,0], 
+      b.gamesRecord[displayRecordIndex,1], 
+      b.gamesRecord[displayRecordIndex,2]);
+      displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
+      }
+    return a;
+  }
 
  public void AddRecord (string playerOneChoice, string playerTwoChoice, string result) {
     gamesRecord[gamesRecordCurrentIndex, 0] = playerOneChoice;
@@ -51,20 +65,5 @@ class GamesRecord {
       WriteLine ("Game #{0}:\t{1}\t-\t{2},\t{3}", i+1, gamesRecord[displayRecordIndex,0], gamesRecord[displayRecordIndex,1], gamesRecord[displayRecordIndex,2]);
       displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
     }
-  }
-
-  public static GamesRecord operator +(GamesRecord a, GamesRecord b) {
-    // zastosowanie przeciazenia operatora
-
-    int displayRecordIndex;
-    if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
-    else displayRecordIndex = b.gamesRecordCurrentIndex;
-    for (int i = 0; i < b.gamesRecordCurrentSize; i++){
-      a.AddRecord(b.gamesRecord[displayRecordIndex,0], 
-      b.gamesRecord[displayRecordIndex,1], 
-      b.gamesRecord[displayRecordIndex,2]);
-      displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
-      }
-    return a;
   }
 }

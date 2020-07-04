@@ -1,4 +1,6 @@
 using System;
+using static System.Console;
+
 class GameController {
     Game game;
     GamesRecord gamesRecord;
@@ -24,7 +26,7 @@ class GameController {
         do {
             Console.Clear();
 
-            Console.WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            Console.WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player \n\t[2] Player vs AI \n\t[3] Show rules \n\t [4] Display last games' record\n[ESC] Exit");
             inputKey = Console.ReadKey(true);
 
             if (inputKey.Key == ConsoleKey.D1){
@@ -55,6 +57,6 @@ class GameController {
             Console.WriteLine ("(click any key to continue)");
             Console.ReadKey(true);
             } 
-        while (inputKey.Key != ConsoleKey.Escape);
+            while (inputKey.Key != ConsoleKey.Escape);
     }
 }
