@@ -2,26 +2,24 @@
 using System.Collections.Generic;
 using static System.Console;
 
-class GameRPS
+class GameRPS : Game
 {
-    Player playerOne, playerTwo;
-    public GamesRecord gamesRecord;
-    Dictionary<string, string> inputTable = new Dictionary<string, string>()
-    {
-      {"1", "Rock"},
-      {"2", "Paper"},
-      {"3", "Scissors"}
-    };
-
     public GameRPS(bool singleplayer = false)
     {
+        inputTable = new Dictionary<string, string>()
+        {
+            {"1", "Rock"},
+            {"2", "Paper"},
+            {"3", "Scissors"}
+        };
+
         playerOne = new Player();
         if (singleplayer) playerTwo = new AIPlayer();
         else playerTwo = new Player();
         gamesRecord = new GamesRecord();
     }
 
-    public string GetPlayerInput(Player player)
+    public override string GetPlayerInput(Player player)
     {
         string rawInput;
         string properInput;
@@ -38,7 +36,7 @@ class GameRPS
         return properInput;
     }
 
-    public string DetermineWinner(Player playerOne, Player playerTwo)
+    string DetermineWinner(Player playerOne, Player playerTwo)
     {
         if (playerOne.LastInput == playerTwo.LastInput)
         {
@@ -59,7 +57,7 @@ class GameRPS
         }
     }
 
-    public void Play()
+    public override void Play()
     {
         Clear();
         playerOne.GetInput(inputTable);
