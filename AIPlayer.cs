@@ -5,9 +5,9 @@ public class AIPlayer : Player
 {
     Random random;
 
-    public AIPlayer()
+    public AIPlayer() : base(false)
     {
-        this.PlayerName += " [AI Player]";
+        this.playerName = "AI Player";
         random = new Random();
     }
 
