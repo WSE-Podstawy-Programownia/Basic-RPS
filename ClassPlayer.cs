@@ -4,18 +4,34 @@ using System.Collections.Generic;
 using System.Linq;
 
 class Player {
- public string playerName;
-  public Player (string playerName) {
-   this.playerName = playerName;
+  protected string playerName;
+    private string lastInput;
+
+    public string PlayerName {
+    get {
+      return PlayerName;
+    }
+    set {
+      PlayerName = value;
+    }
+  }
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
+
+    public Player (string playerName) {
+   this.PlayerName = playerName;
   }
   public void SetPlayerName () {
   Write("Please enter player name: ");
-  playerName = ReadLine();
+  PlayerName = ReadLine();
 }
-public Player () {
-  SetPlayerName();
+public Player (bool invokeNameInput = true) {
+  if (invokeNameInput) {
+    SetPlayerName();
+  }
 }
-public string lastInput; // pole zrobimy publiczne, żeby mieć do niego dostęp z obiektu Game
+
+
 
 virtual public void GetInput (Dictionary<string, string> inputTable) {
   string rawInput;
