@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using static System.Console;
 class GameController
 {
-    GameRPS game;
+    string[] gameType = { "RPS", "???" };
+    int currentGameTypeIndex = 0;
+    Game game;
     GamesRecord gamesRecord;
-        
-    Dictionary<ConsoleKey, string> menuOptions = new Dictionary<ConsoleKey, string> ()
+
+    Dictionary<ConsoleKey, string> menuOptions = new Dictionary<ConsoleKey, string>()
     {
         {ConsoleKey.D1, "Player vs Player"},
         {ConsoleKey.D2, "Player vs AI"},
@@ -15,33 +17,29 @@ class GameController
         {ConsoleKey.D5, "Duel Mode"},
         {ConsoleKey.Escape, "Exit"},
     };
-    
+
     public GameController()
     {
         gamesRecord = new GamesRecord(100);
     }
 
 
-    public void DisplayRules(bool withWelcomeMessage = true)
+    public void DisplayRules(Game game, bool withWelcomeMessage = true)
     {
         if (withWelcomeMessage)
         {
-            WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
+            WriteLine("Welcome to a {0} game!", game.GameName);
         }
-        WriteLine("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
+        WriteLine(game.GameRules);
     }
+
     public void MainMenuLoop()
     {
         ConsoleKeyInfo inputKey;
         do
         {
             Console.Clear();
-            Console.WriteLine("Rock-Paper-Scissors Menu:");
-
-            foreach (var k in menuOptions)
-            {
-                Console.WriteLine($"\t{k.Key.ToString()}: {k.Value}");
-            }
+            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs AI\n[3] Show rules\n[4] Display last games' record\n[5] Change game\n[ESC] Exit", gameType[currentGameTypeIndex]);
 
             inputKey = Console.ReadKey(true);
 
@@ -59,7 +57,8 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                DisplayRules();
+                DisplayRules(game, false); // false to not display the "Welcome.." part
+
             }
             else if (inputKey.Key == ConsoleKey.D4)
             {
@@ -70,6 +69,12 @@ class GameController
                 game = new GameRPS();
                 game.DuelMode();
             }
+            else if (inputKey.Key == ConsoleKey.D6)
+            {
+                currentGameTypeIndex = (currentGameTypeIndex + 1) % gameType.Length;
+                continue;
+            }
+
             Console.WriteLine("Press ENTER to continue...");
             Console.ReadKey();
 
