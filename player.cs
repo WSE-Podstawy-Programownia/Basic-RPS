@@ -4,7 +4,8 @@ using static System.Console;
 
 class Player
 {
-    public string lastInput;
+    protected string playerName;
+    private string lastInput;
     virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
@@ -21,7 +22,19 @@ class Player
         }
 
     }
-    public string playerName;
+    public string PlayerName
+    {
+        get
+        {
+            return playerName;
+        }
+        set
+        {
+            playerName = value;
+        }
+    }
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
 
     public Player(string playerName)
     {
@@ -39,8 +52,11 @@ class Player
         while (playerName.Length == 0 || playerName.Length > 10);
     }
 
-    public Player()
+    public Player(bool invokeNameInput = true)
     {
-        SetPlayerName();
+        if (invokeNameInput)
+        {
+            SetPlayerName();
+        }
     }
 }
