@@ -24,10 +24,14 @@ public class Player
     {
         this.PlayerName = playerName;
     }
-    public Player()
+    public Player(bool invokeNameInput = true)
     {
-        SetPlayerName();
+        if (invokeNameInput)
+        {
+            SetPlayerName();
+        }
     }
+
 
     public virtual void GetInput(Dictionary<int, string> inputTable)
     {
