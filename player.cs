@@ -2,10 +2,20 @@ using System;
 using System.Collections.Generic;
 using static System.Console;
 class Player {
-  public string playerName;
-  public string lastInput; // pole zrobimy publiczne, żeby mieć do niego dostęp z obiektu Game
+  protected string playerName;
+    private string lastInput; // pole zrobimy publiczne, żeby mieć do niego dostęp z obiektu Game
+    public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+  }
 
-  public Player (){
+    public string LastInput { get => lastInput; set => lastInput = value; }
+
+    public Player (){
     SetPlayerName ();
   }
   public Player (string playerName) {
