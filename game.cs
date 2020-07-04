@@ -24,7 +24,7 @@ public Game (bool singleplayer = false) {
 public string GetPlayerInput (Player player){
   string rawInput;
   string properInput;
-  WriteLine ("{0}, Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player.playerName);
+  WriteLine ("{0}, Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player.PlayerName);
   rawInput = ReadLine();
   while (rawInput != "1" && rawInput != "2" && rawInput != "3") {
       WriteLine ("Wrong input. Please enter correct one.\nPlayer One, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
@@ -44,12 +44,12 @@ public string DetermineWinner (Player playerOne, Player playerTwo){
   else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
           (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
           (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
-    Console.WriteLine ("{0} won!", playerOne.playerName);
-    return String.Format("{0} won!", playerOne.playerName);
+    Console.WriteLine ("{0} won!", playerOne.PlayerName);
+    return String.Format("{0} won!", playerOne.PlayerName);
   }
   else{
-    Console.WriteLine ("{0} won!", playerTwo.playerName);
-    return String.Format("{0} won!", playerTwo.playerName);
+    Console.WriteLine ("{0} won!", playerTwo.PlayerName);
+    return String.Format("{0} won!", playerTwo.PlayerName);
   }
 }
 

@@ -5,9 +5,9 @@ class MainClass {
 
   public static void Main (string[] args) {
   Player playerOne = new Player();
-  WriteLine(playerOne.playerName);
+  WriteLine(playerOne.PlayerName);
   Player playerTwo = new Player();
-  WriteLine(playerTwo.playerName);
+  WriteLine(playerTwo.PlayerName);
   GamesRecord gamesRecord = new GamesRecord();
   Game game = new Game();
 
