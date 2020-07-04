@@ -6,7 +6,7 @@ class Player
 {
     private const int maxPlayerNameLength = 20;
     protected string playerName;
-    public string lastInput;
+    private string lastInput;
 
     public string PlayerName
     {
@@ -20,6 +20,7 @@ class Player
         }
     }
 
+    public string LastInput { get => lastInput; set => lastInput = value; }
 
     public Player(string playerName)
     {
