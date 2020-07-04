@@ -3,7 +3,7 @@ using static System.Console;
 
 class GameController
 {
-    string[] gameType = { "RPS", "???" };
+    string[] gameType = { "RPS", "Insults" };
     int currentGameTypeIndex = 0;
     Game game;
     GamesRecord gamesRecord;
@@ -63,9 +63,9 @@ class GameController
     }
 
     private Game CreateGame()
-    {        
+    {
         if (gameType[currentGameTypeIndex] == "RPS") return new GameRPS();
-        //else if (gameType[currentGameTypeIndex] == "MyNewGame") return new GameMyGame();
+        else if (gameType[currentGameTypeIndex] == "Insults") return new GameInsults();
         else throw new ArgumentException("No such game");
     }
 }

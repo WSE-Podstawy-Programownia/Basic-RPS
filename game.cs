@@ -12,6 +12,8 @@ abstract class Game
     protected Player playerOne, playerTwo;    
     public GamesRecord gamesRecord;
 
+    protected virtual string ChoosePhrase => "Choose:";
+
     protected Game()
     {
         gamesRecord = new GamesRecord();
@@ -22,6 +24,9 @@ abstract class Game
         playerOne = new Player();
         if (singleplayer) playerTwo = new AIPlayer();
         else playerTwo = new Player();
+
+        playerOne.ChoosePhrase = ChoosePhrase;
+        playerTwo.ChoosePhrase = ChoosePhrase;
     }    
 
     public void Play()
