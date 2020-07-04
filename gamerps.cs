@@ -16,9 +16,12 @@ Player playerOne, playerTwo;
 
 */
  public GameRPS (bool singleplayer = false) {
-  
-    inputTable = new Dictionary<string, string> () 
-  {
+   
+  GameName = "Rock-Paper-Scissors";
+    
+  GameRules = "The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!";
+
+  inputTable = new Dictionary<string, string> () {
     {"1", "Rock"},
     {"2", "Paper"},
     {"3", "Scissors"}
@@ -35,12 +38,14 @@ Player playerOne, playerTwo;
 
    //MainMenuLoop ();
 
-public static void DisplayRules (bool withWelcomeMessage = true) {
+/* stara funkcja wyświetlajaca reguly
+  
+  public static void DisplayRules (bool withWelcomeMessage = true) {
   if (withWelcomeMessage) {
     Console.WriteLine ("Welcome to a simple Rock-Paper-Scissors game!");
   }
   Console.WriteLine ("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\n and confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
-}
+}*/
 
 /*
 stara funkcja pobierająca input gracza
@@ -141,9 +146,9 @@ if (Console.ReadKey(true).Key == ConsoleKey.Y){
 }
 }
 
-public void MainMenuLoop (){
+/*public void MainMenuLoop (){
 
-      // funkcja odpowiedzialna za pętle glownego menu
+      // stara funkcja odpowiedzialna za pętle glownego menu
 
   ConsoleKeyInfo inputKey;
    
@@ -158,7 +163,7 @@ public void MainMenuLoop (){
             Play();
         }
       else if (inputKey.Key == ConsoleKey.D2){
-            DisplayRules(false);
+            GameController.DisplayRules(game, false);
         }
       else if (inputKey.Key == ConsoleKey.D3){
             gamesRecord.DisplayGamesHistory();
@@ -169,7 +174,7 @@ public void MainMenuLoop (){
     
     } 
   while (inputKey.Key != ConsoleKey.Escape);
-}
+}*/
 }
 
 
