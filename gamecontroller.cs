@@ -18,23 +18,25 @@ class GameController
         do
         {
             Clear();
-            WriteLine("Game Menu - Current game [{0}]:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games' record\n\t[5] Change game\n[ESC] Exit");
+            WriteLine($"Game Menu - Current game [{gameType[currentGameTypeIndex]}]:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games' record\n\t[5] Change game\n[ESC] Exit");
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new GameRPS();
+                game = CreateGame();
+                game.InitializePlayers(false);
                 game.Play();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                game = new GameRPS(true);
+                game = CreateGame();
+                game.InitializePlayers(true);
                 game.Play();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                DisplayRules(game, false);
+                DisplayRules(CreateGame(), false);
             }
             else if (inputKey.Key == ConsoleKey.D4)
             {
@@ -51,12 +53,19 @@ class GameController
         } while (inputKey.Key != ConsoleKey.Escape);
     }
 
-    public void DisplayRules(Game game, bool withWelcomeMessage = true)
+    private void DisplayRules(Game game, bool withWelcomeMessage = true)
     {
         if (withWelcomeMessage)
         {
             WriteLine("Welcome to a {0} game!", game.GameName);
         }
         WriteLine(game.GameRules);
+    }
+
+    private Game CreateGame()
+    {        
+        if (gameType[currentGameTypeIndex] == "RPS") return new GameRPS();
+        //else if (gameType[currentGameTypeIndex] == "MyNewGame") return new GameMyGame();
+        else throw new ArgumentException("No such game");
     }
 }
