@@ -2,21 +2,19 @@ using System;
 using System.Collections.Generic;
 using static System.Console;
 
-public class GameRPS
+public class GameRPS : Game
 {
-    Player playerOne, playerTwo;
-    public GamesRecord gamesRecord;
 
-    Dictionary<int, string> inputTable = new Dictionary<int, string> () 
-    {
-      {1, "Rock"},
-      {2, "Paper"},
-      {3, "Scissors"}
-    };
-    
 
     public GameRPS(bool singlePlayer = false)
     {
+        inputTable = new Dictionary<string, string>()
+        {
+            {"1", "Rock"},
+            {"2", "Paper"},
+            {"3", "Scissors"}
+        };
+
         WriteLine("Set up Player 1:");
         while (true)
         {
@@ -50,7 +48,7 @@ public class GameRPS
         gamesRecord = new GamesRecord();
     }
 
-    int GetPlayerInput(Player player)
+    public override int GetPlayerInput(Player player)
     {
         int playerChoice;
         bool playerOneParseSuccess;
@@ -83,26 +81,29 @@ public class GameRPS
         }
     }
 
-    public string DetermineWinner (Player playerOne, Player playerTwo)
+    public string DetermineWinner(Player playerOne, Player playerTwo)
     {
-        if (playerOne.LastInput == playerTwo.LastInput){
-            WriteLine ("It's a draw!");
+        if (playerOne.LastInput == playerTwo.LastInput)
+        {
+            WriteLine("It's a draw!");
             return "Draw";
         }
         else if ((playerOne.LastInput == "Rock" && playerTwo.LastInput == "Scissors") ||
                 (playerOne.LastInput == "Paper" && playerTwo.LastInput == "Rock") ||
-                (playerOne.LastInput == "Scissors" && playerTwo.LastInput == "Paper")){
-            Console.WriteLine ("{0} won!", playerOne.PlayerName);
+                (playerOne.LastInput == "Scissors" && playerTwo.LastInput == "Paper"))
+        {
+            Console.WriteLine("{0} won!", playerOne.PlayerName);
             return String.Format("{0} won!", playerOne.PlayerName);
         }
-        else{
-            Console.WriteLine ("{0} won!", playerTwo.PlayerName);
+        else
+        {
+            Console.WriteLine("{0} won!", playerTwo.PlayerName);
             return String.Format("{0} won!", playerTwo.PlayerName);
         }
     }
 
 
-    public void PlayGame()
+    public override void PlayGame()
     {
         Clear();
         // int playerOneChoice = GetPlayerInput(playerOne);
