@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Player {
   protected string playerName;
-  public string lastInput;
+  protected string lastInput;
 
  public string PlayerName {
     get {
@@ -12,6 +12,15 @@ public class Player {
     }
     set {
       playerName = value;
+    }
+ }
+
+ public string LastInput {
+   get {
+        return lastInput;
+      }
+ set {
+      lastInput = value;
     }
  }
 
