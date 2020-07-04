@@ -36,7 +36,7 @@ class GamesRecord
       currentIndex = 0;
     }
     else {
-      currentIndex = lastRecordIndex;
+      currentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
     }
 
     WriteLine ("Last games history:");
