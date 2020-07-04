@@ -3,20 +3,10 @@ using System.Collections.Generic;
 using static System.Console;
 class GameController
 {
-    string[] gameType = { "RPS", "???" };
+    string[] gameType = { "RPS", "StupidGame" };
     int currentGameTypeIndex = 0;
     Game game;
     GamesRecord gamesRecord;
-
-    Dictionary<ConsoleKey, string> menuOptions = new Dictionary<ConsoleKey, string>()
-    {
-        {ConsoleKey.D1, "Player vs Player"},
-        {ConsoleKey.D2, "Player vs AI"},
-        {ConsoleKey.D3, "Show rukes"},
-        {ConsoleKey.D4, "Display the record of recent games"},
-        {ConsoleKey.D5, "Duel Mode"},
-        {ConsoleKey.Escape, "Exit"},
-    };
 
     public GameController()
     {
@@ -39,19 +29,31 @@ class GameController
         do
         {
             Console.Clear();
-            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs AI\n[3] Show rules\n[4] Display last games' record\n[5] Change game\n[ESC] Exit", gameType[currentGameTypeIndex]);
+            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs AI\n[3] Show rules\n[4] Display last games' record\n[5] Duel Mode\n[6] Change game\n[ESC] Exit", gameType[currentGameTypeIndex]);
 
             inputKey = Console.ReadKey(true);
 
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new GameRPS();
+                if (gameType[currentGameTypeIndex] == "RPS")
+                    game = new GameRPS();
+                else if (gameType[currentGameTypeIndex] == "StupidGame")
+                    game = new GameStupidGame();
+                else
+                    throw new ArgumentException("No such game");
+
                 game.PlayGame();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                game = new GameRPS(true);
+                if (gameType[currentGameTypeIndex] == "RPS")
+                    game = new GameRPS(true);
+                else if (gameType[currentGameTypeIndex] == "StupidGame")
+                    game = new GameStupidGame(true);
+                else
+                    throw new ArgumentException("No such game");
+
                 game.PlayGame();
                 gamesRecord += game.gamesRecord;
             }
@@ -66,7 +68,12 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D5)
             {
-                game = new GameRPS();
+                if (gameType[currentGameTypeIndex] == "RPS")
+                    game = new GameRPS(true);
+                else if (gameType[currentGameTypeIndex] == "StupidGame")
+                    game = new GameStupidGame(true);
+                else
+                    throw new ArgumentException("No such game");
                 game.DuelMode();
             }
             else if (inputKey.Key == ConsoleKey.D6)

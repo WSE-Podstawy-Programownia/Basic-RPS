@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 public abstract class Game
 {
-    private static string gameName;
-    private static string gameRules;
+    private string gameName;
+    private string gameRules;
     public string GameName { get => gameName; set => gameName = value; }
     public string GameRules { get => gameRules; set => gameRules = value; }
 
     protected Player playerOne, playerTwo;
-    protected Dictionary<string, string> inputTable;
+    protected Dictionary<int, string> inputTable;
     public GamesRecord gamesRecord;
-    public abstract string GetPlayerInput(Player player);
-    public abstract void Play();
+    public abstract int GetPlayerInput(Player player);
+    public abstract void PlayGame();
 
     public virtual void DuelMode()
     {
