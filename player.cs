@@ -4,18 +4,32 @@ using System.Linq;
 
 class Player {
    
-   public string playerName;
-    public string lastInput; 
+   protected string playerName;
+    private string lastInput;
 
     public Player (string playerName) {this.playerName = playerName;}
 
-   public void SetPlayerName () {
+        public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+  }
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
+
+    public void SetPlayerName () {
       Console.Write("Please enter player name: ");
-      playerName = Console.ReadLine();
+      PlayerName = Console.ReadLine();
 }
 
-public Player () {
-  SetPlayerName();
+public Player (bool invokeNameInput = true) {
+  
+    if (invokeNameInput) {
+    SetPlayerName();
+  }
 }
 
  virtual public void GetInput (Dictionary<string, string> inputTable) {
@@ -31,6 +45,7 @@ public Player () {
   rawInput = Console.ReadLine();
   
   while (!inputTable.TryGetValue(rawInput, out lastInput)) {
+
     Console.WriteLine ("Wrong input. Please enter correct one.");
     rawInput = Console.ReadLine();
   }

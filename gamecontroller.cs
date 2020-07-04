@@ -2,7 +2,7 @@ using System;
 
 
 class GameController {
-        Game game;
+        GameRPS game;
         GamesRecord gamesRecord;
 
         public GameController () {
@@ -25,19 +25,19 @@ class GameController {
             inputKey = Console.ReadKey(true);
 
       if (inputKey.Key == ConsoleKey.D1){
-            game = new Game();
+            game = new GameRPS();
             game.Play();
             gamesRecord += game.gamesRecord;
         }
       else if (inputKey.Key == ConsoleKey.D2){
-          game = new Game(true);
+          game = new GameRPS(true);
           game.Play();
           gamesRecord += game.gamesRecord;
   }
 
       else if (inputKey.Key == ConsoleKey.D3){
             //game = new Game();
-            game.DisplayRules(false);
+            GameRPS.DisplayRules(false);
         }
       else if (inputKey.Key == ConsoleKey.D4){
             gamesRecord.DisplayGamesHistory();
