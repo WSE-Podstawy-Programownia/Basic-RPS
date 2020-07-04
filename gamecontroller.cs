@@ -16,31 +16,25 @@ class GameController
         do
         {
             Clear();
-            WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] AI vs AI \n\t[4] Show rules\n\t[5] Display last games' record\n\t[ESC] Exit");
+            WriteLine("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games' record\n\t[ESC] Exit");
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new Game(Game.Mode.MultiPlayer);
+                game = new Game();
                 game.Play();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                game = new Game(Game.Mode.SinglePlayer);
+                game = new Game(true);
                 game.Play();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                game = new Game(Game.Mode.AIvsAI);
-                game.Play();
-                gamesRecord += game.gamesRecord;
-            }
-            else if (inputKey.Key == ConsoleKey.D4)
-            {
                 DisplayRules();
             }
-            else if (inputKey.Key == ConsoleKey.D5)
+            else if (inputKey.Key == ConsoleKey.D4)
             {
                 gamesRecord.DisplayGamesHistory();
             }

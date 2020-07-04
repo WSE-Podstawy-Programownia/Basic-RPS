@@ -4,17 +4,12 @@ using System.Linq;
 
 class AIPlayer : Player
 {
-    private static Random random = new Random();
+    Random random;
 
-    private static string[] names = new string[]
-    {
-        "Bulbasaur", "Ivysaur", "Venusaur", "Charmander", "Charmeleon", "Charizard", "Squirtle", "Wartortle", "Blastoise", "Caterpie", "Metapod", "Butterfree", "Pikachu"
-    };
-
-    public AIPlayer() 
-        : base(names[random.Next(0, names.Length)])
-    {                
-    }    
+    public AIPlayer() : base("[AI Player]")
+    {        
+        random = new Random();
+    }
 
     override public void GetInput(Dictionary<string, string> inputTable)
     {

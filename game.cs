@@ -4,10 +4,6 @@ using static System.Console;
 
 class Game
 {
-    public enum Mode
-    {
-        SinglePlayer, MultiPlayer, AIvsAI
-    }
     Player playerOne, playerTwo;
     public GamesRecord gamesRecord;
     Dictionary<string, string> inputTable = new Dictionary<string, string>()
@@ -17,24 +13,11 @@ class Game
       {"3", "Scissors"}
     };
 
-    public Game(Mode mode)
+    public Game(bool singleplayer = false)
     {
-        if (mode == Mode.SinglePlayer)
-        {
-            playerOne = new Player();
-            playerTwo = new AIPlayer();
-        }
-        else if (mode == Mode.MultiPlayer)
-        {
-            playerOne = new Player();
-            playerTwo = new Player();
-        }
-        else
-        {
-            playerOne = new AIPlayer();
-            playerTwo = new AIPlayer();
-        }
-
+        playerOne = new Player();
+        if (singleplayer) playerTwo = new AIPlayer();
+        else playerTwo = new Player();
         gamesRecord = new GamesRecord();
     }
 
@@ -57,7 +40,6 @@ class Game
 
     public string DetermineWinner(Player playerOne, Player playerTwo)
     {
-        WriteLine($"{playerOne.playerName} chose {playerOne.lastInput}, {playerTwo.playerName} chose {playerTwo.lastInput}.");
         if (playerOne.lastInput == playerTwo.lastInput)
         {
             WriteLine("It's a draw!");
