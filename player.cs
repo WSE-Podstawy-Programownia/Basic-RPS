@@ -15,9 +15,11 @@ class Player {
 
     public string LastInput { get => lastInput; set => lastInput = value; }
 
-    public Player (){
-    SetPlayerName ();
-  }
+    public Player (bool invokeNameInput = true) {
+      if (invokeNameInput) {
+        SetPlayerName ();
+      }
+    }
   public Player (string playerName) {
     this.playerName = playerName;
   }

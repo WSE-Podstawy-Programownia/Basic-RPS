@@ -5,7 +5,7 @@ using System.Linq;
 class AIPlayer : Player {
     Random random;
 
-    public AIPlayer () {
+    public AIPlayer () : base(false) {
       this.PlayerName += "[AI Player]";
       random = new Random();
     }
