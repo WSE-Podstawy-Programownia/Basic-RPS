@@ -4,7 +4,7 @@ using System.Linq;
 class AIPlayer : Player {
     Random random;
 override public void GetInput (Dictionary<string, string> inputTable) {
-  lastInput = inputTable.ElementAt(random.Next(inputTable.Count)).Value;
+  LastInput = inputTable.ElementAt(random.Next(inputTable.Count)).Value;
 }
 
 

@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 class Player {
  protected string playerName;
-  public string lastInput;
-  public string PlayerName {
+    private string lastInput;
+    public string PlayerName {
     get {
       return playerName;
     }
@@ -13,7 +13,10 @@ class Player {
       playerName = value;
     }
   }
-  public void SetPlayerName () {
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
+
+    public void SetPlayerName () {
     Write("Please enter player name: ");
     playerName = ReadLine();
   }
