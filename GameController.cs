@@ -3,7 +3,7 @@ using static System.Console;
 
 class GameController
 {
-    string[] gameType = {"RPS","???"};
+    string[] gameType = { "RPS", "AnotherGame" };
     int currentGameTypeIndex = 0;
     Game game;
     GameRecord gameRecord;
@@ -25,11 +25,16 @@ class GameController
         do
         {
             Clear();
-            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs Computer\n[3] Show rules\n[4] Game Score\n[5] Change game[ESC] Exit", gameType[currentGameTypeIndex]);
+            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs Computer\n[3] Show rules\n[4] Game Score\n[5] Change game\n[ESC] Exit", gameType[currentGameTypeIndex]);
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new GameRPS();
+                if (gameType[currentGameTypeIndex] == "RPS")
+                    game = new GameRPS();
+                else if (gameType[currentGameTypeIndex] == "AnotherGame")
+                    game = new GameMyGame();
+                else
+                    throw new ArgumentException("No such game");
                 game.Play();
                 gameRecord += game.gameRecord;
             }
@@ -41,7 +46,7 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                DisplayRules(game,false);
+                DisplayRules(game, false);
             }
             else if (inputKey.Key == ConsoleKey.D4)
             {
