@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using static System.Console;
 
-public class Game
+public class GameRPS
 {
     Player playerOne, playerTwo;
     public GamesRecord gamesRecord;
@@ -15,7 +15,7 @@ public class Game
     };
     
 
-    public Game(bool singlePlayer = false)
+    public GameRPS(bool singlePlayer = false)
     {
         WriteLine("Set up Player 1:");
         while (true)

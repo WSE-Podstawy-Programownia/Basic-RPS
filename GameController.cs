@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using static System.Console;
 class GameController
 {
-    Game game;
+    GameRPS game;
     GamesRecord gamesRecord;
         
     Dictionary<ConsoleKey, string> menuOptions = new Dictionary<ConsoleKey, string> ()
@@ -47,13 +47,13 @@ class GameController
 
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new Game();
+                game = new GameRPS();
                 game.PlayGame();
                 gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                game = new Game(true);
+                game = new GameRPS(true);
                 game.PlayGame();
                 gamesRecord += game.gamesRecord;
             }
@@ -67,7 +67,7 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D5)
             {
-                game = new Game();
+                game = new GameRPS();
                 game.DuelMode();
             }
             Console.WriteLine("Press ENTER to continue...");
