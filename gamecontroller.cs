@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 
 class GameController {
-    Game game;
+    GameRPS game;
     GamesRecord gamesRecord;
     public GameController () {
       gamesRecord = new GamesRecord();
@@ -31,7 +31,7 @@ class GameController {
 
             if (inputKey.Key == ConsoleKey.D1){
                 //po wybraniu Play tworzyła nowy obiekt Game i na nim wywoływała metodę Play 1b-48
-                game = new Game();
+                game = new GameRPS();
                 game.Play();
                 gamesRecord += game.gamesRecord;
                 //dodawanie po zakończeniu rozgrywki instrukcji dodającą GamesRecord trzymany w obiekcie klasy
@@ -40,7 +40,7 @@ class GameController {
             
             //dostępnienie graczowi odpowiedniego wyboru w menu gry.  single/multi
             else if (inputKey.Key == ConsoleKey.D2){
-                game = new Game(true);
+                game = new GameRPS(true);
                 game.Play();
                 gamesRecord += game.gamesRecord;
             }
