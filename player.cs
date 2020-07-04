@@ -5,8 +5,21 @@ using static System.Console;
 class Player
 {
     private const int maxPlayerNameLength = 20;
-    public string playerName;
+    protected string playerName;
     public string lastInput;
+
+    public string PlayerName
+    {
+        get
+        {
+            return playerName;
+        }
+        set
+        {
+            playerName = value;
+        }
+    }
+
 
     public Player(string playerName)
     {
@@ -29,14 +42,14 @@ class Player
         }
         else
         {
-            playerName = newPlayerName;
+            PlayerName = newPlayerName;
         }
     }
 
     virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
-        WriteLine("{0}, Choose:", playerName);
+        WriteLine("{0}, Choose:", PlayerName);
         foreach (KeyValuePair<string, string> entry in inputTable)
         {
             WriteLine("[{0}] {1}", entry.Key, entry.Value);
