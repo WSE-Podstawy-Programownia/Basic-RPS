@@ -5,7 +5,7 @@ public class Player
 {
     protected string playerName;
 
-    public string LastInput;
+    private string lastInput;
     public string PlayerName
     {
         get
@@ -43,7 +43,7 @@ public class Player
             }
 
             playerParseSuccess = Int32.TryParse(Console.ReadLine(), out playerChoice);
-        } while (!inputTable.TryGetValue(playerChoice, out LastInput));
+        } while (!inputTable.TryGetValue(playerChoice, out lastInput));
 
     }
 
@@ -51,6 +51,7 @@ public class Player
     public int Damage { get; set; }
 
     public int Health { get; set; }
+    public string LastInput { get => lastInput; set => lastInput = value; }
 
     public void SetPlayerDamage()
     {
