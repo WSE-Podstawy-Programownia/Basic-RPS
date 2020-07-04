@@ -1,6 +1,11 @@
 using System.Collections.Generic;
 using static System.Console;
 
+
+
+
+ 
+
 class Player {
   protected string playerName;
   private string lastInput;
@@ -10,6 +15,11 @@ class Player {
       return playerName;
     }
     set {
+      if (value <= 0)
+      {
+        healthPoints = 0;
+        status = "DEAD";
+      }
       playerName = value;
     }
   }
