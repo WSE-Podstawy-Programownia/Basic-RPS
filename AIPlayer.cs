@@ -14,7 +14,7 @@ this.playerName = "AI Player: ";
 random = new Random();
 
 Random rnd = new Random();
-int rand  = rnd.Next(0, 6);
+int rand  = rnd.Next(0, imiona.Count());
 
 this.playerName += imiona[rand];
 random = new Random();

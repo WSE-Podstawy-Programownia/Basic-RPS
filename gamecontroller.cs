@@ -26,8 +26,8 @@ WriteLine (game.GameRules);
       if (inputKey.Key == ConsoleKey.D1){
         if (gameType[currentGameTypeIndex] == "RPS")
         game = new GameRPS();
-        else if (gameType[currentGameTypeIndex] == "MyNewGame")
-        game = new GameMyGame();
+        /*else if (gameType[currentGameTypeIndex] == "MyNewGame")
+        game = new GameMyGame();*/
         else
         throw new ArgumentException("No such game");
         game.Play();
