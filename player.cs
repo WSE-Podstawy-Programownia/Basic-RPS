@@ -35,7 +35,10 @@ class Player {
 
   }
 
-  public Player () {
+public Player (bool invokeNameInput = true) {
+  if (invokeNameInput) {
     SetPlayerName();
   }
+}
+
 }
