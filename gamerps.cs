@@ -21,31 +21,6 @@ class GameRPS : Game {
     gamesRecord = new GamesRecord ();
   }
 
-  public override string GetPlayerInput (Player player){
-    // Variable declaration
-    string rawInput;
-    string properInput;
-
-    // Prompt for input
-    WriteLine ("{0}, Choose:\n[1] Rock\n[2] Paper\n[3] Scissors", player.PlayerName);
-    
-    // Get player input
-    rawInput = ReadLine();
-
-    // Verify input and reprompt if wrong
-    while (rawInput != "1" && rawInput != "2" && rawInput != "3") {
-        WriteLine ("Wrong input. Please enter correct one.\nPlayer One, choose:\n[1] Rock\n[2] Paper\n[3] Scissors");
-        rawInput = ReadLine();
-    }
-
-    // Translate the raw input into proper one
-    if (rawInput == "1") { properInput = "Rock"; }
-    else if (rawInput == "2") { properInput = "Paper"; }
-    else { properInput = "Scissors"; }
-
-    return properInput;
-  }
-
   public string DetermineWinner (Player playerOne, Player playerTwo){
     if (playerOne.LastInput == playerTwo.LastInput){
         WriteLine ("It's a draw!");

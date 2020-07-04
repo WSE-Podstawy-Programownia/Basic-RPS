@@ -10,6 +10,5 @@ abstract class Game {
     public string GameName { get => gameName; set => gameName = value; }
     public string GameRules { get => gameRules; set => gameRules = value; }
 
-    public abstract string GetPlayerInput (Player player);
     public abstract void Play ();
 }
