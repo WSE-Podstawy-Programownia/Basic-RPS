@@ -33,7 +33,7 @@ class GameController {
             if (gameType[currentGameTypeIndex] == "RPS")
                 game = new GameRPS();
             else if (gameType[currentGameTypeIndex] == "MyNewGame")
-                game = new GameMyGame();
+                throw new ArgumentException("No such game");
             else
                 throw new ArgumentException("No such game");
             game.Play();
