@@ -3,8 +3,17 @@ using static System.Console;
 using System.Collections.Generic;
 
 public class Player {
-  public string playerName;
+  protected string playerName;
   public string lastInput;
+
+ public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+ }
 
  public Player (string playerName) {
    this.playerName = playerName;
