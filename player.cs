@@ -4,41 +4,31 @@ using static System.Console;
 
 class Player
 {
-    protected string playerName;
-    private string lastInput;
     virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
-        WriteLine("{0}, Choose:", playerName);
+        WriteLine("{0}, Choose:", PlayerName);
         foreach (KeyValuePair<string, string> entry in inputTable)
         {
             WriteLine("[{0}] {1}", entry.Key, entry.Value);
         }
         rawInput = ReadLine();
-        while (!inputTable.TryGetValue(rawInput, out lastInput))
+        while (!inputTable.TryGetValue(rawInput, out var lastInput))
         {
+            LastInput = lastInput;
+
             WriteLine("Wrong input. Please enter correct one.");
             rawInput = ReadLine();
         }
 
     }
-    public string PlayerName
-    {
-        get
-        {
-            return playerName;
-        }
-        set
-        {
-            playerName = value;
-        }
-    }
+    public string PlayerName { get; protected set; }
 
-    public string LastInput { get => lastInput; set => lastInput = value; }
+    public string LastInput { get; set; }
 
     public Player(string playerName)
     {
-        this.playerName = playerName;
+        PlayerName = playerName;
     }
 
     public void SetPlayerName()
@@ -47,9 +37,9 @@ class Player
         {
             Clear();
             Write("Please enter player name: ");
-            playerName = ReadLine();
+            PlayerName = ReadLine();
         }
-        while (playerName.Length == 0 || playerName.Length > 10);
+        while (PlayerName.Length == 0 || PlayerName.Length > 10);
     }
 
     public Player(bool invokeNameInput = true)

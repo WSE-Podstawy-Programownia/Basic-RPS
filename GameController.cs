@@ -3,19 +3,21 @@ using static System.Console;
 
 class GameController
 {
+    string[] gameType = {"RPS","???"};
+    int currentGameTypeIndex = 0;
     Game game;
     GameRecord gameRecord;
     public GameController()
     {
         gameRecord = new GameRecord();
     }
-    public void DisplayRules(bool withWelcomeMessage = true)
+    public void DisplayRules(Game game, bool withWelcomeMessage = true)
     {
         if (withWelcomeMessage)
         {
-            WriteLine("Welcome to a simple Rock-Paper-Scissors game!");
+            WriteLine("Welcome to a {0} game!", game.GameName);
         }
-        WriteLine("The rules are very simple - each player chooses Rock, Paper or Scissors, the choice is made by entering its number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both players choise is made, the winner is determined. After each game the application will ask the player if they want to continue, and if the player repond with anything else than [y]es than the game ends and the record of the last up to 10 games is presented.\n\nHave fun!");
+        WriteLine(game.GameRules);
     }
     public void MainMenuLoop()
     {
@@ -23,27 +25,32 @@ class GameController
         do
         {
             Clear();
-            WriteLine("Rock-Paper-Scissors Menu:\n[1] Player vs Player\n[2] Player vs Computer\n[3] Show rules\n[4] Game Score\n[ESC] Exit");
+            WriteLine("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs Computer\n[3] Show rules\n[4] Game Score\n[5] Change game[ESC] Exit", gameType[currentGameTypeIndex]);
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
-                game = new Game();
+                game = new GameRPS();
                 game.Play();
                 gameRecord += game.gameRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                game = new Game(true);
+                game = new GameRPS(true);
                 game.Play();
                 gameRecord += game.gameRecord;
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                DisplayRules(false);
+                DisplayRules(game,false);
             }
             else if (inputKey.Key == ConsoleKey.D4)
             {
                 gameRecord.DisplayGameHistory();
+            }
+            else if (inputKey.Key == ConsoleKey.D5)
+            {
+                currentGameTypeIndex = (currentGameTypeIndex + 1) % gameType.Length;
+                continue;
             }
             else { continue; }
             WriteLine("(click any key to continue)");

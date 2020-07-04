@@ -6,9 +6,8 @@ class AIPlayer : Player
 {
     Random random;
 
-    public AIPlayer() : base(false)
+    public AIPlayer() : base("AI Player")
     {
-        this.playerName = "AI Player";
         random = new Random();
     }
     override public void GetInput(Dictionary<string, string> inputTable)
