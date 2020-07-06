@@ -1,11 +1,25 @@
-using System;
+using System.Collections.Generic;
 using static System.Console;
 
 class Player {
-  public string playerName;
-  
-  public Player () {
-    SetPlayerName();
+  protected string playerName;
+  private string lastInput;
+
+  public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+  }
+
+  public string LastInput { get => lastInput; set => lastInput = value; }
+
+  public Player (bool invokeNameInput = true) {
+    if (invokeNameInput) {
+      SetPlayerName();
+    }
   }
 
   public Player (string playerName) {
@@ -17,24 +31,24 @@ class Player {
     playerName = ReadLine();
   }
 
+  virtual public void GetInput (Dictionary<string, string> inputTable) {
+    // Variable declaration
+    string rawInput;
 
-  public string lastInput; 
-
-   virtual public void GetInput (Dictionary<string, string> inputTable) {
-
-      string rawInput;
-  WriteLine ("{0}, Choose:", playerName);
-  foreach(KeyValuePair<string, string> entry in inputTable) {
-    WriteLine ("[{0}] {1}", entry.Key, entry.Value);
-  }
-  rawInput = ReadLine();
-  while (!inputTable.TryGetValue(rawInput, out lastInput)) {
-    WriteLine ("Wrong input. Please enter correct one.");
-    rawInput = ReadLine();
-  }
-
+    // Prompt for input
+    WriteLine ("{0}, Choose:", playerName);
+    foreach(KeyValuePair<string, string> entry in inputTable) {
+      WriteLine ("[{0}] {1}", entry.Key, entry.Value);
+    }
     
-  }
+    // Get player input
+    rawInput = ReadLine();
 
+    // Verify input and reprompt if wrong
+    while (!inputTable.TryGetValue(rawInput, out lastInput)) {
+      WriteLine ("Wrong input. Please enter correct one.");
+      rawInput = ReadLine();
+    }
+  }
 
 }
