@@ -7,10 +7,11 @@ class Game
 {
   Player playerOne, playerTwo;
   public GamesRecord gamesRecord;
-  public Game()
+  public Game(bool singleplayer = false)
   {
     playerOne = new Player();
-    playerTwo = new AIPlayer();
+    if (singleplayer) playerTwo = new AIPlayer();
+    else playerTwo = new Player();
     gamesRecord = new GamesRecord();
   }
 
