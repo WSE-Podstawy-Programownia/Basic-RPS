@@ -6,8 +6,7 @@ using System.Linq;
 class Game 
 {
   Player playerOne, playerTwo;
-  GamesRecord gamesRecord;
-
+  public GamesRecord gamesRecord;
   public Game()
   {
     playerOne = new Player();

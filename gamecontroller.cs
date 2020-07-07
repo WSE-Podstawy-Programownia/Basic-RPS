@@ -31,6 +31,7 @@ class GameController
             {
                 game = new Game();
                 game.PlayGame();
+                gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
