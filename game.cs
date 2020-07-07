@@ -14,6 +14,13 @@ class Game
     gamesRecord = new GamesRecord();
   }
 
+  Dictionary <string, string> inputTable = new Dictionary<string, string> ()
+  {
+    {"1", "Rock"},
+    {"2", "Paper"},
+    {"3", "Scissors"}
+  };
+
   public string GetPlayerInput (Player player){
     string rawInput;
     string properInput;
