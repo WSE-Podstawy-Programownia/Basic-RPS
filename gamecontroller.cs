@@ -25,7 +25,7 @@ class GameController
         do 
         {
             Clear();
-            WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Play a game\n\t[2] Show rules\n\t[3] Display last games' record\n\t[ESC] Exit");
+            WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games record\n\t[ESC] Exit");
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
@@ -35,9 +35,15 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D2)
             {
-                DisplayWelcomeMessage();
+                game = new Game(true);
+                game.PlayGame();
+                gamesRecord += game.gamesRecord;
             }
             else if (inputKey.Key == ConsoleKey.D3)
+            {
+                DisplayWelcomeMessage(false);
+            }
+            else if (inputKey.Key == ConsoleKey.D4)
             {
                 gamesRecord.DisplayGamesHistory();
             }
