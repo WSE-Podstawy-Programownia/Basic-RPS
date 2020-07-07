@@ -14,7 +14,7 @@ class Game
     gamesRecord = new GamesRecord();
   }
 
-  Dictionary <string, string> inputTable = new Dictionary<string, string> ()
+  public Dictionary <string, string> inputTable = new Dictionary<string, string> ()
   {
     {"1", "Rock"},
     {"2", "Paper"},
@@ -40,20 +40,20 @@ class Game
     return properInput;
   }
 
-   public string DetermineWinner (string playerOne, string playerTwo){
-    if (playerOne == playerTwo){
+   public string DetermineWinner (Player playerOne, Player playerTwo){
+    if (playerOne.lastInput == playerTwo.lastInput){
         WriteLine ("It's a draw!");
         return "Draw";
     }
-    else if ((playerOne == "Rock" && playerTwo == "Scissors") ||
-            (playerOne == "Paper" && playerTwo == "Rock") ||
-            (playerOne == "Scissors" && playerTwo == "Paper")){
-      Console.WriteLine ("Player One won!");
-      return "Player One won";
+    else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+            (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+            (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
+      Console.WriteLine ("{0} won!", playerOne.playerName);
+      return String.Format("{0} won", playerOne.playerName);
     }
     else{
-      Console.WriteLine ("Player Two won!");
-      return "Player Two won";
+      Console.WriteLine ("{0} won!", playerTwo.playerName);
+      return String.Format("{0} won", playerTwo.playerName);
     }
   }
 
@@ -61,16 +61,16 @@ class Game
   {
     Clear();
 
-    string firstPlayerChoiceString = GetPlayerInput(playerOne);
+    playerOne.GetInput(inputTable);
     
     Clear ();
     
-    string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+    playerTwo.GetInput(inputTable);
     
     Clear ();
 
-    string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
-    gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+    string gameResult = DetermineWinner(playerOne, playerTwo);
+    gamesRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);
 
 
     WriteLine("Do you want to play another round? [y]");
