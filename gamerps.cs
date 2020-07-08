@@ -3,24 +3,22 @@ using static System.Console;
 using System.Collections.Generic;
 using System.Linq;
 
-class GameRPS 
+class GameRPS : Game
 {
-  Player playerOne, playerTwo;
-  public GamesRecord gamesRecord;
   public GameRPS(bool singleplayer = false)
   {
+    inputTable = new Dictionary<string, string>()
+    {
+      {"1", "Rock"},
+      {"2", "Paper"},
+      {"3", "Scissors"}
+    };
+
     playerOne = new Player();
     if (singleplayer) playerTwo = new AIPlayer();
     else playerTwo = new Player();
     gamesRecord = new GamesRecord();
   }
-
-  Dictionary <string, string> inputTable = new Dictionary<string, string> ()
-  {
-    {"1", "Rock"},
-    {"2", "Paper"},
-    {"3", "Scissors"}
-  };
 
   public string GetPlayerInput (Player player){
     string rawInput;
@@ -41,7 +39,7 @@ class GameRPS
     return properInput;
   }
 
-   public string DetermineWinner (Player playerOne, Player playerTwo){
+  string DetermineWinner (Player playerOne, Player playerTwo){
     if (playerOne.LastInput == playerTwo.LastInput){
         WriteLine ("It's a draw!");
         return "Draw";
@@ -58,7 +56,7 @@ class GameRPS
     }
   }
 
-  public void PlayGame ()
+  public override void PlayGame ()
   {
     Clear();
 
