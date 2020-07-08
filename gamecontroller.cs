@@ -3,7 +3,9 @@ using static System.Console;
 
 class GameController 
 {
-    GameRPS game;
+    string[] gameType = {"RPS", "My New Game"};
+    int currentGameTypeIndex = 0;
+    Game game;
     GamesRecord gamesRecord;
 
     public GameController ()
@@ -14,9 +16,9 @@ class GameController
     {
         if (withWelcomeMessage)
         {
-            WriteLine ("Welcome to a simple Rock-Paper-Scissors game!");
+            WriteLine ("Welcome to a {0} game!", game.GameName);
         }
-            WriteLine ("The rules are very simple - each player chooses Rock, Paper or Scissors choice by entering the choice's number\n[1] Rock\n[2] Paper\n[3] Scissors\nand confirm it by clicking Enter.\nAfter both player choose, the winner is determined. After each game the application will ask the players if they want to continue, and if the player repond with anything else than [y]es than the game finishes and presents the record of the last up to 10 games.\n\nHave fun!");
+            WriteLine (game.GameRules);
     }
 
     public void MainMenuLoop ()
@@ -25,7 +27,7 @@ class GameController
         do 
         {
             Clear();
-            WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games record\n\t[ESC] Exit");
+            WriteLine ("Rock-Paper-Scissors Menu:\n\t[1] Player vs Player\n\t[2] Player vs AI\n\t[3] Show rules\n\t[4] Display last games record\n\t[5] Play other game\n\t[ESC] Exit", gameType[currentGameTypeIndex]);
             inputKey = ReadKey(true);
             if (inputKey.Key == ConsoleKey.D1)
             {
@@ -46,6 +48,11 @@ class GameController
             else if (inputKey.Key == ConsoleKey.D4)
             {
                 gamesRecord.DisplayGamesHistory();
+            }
+            else if (inputKey.Key == ConsoleKey.D5)
+            {
+                currentGameTypeIndex = (currentGameTypeIndex + 1) % gameType.Length;
+                continue;
             }
             else { continue; }
             WriteLine ("(click any key to continue)");
