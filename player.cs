@@ -6,9 +6,9 @@ using System.Linq;
 class Player 
 {
   protected string playerName;
-  public string lastInput;
+    private string lastInput;
 
-  public string PlayerName 
+    public string PlayerName 
   {
     get 
     {
@@ -18,8 +18,11 @@ class Player
     {
       playerName = value;
     }
-  } 
-  public Player (string playerName)
+  }
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
+
+    public Player (string playerName)
   {
     this.playerName = playerName; 
   }
