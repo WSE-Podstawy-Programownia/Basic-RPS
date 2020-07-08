@@ -5,8 +5,20 @@ using System.Linq;
 
 class Player 
 {
-  public string playerName;
-  public string lastInput; 
+  protected string playerName;
+  public string lastInput;
+
+  public string PlayerName 
+  {
+    get 
+    {
+      return playerName;
+    }
+    set
+    {
+      playerName = value;
+    }
+  } 
   public Player (string playerName)
   {
     this.playerName = playerName; 

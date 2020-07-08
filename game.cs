@@ -49,12 +49,12 @@ class Game
     else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
             (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
             (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
-      Console.WriteLine ("{0} won!", playerOne.playerName);
-      return String.Format("{0} won", playerOne.playerName);
+      Console.WriteLine ("{0} won!", playerOne.PlayerName);
+      return String.Format("{0} won", playerOne.PlayerName);
     }
     else{
-      Console.WriteLine ("{0} won!", playerTwo.playerName);
-      return String.Format("{0} won", playerTwo.playerName);
+      Console.WriteLine ("{0} won!", playerTwo.PlayerName);
+      return String.Format("{0} won", playerTwo.PlayerName);
     }
   }
 
