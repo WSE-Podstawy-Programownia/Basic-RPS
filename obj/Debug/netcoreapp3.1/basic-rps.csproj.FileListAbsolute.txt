@@ -1,0 +1,4 @@
+C:\Users\hggheetyygh\Documents\GitHub\basic-rps\obj\Debug\netcoreapp3.1\basic-rps.csprojAssemblyReference.cache
+C:\Users\hggheetyygh\Documents\GitHub\basic-rps\obj\Debug\netcoreapp3.1\basic-rps.AssemblyInfoInputs.cache
+C:\Users\hggheetyygh\Documents\GitHub\basic-rps\obj\Debug\netcoreapp3.1\basic-rps.AssemblyInfo.cs
+C:\Users\hggheetyygh\Documents\GitHub\basic-rps\obj\Debug\netcoreapp3.1\basic-rps.csproj.CoreCompileInputs.cache

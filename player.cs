@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using static System.Console;
 
 class Player {
+<<<<<<< HEAD
   protected string playerName;
   private string lastInput;
 
@@ -20,6 +21,13 @@ class Player {
     if (invokeNameInput) {
       SetPlayerName();
     }
+=======
+  public string playerName;
+  public string lastInput;
+  
+  public Player () {
+    SetPlayerName();
+>>>>>>> 20c5dc4f8c51622fed076cf85cf304c3af48eca9
   }
 
   public Player (string playerName) {

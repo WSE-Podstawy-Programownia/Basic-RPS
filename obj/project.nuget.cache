@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "R28WPv5bZyRu4J0aofYzFIlHDxmvqOZa77515CxDxs5Zupx9nmzE1qw96QkdAbZSPuZYLwgkYudWU00YxV8RDA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hggheetyygh\\Documents\\GitHub\\basic-rps\\basic-rps.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hggheetyygh\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\3.1.2\\microsoft.aspnetcore.app.ref.3.1.2.nupkg.sha512"
+  ],
+  "logs": []
+}
