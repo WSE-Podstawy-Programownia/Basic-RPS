@@ -1,62 +1,48 @@
 using System.Collections.Generic;
 using static System.Console;
 
-class Player {
-<<<<<<< HEAD
-  protected string playerName;
-  private string lastInput;
+class Player
+{
+    public string playerName;
+    public string lastInput;
 
-  public string PlayerName {
-    get {
-      return playerName;
+    public Player()
+    {
+        SetPlayerName();
     }
-    set {
-      playerName = value;
+
+    public Player(string playerName)
+    {
+        this.playerName = playerName;
     }
-  }
 
-  public string LastInput { get => lastInput; set => lastInput = value; }
-
-  public Player (bool invokeNameInput = true) {
-    if (invokeNameInput) {
-      SetPlayerName();
+    public void SetPlayerName()
+    {
+        Write("Please enter player name: ");
+        playerName = ReadLine();
     }
-=======
-  public string playerName;
-  public string lastInput;
-  
-  public Player () {
-    SetPlayerName();
->>>>>>> 20c5dc4f8c51622fed076cf85cf304c3af48eca9
-  }
 
-  public Player (string playerName) {
-    this.playerName = playerName;
-  }
+    virtual public void GetInput(Dictionary<string, string> inputTable)
+    {
+        // Variable declaration
+        string rawInput;
 
-  public void SetPlayerName () {
-    Write("Please enter player name: ");
-    playerName = ReadLine();
-  }
+        // Prompt for input
+        WriteLine("{0}, Choose:", playerName);
+        foreach (KeyValuePair<string, string> entry in inputTable)
+        {
+            WriteLine("[{0}] {1}", entry.Key, entry.Value);
+        }
 
-  virtual public void GetInput (Dictionary<string, string> inputTable) {
-    // Variable declaration
-    string rawInput;
+        // Get player input
+        rawInput = ReadLine();
 
-    // Prompt for input
-    WriteLine ("{0}, Choose:", playerName);
-    foreach(KeyValuePair<string, string> entry in inputTable) {
-      WriteLine ("[{0}] {1}", entry.Key, entry.Value);
+        // Verify input and reprompt if wrong
+        while (!inputTable.TryGetValue(rawInput, out lastInput))
+        {
+            WriteLine("Wrong input. Please enter correct one.");
+            rawInput = ReadLine();
+        }
     }
-    
-    // Get player input
-    rawInput = ReadLine();
-
-    // Verify input and reprompt if wrong
-    while (!inputTable.TryGetValue(rawInput, out lastInput)) {
-      WriteLine ("Wrong input. Please enter correct one.");
-      rawInput = ReadLine();
-    }
-  }
 
 }
