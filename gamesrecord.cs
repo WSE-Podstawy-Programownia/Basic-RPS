@@ -50,7 +50,7 @@ public void DisplayGamesHistory()
     
     Console.WriteLine ("Game #{0}:\t{1}", i+1, gamesRecord[displayRecordIndex].ToString());
     displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
-    displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
+    // displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
   }
 }
 
