@@ -48,15 +48,15 @@ class GameController {
 
       if (inputKey.Key == ConsoleKey.D1){
             
-          if  (game.GameName == "RPS"){
+          if  (gameType[currentGameTypeIndex] == "RPS"){
             game = new GameRPS();
             
             game.Play();
             gamesRecord += game.gamesRecord;
           }
-        else
+        else if (gameType[currentGameTypeIndex] == "Dice")
           {
-            game = new GameDice(true);
+            game = new GameDice();
             game.Play();
             gamesRecord += game.gamesRecord;
 
@@ -67,13 +67,13 @@ class GameController {
         }
       else if (inputKey.Key == ConsoleKey.D2){
           
-          if  (game.GameName == "RPS")
+          if  (gameType[currentGameTypeIndex]== "RPS")
           {
             game = new GameRPS(true);
             game.Play();
             gamesRecord += game.gamesRecord;
           }
-          else
+          else if (gameType[currentGameTypeIndex] == "Dice")
           {
             game = new GameDice(true);
             game.Play();
