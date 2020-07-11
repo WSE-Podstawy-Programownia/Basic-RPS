@@ -22,14 +22,12 @@ class Player
 
     public string LastInput { get => lastInput; set => lastInput = value; }
 
-    public string ChoosePhrase { get; set; }
-
     public Player(bool invokeNameInput = true)
     {
         if (invokeNameInput)
         {
             SetPlayerName();
-        }        
+        }
     }
 
     public void SetPlayerName()
@@ -50,10 +48,10 @@ class Player
     virtual public void GetInput(Dictionary<string, string> inputTable)
     {
         string rawInput;
-        WriteLine($"{PlayerName}, {ChoosePhrase}");
+        WriteLine("{0}, Choose:", PlayerName);
         foreach (KeyValuePair<string, string> entry in inputTable)
         {
-            WriteLine($"[{entry.Key}] {entry.Value}");
+            WriteLine("[{0}] {1}", entry.Key, entry.Value);
         }
         rawInput = ReadLine();
         while (!inputTable.TryGetValue(rawInput, out lastInput))
