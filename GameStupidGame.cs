@@ -68,7 +68,7 @@ public class GameStupidGame : Game
 
         string winner = random.Next(0, 2) == 0 ? playerOne.PlayerName : playerTwo.PlayerName;
 
-        gamesRecord.AddRecord(playerOne.LastInput, playerTwo.LastInput, winner);
+        gamesRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, winner));
 
         WriteLine($"{winner} wins.");
 

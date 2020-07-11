@@ -1,4 +1,4 @@
-interface IRecord 
+public interface IRecord 
 {
   string ToString ();
 }

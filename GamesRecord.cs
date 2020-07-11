@@ -11,15 +11,13 @@ public class GamesRecord
         else displayRecordIndex = b.gamesRecordCurrentIndex;
         for (int i = 0; i < b.gamesRecordCurrentSize; i++)
         {
-            a.AddRecord(b.gamesRecord[displayRecordIndex, 0],
-            b.gamesRecord[displayRecordIndex, 1],
-            b.gamesRecord[displayRecordIndex, 2]);
+            a.AddRecord(b.gamesRecord[displayRecordIndex]);
             displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
         }
         return a;
     }
     int gamesRecordSize;
-    string[,] gamesRecord;
+    IRecord[] gamesRecord;
     int gamesRecordCurrentIndex;
 
     int gamesRecordCurrentSize;
@@ -50,7 +48,7 @@ public class GamesRecord
             break;
         }
 
-        gamesRecord = new string[gamesRecordSize, 3];
+        gamesRecord = new IRecord[gamesRecordSize];
         gamesRecordCurrentIndex = 0;
         gamesRecordCurrentSize = 0;
     }
@@ -59,7 +57,7 @@ public class GamesRecord
         try
         {
             gamesRecordSize = recordSize;
-            gamesRecord = new string[gamesRecordSize, 3];
+            gamesRecord = new IRecord[gamesRecordSize];
         }
         catch (OverflowException e)
         {
@@ -67,7 +65,7 @@ public class GamesRecord
             WriteLine("Press Enter to continue");
             ReadLine();
             gamesRecordSize = 10;
-            gamesRecord = new string[gamesRecordSize, 3];
+            gamesRecord = new IRecord[gamesRecordSize];
 
         }
         gamesRecordCurrentIndex = 0;
@@ -75,24 +73,16 @@ public class GamesRecord
     }
 
 
-    public void AddRecord(int playerOneChoice, int playerTwoChoice, string result)
+    public void AddRecord(IRecord record)
     {
-        gamesRecord[gamesRecordCurrentIndex, 0] = lookupTable[playerOneChoice - 1];
-        gamesRecord[gamesRecordCurrentIndex, 1] = lookupTable[playerTwoChoice - 1];
-        gamesRecord[gamesRecordCurrentIndex, 2] = result;
-
+        gamesRecord[gamesRecordCurrentIndex] = record;
         gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-        gamesRecordCurrentSize = System.Math.Min(gamesRecordCurrentSize + 1, gamesRecordSize);
+        if (gamesRecordCurrentSize < gamesRecordSize)
+        {
+            gamesRecordCurrentSize++;
+        }
     }
-    public void AddRecord(string playerOneChoice, string playerTwoChoice, string result)
-    {
-        gamesRecord[gamesRecordCurrentIndex, 0] = playerOneChoice;
-        gamesRecord[gamesRecordCurrentIndex, 1] = playerTwoChoice;
-        gamesRecord[gamesRecordCurrentIndex, 2] = result;
 
-        gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
-        gamesRecordCurrentSize = System.Math.Min(gamesRecordCurrentSize + 1, gamesRecordSize);
-    }
     public void DisplayGamesHistory()
     {
         int displayRecordIndex;
@@ -107,7 +97,7 @@ public class GamesRecord
         WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine("Game #{0}: {1}-\t{2}{3}", i + 1, gamesRecord[displayRecordIndex, 0].PadRight(12), gamesRecord[displayRecordIndex, 1].PadRight(12), gamesRecord[displayRecordIndex, 2].PadRight(16));
+            WriteLine ("Game #{0}:\t{1}", i+1, gamesRecord[displayRecordIndex].ToString());
             displayRecordIndex = (displayRecordIndex + 1) % gamesRecordCurrentSize;
         }
     }
