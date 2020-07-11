@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 
 class GameController {
-    string[] gameType = {"RPS","???"};
+    string[] gameType = {"RPS","RPSLS"};
     int currentGameTypeIndex = 0;
  Game game;
     GamesRecord gamesRecord;   
@@ -27,17 +27,32 @@ public void MainMenuLoop (){
   WriteLine ("Game Menu - Current game [{0}]:\n[1] Player vs Player\n[2] Player vs AI\n[3] AI vs AI\n[4] Show rules\n[5] Display last games' record\n[6] Change game\n[ESC] Exit", gameType[currentGameTypeIndex]);
   inputKey = ReadKey(true);
   if (inputKey.Key == ConsoleKey.D1){
-    game = new GameRPS();
-    game.Play();
-    gamesRecord += game.gamesRecord;
-    }
+            if (gameType[currentGameTypeIndex] == "RPS")
+                game = new GameRPS();
+            else if (gameType[currentGameTypeIndex] == "RPSLS")
+                game = new GameRPSLS();
+            else
+                throw new ArgumentException("No such game");
+            game.Play();
+            gamesRecord += game.gamesRecord;
+        }
      else if (inputKey.Key == ConsoleKey.D2){
-            game = new GameRPS(true);
+            if (gameType[currentGameTypeIndex] == "RPS")
+                game = new GameRPS(true);
+            else if (gameType[currentGameTypeIndex] == "RPSLS")
+                game = new GameRPSLS(true);
+            else
+                throw new ArgumentException("No such game");
             game.Play();
             gamesRecord += game.gamesRecord;
         }
 else if (inputKey.Key == ConsoleKey.D3){
-            game = new GameAI(true);
+            if (gameType[currentGameTypeIndex] == "RPS")
+                game = new GameAI(true);
+            else if (gameType[currentGameTypeIndex] == "RPSLS")
+                game = new GameAIRPSLS(true);
+            else
+                throw new ArgumentException("No such game");
             game.Play();
             gamesRecord += game.gamesRecord;
         }
