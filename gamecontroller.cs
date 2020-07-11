@@ -5,7 +5,7 @@ class GameController {
         Game game;
         GamesRecord gamesRecord;
         
-        string[] gameType = {"RPS","???"};
+        string[] gameType = {"RPS","Dice"};
         int currentGameTypeIndex = 0;
 
 
