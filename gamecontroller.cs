@@ -13,9 +13,8 @@ class GameController {
     public void DisplayRules (Game game, bool withWelcomeMessage = true) {
         if (withWelcomeMessage) {
             Console.WriteLine ("Welcome to a {0} game!", game.GameName);
-    }
-
-    Console.WriteLine (game.GameRules);
+        }
+        Console.WriteLine (game.GameRules);
     }
 
     
@@ -35,17 +34,15 @@ class GameController {
                 //po wybraniu Play tworzyła nowy obiekt Game i na nim wywoływała metodę Play 1b-48
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS();
-                else if (gameType[currentGameTypeIndex] == "Sic Mundus")
-                    game = new GameMyGame();  // ma sie odnosic do nowej klasy nowej gry ????
+                else if (gameType[currentGameTypeIndex] == "MyNewGame")
+                    game = new SicMundusGame();
                 else
-                    throw new ArgumentException("Next games comming soon..");
+                    throw new ArgumentException("No such game");
                 game.Play();
                 gamesRecord += game.gamesRecord;
-                //dodawanie po zakończeniu rozgrywki instrukcji dodającą GamesRecord trzymany w obiekcie klasy
-                // GameController z obiektem Game, który właśnie skończył wykonywać swoją metodę Play
             }
             
-            //dostępnienie graczowi odpowiedniego wyboru w menu gry.  single/multi
+            //udostępnienie graczowi odpowiedniego wyboru w menu gry.  single/multi
             else if (inputKey.Key == ConsoleKey.D2){
                 game = new GameRPS(true);
                 game.Play();
