@@ -6,11 +6,6 @@ using static System.Console;
 class GameMyGame : Game
 {
 
-  
-   
-    
-     
-         
    
   string symbolGracza = "@";
   string ostatniePole = " ";
@@ -20,6 +15,7 @@ class GameMyGame : Game
   bool czyMeta = true;
   
   string[] polaZakazane = { "X" };
+  int kroki = 0;
   string[,] mapa = {
 
     {"X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", "X", },
@@ -41,6 +37,7 @@ class GameMyGame : Game
      GameName = "Labirynt";
      GameRules = "Dojdź do W";
      playerOne = new Player ();
+     gamesRecord = new GamesRecord ();
   }
 
   public override void Play(){
@@ -49,11 +46,16 @@ class GameMyGame : Game
     rysujGracza(graczX, graczY);
     rysujPlansze(mapa);
     ruchGracza();
+    kroki = kroki +1;
     if(czyMeta == true)Clear();
     }while(czyMeta);
    // Clear();
    ForegroundColor = ConsoleColor.Magenta;
     WriteLine("\nGratulacje, Wygrałeś/aś/uś/oś");
+
+    gamesRecord.AddRecord (new RecordLabirynt(playerOne.PlayerName, kroki));
+    
+   
 
   }
 
@@ -110,11 +112,10 @@ class GameMyGame : Game
      
       if(mapa[y,x] == "M") czyMeta = false;
 
-      for (int i = 0; i <= polaZakazane.Length; i++){
+      for (int i = 0; i < polaZakazane.Length; i++){
         if (mapa[y, x] == polaZakazane[i]) return false;
-         else return true;
       }
-      return false;
+      return true;
 
     }
 }

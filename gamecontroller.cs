@@ -21,7 +21,7 @@ WriteLine (game.GameRules);
     ConsoleKeyInfo inputKey;
     do {
       Console.Clear();
-      WriteLine ("Papier Kamień Nożyce Menu:\n\t[1] Zagraj w grę: multiplayer\n\t[2] Zagraj w grę: singleplayer\n\t[3] Pokaż zasady\n\t[4] Wyświetl poprzednie rozgrywki\n\t[5] Zmień gre\n\t[ESC] Exit", gameType[currentGameTypeIndex]);
+      WriteLine ("{0} Menu:\n\t[1] Zagraj w grę: multiplayer\n\t[2] Zagraj w grę: singleplayer\n\t[3] Pokaż zasady\n\t[4] Wyświetl poprzednie rozgrywki\n\t[5] Zmień gre\n\t[ESC] Exit", gameType[currentGameTypeIndex]);
       inputKey = ReadKey(true);
       if (inputKey.Key == ConsoleKey.D1){
         if (gameType[currentGameTypeIndex] == "RPS")

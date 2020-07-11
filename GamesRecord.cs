@@ -35,7 +35,7 @@ gamesRecord = gamesRecord = new IRecord[gamesRecordSize];
   }
 
   public void AddRecord (IRecord record) {
-    
+    gamesRecord[gamesRecordCurrentIndex] = record;
     gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
     if (gamesRecordCurrentSize < gamesRecordSize){
       gamesRecordCurrentSize++;
