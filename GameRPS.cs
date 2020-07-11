@@ -79,7 +79,7 @@ class GameRPS : Game
         Clear();
         string gameResult = DetermineWinner(playerOne, playerTwo);
 
-        gameRecord.AddRecord(playerOne.LastInput, playerTwo.LastInput, gameResult);
+        gameRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, gameResult));
 
         WriteLine("Do you want to play another round? [y]");
         if (ReadKey(true).Key == ConsoleKey.Y)
