@@ -1,0 +1,4 @@
+interface IRecord 
+{
+    string ToString ();
+}
