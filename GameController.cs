@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using static System.Console;
 class GameController
 {
-    string[] gameType = { "RPS", "StupidGame" };
+    string[] gameType = { "RPS", "Almost Black Jack" };
     int currentGameTypeIndex = 0;
     Game game;
     GamesRecord gamesRecord;
@@ -14,13 +14,13 @@ class GameController
     }
 
 
-    public void DisplayRules(Game game, bool withWelcomeMessage = true)
+    public void DisplayRules(bool withWelcomeMessage = true)
     {
         if (withWelcomeMessage)
         {
-            WriteLine("Welcome to a {0} game!", game.GameName);
+            WriteLine("Welcome to a {0} game!", Game.GameName);
         }
-        WriteLine(game.GameRules);
+        WriteLine(Game.GameRules);
     }
 
     public void MainMenuLoop()
@@ -37,8 +37,8 @@ class GameController
             {
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS();
-                else if (gameType[currentGameTypeIndex] == "StupidGame")
-                    game = new GameStupidGame();
+                else if (gameType[currentGameTypeIndex] == "Almost Black Jack")
+                    game = new GameAlmostBlackJack();
                 else
                     throw new ArgumentException("No such game");
 
@@ -49,8 +49,8 @@ class GameController
             {
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS(true);
-                else if (gameType[currentGameTypeIndex] == "StupidGame")
-                    game = new GameStupidGame(true);
+                else if (gameType[currentGameTypeIndex] == "Almost Black Jack")
+                    game = new GameAlmostBlackJack(true);
                 else
                     throw new ArgumentException("No such game");
 
@@ -59,8 +59,7 @@ class GameController
             }
             else if (inputKey.Key == ConsoleKey.D3)
             {
-                DisplayRules(game, false); // false to not display the "Welcome.." part
-
+                DisplayRules(false); // false to not display the "Welcome.." part
             }
             else if (inputKey.Key == ConsoleKey.D4)
             {
@@ -70,8 +69,8 @@ class GameController
             {
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS(true);
-                else if (gameType[currentGameTypeIndex] == "StupidGame")
-                    game = new GameStupidGame(true);
+                else if (gameType[currentGameTypeIndex] == "Almost Black Jack")
+                    game = new GameAlmostBlackJack(true);
                 else
                     throw new ArgumentException("No such game");
                 game.DuelMode();

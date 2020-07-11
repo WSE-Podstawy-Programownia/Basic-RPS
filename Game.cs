@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 public abstract class Game
 {
-    private string gameName;
-    private string gameRules;
-    public string GameName { get => gameName; set => gameName = value; }
-    public string GameRules { get => gameRules; set => gameRules = value; }
+    // private string gameName;
+    // private string gameRules;
+    public static string GameName {get; set;} //{ get => gameName; set => gameName = value; }
+    public static string GameRules {get; set;}//{ get => gameRules; set => gameRules = value; }
 
     protected Player playerOne, playerTwo;
     protected Dictionary<int, string> inputTable;
