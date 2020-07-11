@@ -66,7 +66,7 @@ public override void Play () {
   Clear ();
 
   string gameResult = DetermineWinner(playerOne, playerTwo);
-  gamesRecord.AddRecord(playerOne.LastInput, playerTwo.LastInput, gameResult);
+  gamesRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, gameResult));
 
 
 WriteLine("Do you want to play another round? [y]");
