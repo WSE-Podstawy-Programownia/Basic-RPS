@@ -53,7 +53,7 @@ class GameRPS : Game {
 
     string gameResult = DetermineWinner();
 
-    gamesRecord.AddRecord (playerOne.LastInput, playerTwo.LastInput, gameResult);
+    gamesRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, gameResult));
 
     WriteLine("Czy chcesz rozegrać kolejną rundę? Jeśli tak wciśnij [y] \n\nAby zakończyć rozgrywkę wciśnij dowolny przycisk"); 
     if (ReadKey(true).Key == ConsoleKey.Y){

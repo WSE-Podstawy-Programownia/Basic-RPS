@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
 class GameController {
-    string[] gameType = {"RPS","???"};
+    string[] gameType = {"RPS","Labirynt"};
     int currentGameTypeIndex = 0;
     Game game;
     GamesRecord gamesRecord;
@@ -26,8 +26,8 @@ WriteLine (game.GameRules);
       if (inputKey.Key == ConsoleKey.D1){
         if (gameType[currentGameTypeIndex] == "RPS")
         game = new GameRPS();
-        /*else if (gameType[currentGameTypeIndex] == "MyNewGame")
-        game = new GameMyGame();*/
+        else if (gameType[currentGameTypeIndex] == "Labirynt")
+        game = new GameMyGame();
         else
         throw new ArgumentException("No such game");
         game.Play();
