@@ -134,7 +134,9 @@ override public void Play () {
   //string gameResult = DetermineWinner(c_p1, c_p2);
   //gamesRecord.AddRecord(c_p1, c_p2, gameResult);
   string gameResult = DetermineWinner(playerOne, playerTwo);
-  gamesRecord.AddRecord(playerOne.LastInput, playerTwo.LastInput, gameResult);
+  
+  //gamesRecord.AddRecord(playerOne.LastInput, playerTwo.LastInput, gameResult);
+  gamesRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, gameResult));
 
   
   
