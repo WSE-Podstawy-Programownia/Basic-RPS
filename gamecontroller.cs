@@ -35,8 +35,8 @@ class GameController {
                 //po wybraniu Play tworzyła nowy obiekt Game i na nim wywoływała metodę Play 1b-48
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS();
-                // else if (gameType[currentGameTypeIndex] == "Sic Mundus")
-                //     // game = new GameMyGame();
+                else if (gameType[currentGameTypeIndex] == "Sic Mundus")
+                    game = new GameMyGame();  // ma sie odnosic do nowej klasy nowej gry ????
                 else
                     throw new ArgumentException("Next games comming soon..");
                 game.Play();
