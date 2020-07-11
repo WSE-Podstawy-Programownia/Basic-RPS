@@ -3,7 +3,7 @@ using static System.Console;
 
 class GameController {
     string[] gameType = {"RPS","???"};
-  int currentGameTypeIndex = 0;
+    int currentGameTypeIndex = 0;
  Game game;
     GamesRecord gamesRecord;   
 
