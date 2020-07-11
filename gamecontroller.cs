@@ -18,7 +18,7 @@ class GameController {
         }
 
 
-        public void DisplayRules (Game game, bool withWelcomeMessage = true) {
+        static public void DisplayRules (Game game, bool withWelcomeMessage = true) {
         
           if (withWelcomeMessage) {
             
@@ -47,14 +47,39 @@ class GameController {
             inputKey = Console.ReadKey(true);
 
       if (inputKey.Key == ConsoleKey.D1){
+            
+          if  (game.GameName == "RPS"){
             game = new GameRPS();
+            
             game.Play();
             gamesRecord += game.gamesRecord;
+          }
+        else
+          {
+            game = new GameDice(true);
+            game.Play();
+            gamesRecord += game.gamesRecord;
+
+          }
+       
+       
+       
         }
       else if (inputKey.Key == ConsoleKey.D2){
-          game = new GameRPS(true);
-          game.Play();
-          gamesRecord += game.gamesRecord;
+          
+          if  (game.GameName == "RPS")
+          {
+            game = new GameRPS(true);
+            game.Play();
+            gamesRecord += game.gamesRecord;
+          }
+          else
+          {
+            game = new GameDice(true);
+            game.Play();
+            gamesRecord += game.gamesRecord;
+
+          }
   }
 
       else if (inputKey.Key == ConsoleKey.D3){

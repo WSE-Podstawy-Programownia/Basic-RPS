@@ -94,7 +94,7 @@ override public void Play () {
   string gameResult = DetermineRollWinner(playerOne, playerTwo);
   
 
-  gamesRecord.AddRecord(new RecordRPS(playerOne.LastInput, playerTwo.LastInput, gameResult));
+  gamesRecord.AddRecord(new RecordDice(roll_value_1, roll_value_2, gameResult));
 
   
   
