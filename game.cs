@@ -14,5 +14,10 @@ public string GameName { get => gameName; set => gameName = value; }
     public GamesRecord gamesRecord;
     
     public abstract void Play ();
+
+    public static implicit operator Game(Moneta v)
+    {
+        throw new NotImplementedException();
+    }
 }
 

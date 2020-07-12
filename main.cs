@@ -10,4 +10,5 @@ class MainClass {
   GameController gameController = new GameController();
   gameController.MainMenuLoop();
 }
+
 }

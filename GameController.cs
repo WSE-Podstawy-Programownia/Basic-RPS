@@ -31,7 +31,7 @@ public void MainMenuLoop (){
     if (inputKey.Key == ConsoleKey.D1){
      if (gameType[currentGameTypeIndex] == "RPS")
       game = new GameRPS();
-    else if (gameType[currentGameTypeIndex] == "Moneta")
+    else if (gameType[currentGameTypeIndex] == "Rzut Monetą")
       game = new Moneta();
     else
       throw new ArgumentException("Brak Gry");
