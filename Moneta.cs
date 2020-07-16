@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
 					
-public class Moneta
+class Moneta : GameController
 {
 	public static void Rzut()
 	{
