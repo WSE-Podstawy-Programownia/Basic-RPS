@@ -30,7 +30,7 @@ public Player (bool invokeNameInput = true) {
     SetPlayerName();
   }
 }
-
+//Błąd StackOverflow
 
 
 virtual public void GetInput (Dictionary<string, string> inputTable) {
