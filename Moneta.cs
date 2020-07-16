@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
 					
-class Moneta
+class Moneta : Game
 {
-	public static void Rzut()
+	
+	public override void Play()
 	{
 		//próba rzutu monetą
 
