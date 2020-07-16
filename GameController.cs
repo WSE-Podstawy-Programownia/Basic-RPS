@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using static System.Console;
 class GameController {
-  string[] gameType = {"RPS","???"};
+  string[] gameType = {"RPS","Moneta"};
   int currentGameTypeIndex = 0;
   Game game;
 
