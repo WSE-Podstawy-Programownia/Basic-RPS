@@ -10,7 +10,15 @@ class GamesRecord {
 
  public static GamesRecord operator +(GamesRecord a, GamesRecord b) {
     int displayRecordIndex;
-  if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
+    if(b == null)
+{
+return a;
+}
+if(a == null)
+{
+return b;
+}
+    if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
   else displayRecordIndex = b.gamesRecordCurrentIndex;
   for (int i = 0; i < b.gamesRecordCurrentSize; i++){
  a.AddRecord(b.gamesRecord[displayRecordIndex]);
