@@ -2,7 +2,7 @@ using System;
 using static System.Console;
 class GameController
 {
-    string[] gameType = { "RPS", "New" };
+    string[] gameType = { "RPS", "Dice" };
     int currentGameTypeIndex = 0;
 
     Game game;
@@ -32,8 +32,8 @@ class GameController
             {
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS();
-                else if (gameType[currentGameTypeIndex] == "New")
-                    game = new GameNew();
+                else if (gameType[currentGameTypeIndex] == "Dice")
+                    game = new GameDice();
                 else
                     throw new ArgumentException("No such game");
                 game.Play();
@@ -43,8 +43,8 @@ class GameController
             {
                 if (gameType[currentGameTypeIndex] == "RPS")
                     game = new GameRPS(true);
-                else if (gameType[currentGameTypeIndex] == "New")
-                    game = new GameNew(true);
+                else if (gameType[currentGameTypeIndex] == "Dice")
+                    game = new GameDice(true);
                 else
                     throw new ArgumentException("No such game");
                 game.Play();

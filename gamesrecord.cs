@@ -3,7 +3,7 @@ using static System.Console;
 class GamesRecord
 {
     int gamesRecordSize;
-    string[,] gamesRecord;
+    IRecord[] gamesRecord;
     int gamesRecordCurrentIndex;
     int gamesRecordCurrentSize;
 
@@ -29,7 +29,7 @@ class GamesRecord
             break;
         }
 
-        gamesRecord = new string[gamesRecordSize, 3];
+        gamesRecord = new IRecord[gamesRecordSize];
         gamesRecordCurrentIndex = 0;
         gamesRecordCurrentSize = 0;
     }
@@ -45,7 +45,7 @@ class GamesRecord
             gamesRecordSize = recordSize;
         }
         gamesRecordSize = recordSize;
-        gamesRecord = new string[gamesRecordSize, 3];
+        gamesRecord = new IRecord[gamesRecordSize];
         gamesRecordCurrentIndex = 0;
         gamesRecordCurrentSize = 0;
     }
@@ -56,9 +56,7 @@ class GamesRecord
         else displayRecordIndex = b.gamesRecordCurrentIndex;
         for (int i = 0; i < b.gamesRecordCurrentSize; i++)
         {
-            a.AddRecord(b.gamesRecord[displayRecordIndex, 0],
-            b.gamesRecord[displayRecordIndex, 1],
-            b.gamesRecord[displayRecordIndex, 2]);
+            a.AddRecord(b.gamesRecord[displayRecordIndex]);
             displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
         }
         return a;
@@ -77,20 +75,18 @@ class GamesRecord
         WriteLine("Last games history:");
         for (int i = 0; i < gamesRecordCurrentSize; i++)
         {
-            WriteLine("Game #{0}:\t{1}\t-\t{2},\t{3}", i + 1, gamesRecord[currentIndex, 0], gamesRecord[currentIndex, 1], gamesRecord[currentIndex, 2]);
+            WriteLine ("Game #{0}:\t{1}", i+1, gamesRecord[currentIndex].ToString());
             currentIndex = (currentIndex + 1) % gamesRecordCurrentSize;
         }
     }
-    public void AddRecord(string playerOneChoice, string playerTwoChoice, string result)
+    public void AddRecord(IRecord record)
     {
-        gamesRecord[gamesRecordCurrentIndex, 0] = playerOneChoice;
-        gamesRecord[gamesRecordCurrentIndex, 1] = playerTwoChoice;
-        gamesRecord[gamesRecordCurrentIndex, 2] = result;
-
+        gamesRecord[gamesRecordCurrentIndex] = record;
         gamesRecordCurrentIndex = (gamesRecordCurrentIndex + 1) % gamesRecordSize;
         if (gamesRecordCurrentSize < gamesRecordSize)
         {
             gamesRecordCurrentSize++;
         }
+
     }
 }
