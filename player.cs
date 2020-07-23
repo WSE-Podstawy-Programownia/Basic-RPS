@@ -4,36 +4,43 @@ using static System.Console;
 
 public class Player
 {
-    public string playerName;
+    protected string playerName;
 
     private readonly int maxNameLength = 10;
 
-    public string lastInput;
+    private string lastInput;
+
+    public string PlayerName { get => playerName; set => playerName = value; }
+
+    public string LastInput { get => lastInput; set => lastInput = value; }
 
     public void SetPlayerName()
     {
         Write("Please enter player name: ");
-        playerName = ReadLine();
-        if (playerName.Length > maxNameLength || playerName.Length == 0)
+        PlayerName = ReadLine();
+        if (PlayerName.Length > maxNameLength || PlayerName.Length == 0)
         {
             throw new Exception("Invalid player name");
         }
     }
 
-    public Player()
+    public Player(bool invokePlayerName = true)
     {
-        SetPlayerName();
+        if (invokePlayerName)
+        {
+            SetPlayerName();
+        }
     }
 
     public Player(string playerName)
     {
-        this.playerName = playerName;
+        this.PlayerName = playerName;
     }
 
     public virtual void GetInput(System.Collections.Generic.Dictionary<string, string> inputTable)
     {
         string rawInput;
-        WriteLine("{0}, Choose:", playerName);
+        WriteLine("{0}, Choose:", PlayerName);
         foreach (KeyValuePair<string, string> entry in inputTable)
         {
             WriteLine("[{0}] {1}", entry.Key, entry.Value);
