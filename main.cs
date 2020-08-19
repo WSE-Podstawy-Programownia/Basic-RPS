@@ -1,108 +1,88 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GraKPN
+
+
+public class Program
 {
-    class Program
+  public static int SprawdzenieZwyciestwa(string wyborGracza, string wyborPC)
+  {
+    return 0;
+  }
+  
+  public static void Main(string[] args) 
+  {
+    string odp = "";
+    int wynikuser = 0;
+    int wynikPC = 0;
+
+    Console.WriteLine("Cześć! Zagrajmy w RPS.");
+
+    while (odp != "NIE") //Główna pętla z grą
     {
-        static void Main(string[] args)
-        {
-            string gracz, komputer = null;
-            int randomInt;
+      Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
+      string[] choices = new string[3] { "Kamień", "Papier", "Nożyce" };
+      Random rnd = new Random();
+      int n = rnd.Next(0, 3); //Komputer losuje
+      Console.WriteLine("Twój wybór:");
+      string user = Console.ReadLine().ToUpper();
+      Console.WriteLine("Komputer:" + choices[n]);
+      int wynik = SprawdzenieZwyciestwa(user, choices[n]);
+      if(wynik == 1)
+      {
+        Console.WriteLine("Wygrałeś!");
+        wynikuser += 1;
+      }
+      else if(wynik == -1)
+      {
+        Console.WriteLine("Przegrałeś!");
+        wynikPC += 1; //+1 do wyniku komputera
+      }
+      else if(wynik == 0)
+      {
+         Console.WriteLine("Remis!");
+      }
+      
+      if (user == "1" && choices[n] == "Nożyce")
+      {
+      Console.WriteLine("Wygrałeś!");
+      wynikuser += 1; //+1 do wyniku gracza
+      }
+      else if (user == "1" && choices[n] == "Papier")
+      {
+      Console.WriteLine("Przegrałeś!");
+      wynikPC += 1; //+1 do wyniku komputera
+      }
+      else if (user == "2" && choices[n] == "Kamień")
+      {
+      Console.WriteLine("Wygrałeś!");
+      wynikuser += 1;
+      }
+      else if (user == "2" && choices[n] == "Nożyce")
+      {
+      Console.WriteLine("Przegrałeś!");
+      wynikPC += 1;
+      }
+      else if (user == "3" && choices[n] == "Kamień")
+      {
+      Console.WriteLine("Przegrałeś!");
+      wynikPC += 1;
+      }
+      else if (user == "3" && choices[n] == "Papier")
+      {
+      Console.WriteLine("Wygrałeś!");
+      wynikuser += 1;
+      }
+      else
+      {
 
-            bool zagpon = true;
-
-            while (zagpon)
-            {
-                {
-
-
-                    Console.Write("Wybierz - kamień, papier, nożyce:    ");
-                    gracz = Console.ReadLine();
-                    gracz = gracz.ToUpper();
-                    /*wybór gracza (małe litery+polskie znaki)*/
-
-                    Random r = new Random();
-
-                    randomInt = r.Next(1, 4); 
-                    //komputer "losuje"
-
-                    switch (randomInt)
-                    {
-                        case 1: //komputer wybrał kamień
-                            komputer = "kamień";
-                            Console.WriteLine("Komputer wybrał kamień.");
-                            if (gracz == "kamień")
-                            {
-                                Console.WriteLine("REMIS!");
-                            }
-                            else if (gracz == "papier")
-                            {
-                                Console.WriteLine("Wygrałeś!");
-                            }
-                            else if (gracz == "nożyce")
-                            {
-                                Console.WriteLine("Przegrałeś!");
-                            }
-                            break;
-                        case 2: //komputer wybrał papier
-                            komputer = "papier";
-                            Console.WriteLine("Komputer wybrał papier.");
-                            if (gracz == "papier")
-                            {
-                                Console.WriteLine("REMIS");
-                            }
-                            else if (gracz == "kamień")
-                            {
-                                Console.WriteLine("Przegrałeś!");
-                            }
-                            else if (gracz == "nożyce")
-                            {
-                                Console.WriteLine("Wygrałeś!");
-                            }
-                            break;
-                        case 3: //komputer wybrał nożyce
-                            komputer = "nożyce";
-                            Console.WriteLine("Komputer wybrał nożyce.");
-                            if (gracz == "nożyce")
-                            {
-                                Console.WriteLine("REMIS");
-                            }
-                            else if (gracz == "kamień")
-                            {
-                                Console.WriteLine("Wygrałeś!");
-                            }
-                            else if (gracz == "PAPER")
-                            {
-                                Console.WriteLine("Przegrałeś!");
-                            }
-                            break;
-                        default:  /*gracz wpisał coś innego niż "kamień", "papier", "nożyce"*/
-                            Console.WriteLine("Wybierz jedno: papier, kamień, nożyce.");
-                            break;
-                    }
-
-                }
-                Console.WriteLine("Chcesz zagrać ponownie? tak/nie");
-                string loop = Console.ReadLine();
-                if (loop == "tak")
-                {
-                    zagpon = true;
-                    Console.Clear();
-                }
-                else if (loop == "nie")
-                {
-                    zagpon = false;
-                }
-                else
-                {
-
-                }
-
-            }
-        }
+      }
+      Console.WriteLine("Kontynuujesz? (TAK/NIE):");
+      odp = Console.ReadLine().ToUpper();
+      Console.WriteLine("---------------------------------------");
     }
+    Console.WriteLine("Koniec gry!");
+    Console.WriteLine("Gracz: " + wynikuser);
+    Console.WriteLine("Komputer: " + wynikPC);
+  }
 }
+
