@@ -1,4 +1,4 @@
-zusing System;
+using System;
 
 
 
@@ -39,7 +39,23 @@ public class Program
 
   public static int SprawdzenieZwyciezcy(string Gracz, string PCyfra)
   {
-    return 0;
+   if (Gracz == PCyfra)
+   {
+     Console.WriteLine ("Remis!");
+     return 0;
+   }
+   else if ((Gracz == "1" && PCyfra == "3") ||
+         (Gracz == "2" && PCyfra == "1") ||
+         (Gracz == "3" && PCyfra == "2"))
+         {
+            Console.WriteLine ("Wygrałeś!");
+            return 1;
+         }
+   else
+   {
+     Console.WriteLine ("Przegrałeś!");
+     return 2;
+   }
   }
   
   public static void Main(string[] args) 
@@ -59,7 +75,7 @@ public class Program
       Console.WriteLine("Twój wybór:");
       string user = Console.ReadLine().ToUpper();
       Console.WriteLine("Komputer:" + choices[n]);
-      int wynik = SprawdzenieZwyciestwa(user, choices[n]);
+      int wynik = SprawdzenieZwyciezcy(user, choices[n]);
       if(wynik == 1)
       {
         Console.WriteLine("Wygrałeś!");
