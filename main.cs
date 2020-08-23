@@ -4,6 +4,12 @@ using System;
 
 public class Program
 {
+
+
+  public static void Powitanie ()
+  {
+    Console.WriteLine("Cześć! Zagrajmy w RPS.");
+  }
   public static int SprawdzenieZwyciestwa(string wyborGracza, string wyborPC)
   {
     return 0;
@@ -15,7 +21,7 @@ public class Program
     int wynikuser = 0;
     int wynikPC = 0;
 
-    Console.WriteLine("Cześć! Zagrajmy w RPS.");
+    Powitanie();
 
     while (odp != "NIE") //Główna pętla z grą
     {
