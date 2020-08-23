@@ -10,6 +10,24 @@ public class Program
   {
     Console.WriteLine("Cześć! Zagrajmy w RPS.");
   }
+  public static string GraczWybiera ()
+  {
+     string Gracz;
+     string GraczSlowo;
+
+      Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
+      Gracz = Console.ReadLine();
+       while (Gracz != "1" && Gracz != "2" && Gracz != "3")
+        {
+            Console.WriteLine("Nieprawidłowy wybór. Wybierz cyfrę od 1 do 3");
+            Gracz = ReadLine();
+        }
+         if (Gracz == "1") { GraczSlowo = "Kamien"; }
+        else if (Gracz == "2") { GraczSlowo = "Papier"; }
+        else { GraczSlowo = "Nozyce"; }
+        return Gracz;
+        return GraczSlowo;
+  }
   public static int SprawdzenieZwyciestwa(string wyborGracza, string wyborPC)
   {
     return 0;
