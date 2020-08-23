@@ -15,7 +15,6 @@ public class Program
   public static string GraczWybiera ()
   {
      string Gracz;
-     string GraczSlowo;
 
       Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
       Gracz = Console.ReadLine();
@@ -24,11 +23,7 @@ public class Program
             Console.WriteLine("Nieprawidłowy wybór. Wybierz cyfrę od 1 do 3");
             Gracz = Console.ReadLine();
         }
-         if (Gracz == "1") { GraczSlowo = "Kamien"; }
-        else if (Gracz == "2") { GraczSlowo = "Papier"; }
-        else { GraczSlowo = "Nozyce"; }
-        return Gracz;
-        return GraczSlowo;
+          return Gracz;
   }
 
   public static int PCWybiera ()
@@ -59,29 +54,43 @@ public class Program
    }
   }
 
-static void MenuGlowne ()
-{
+  public static void Zagraj ()
+  {
+    Console.Clear();
+  string Gracz = GraczWybiera();
+  int PCyfra = PCWybiera();
+  int wygrywa = SprawdzenieZwyciezcy(Gracz, PCyfra);
+  }
+
+
+
+
+
+
+  public static void MenuGlowne ()
+  {
   ConsoleKeyInfo inputKey;
-do 
-{
-  Clear();
-  WriteLine ("Kamień, Papier i Nożyce - Menu:\n\t[1] Zagraj\n\t[2] Zasady\n\t[ESC] Wyjście");
-  inputKey = ReadKey(true);
+  do 
+  {
+  Console.Clear();
+  Console.WriteLine ("Kamień, Papier i Nożyce - Menu:\n\t[1] Zagraj\n\t[2] Zasady\n\t[ESC] Wyjście");
+  inputKey = Console.ReadKey(true);
   
   if (inputKey.Key == ConsoleKey.D1){
-  WriteLine("Opcja pierwsza");
+  Console.WriteLine("Opcja pierwsza");
   }
   else if (inputKey.Key == ConsoleKey.D2){
   Powitanie();
   }
   else { continue; }
-WriteLine ("(Wybierz jedną z opcji)");
-ReadKey(true);
-} while (inputKey.Key != ConsoleKey.Escape);
-}
+  Console.WriteLine ("(Wybierz jedną z opcji)");
+  Console.ReadKey(true);
+  } while (inputKey.Key != ConsoleKey.Escape);
+  }
 
   
   public static void Main(string[] args) 
   {
     MenuGlowne();
   } 
+  }
