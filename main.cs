@@ -26,30 +26,36 @@ public class Program
           return Gracz;
   }
 
-  public static int PCWybiera ()
-  {
-    Random rnd = new Random();
-    int PCyfra = rnd.Next(0, 3);
-    return PCyfra;
-  }
+  public static string GraczDrugiWybiera ()
+    {
+      string GraczDrugi;
 
-  public static int SprawdzenieZwyciezcy(string Gracz, string PCyfra)
+        Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
+        GraczDrugi = Console.ReadLine();
+        while (GraczDrugi != "1" && GraczDrugi != "2" && GraczDrugi != "3")
+          {
+              Console.WriteLine("Nieprawidłowy wybór. Wybierz cyfrę od 1 do 3");
+              GraczDrugi = Console.ReadLine();
+          }
+            return GraczDrugi;
+    }
+  public static int SprawdzenieZwyciezcy(string Gracz, string GraczDrugi)
   {
-   if (Gracz == PCyfra)
+   if (Gracz == GraczDrugi)
    {
      Console.WriteLine ("Remis!");
      return 0;
    }
-   else if ((Gracz == "1" && PCyfra == "3") ||
-         (Gracz == "2" && PCyfra == "1") ||
-         (Gracz == "3" && PCyfra == "2"))
+   else if ((Gracz == "1" && GraczDrugi == "3") ||
+         (Gracz == "2" && GraczDrugi == "1") ||
+         (Gracz == "3" && GraczDrugi == "2"))
          {
-            Console.WriteLine ("Wygrałeś!");
+            Console.WriteLine ("Wygrał gracz pierwszy!");
             return 1;
          }
    else
    {
-     Console.WriteLine ("Przegrałeś!");
+     Console.WriteLine ("Wygrał gracz drugi!");
      return 2;
    }
   }
@@ -58,8 +64,8 @@ public class Program
   {
     Console.Clear();
   string Gracz = GraczWybiera();
-  int PCyfra = PCWybiera();
-  int wygrywa = SprawdzenieZwyciezcy(Gracz, PCyfra);
+  int GraczDrugi = GraczDrugiWybiera();
+  int wygrywa = SprawdzenieZwyciezcy(Gracz, GraczDrugi);
   }
 
 
