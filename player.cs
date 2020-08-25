@@ -3,7 +3,13 @@ using static System.Console;
 
 class Player {
   public string playerName;
-  
+  public string lastInput; 
+
+  public void GetInput (Dictionary<string, string> inputTable) {
+    // tu będziemy uzupełniać działanie funkcji
+  }
+
+
   public Player () {
     SetPlayerName();
   }
