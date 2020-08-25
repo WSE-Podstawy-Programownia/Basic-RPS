@@ -16,7 +16,7 @@ public class Program
   {
      string Gracz;
 
-      Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
+      Console.WriteLine("Graczu pierwszy - wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
       Gracz = Console.ReadLine();
        while (Gracz != "1" && Gracz != "2" && Gracz != "3")
         {
@@ -30,7 +30,7 @@ public class Program
     {
       string GraczDrugi;
 
-        Console.WriteLine("Wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
+        Console.WriteLine("Graczu drugi - wybierz jedno: \n1->Kamień\n2->Papier\n3->Nożyce");
         GraczDrugi = Console.ReadLine();
         while (GraczDrugi != "1" && GraczDrugi != "2" && GraczDrugi != "3")
           {
@@ -64,7 +64,7 @@ public class Program
   {
     Console.Clear();
   string Gracz = GraczWybiera();
-  int GraczDrugi = GraczDrugiWybiera();
+  string GraczDrugi = GraczDrugiWybiera();
   int wygrywa = SprawdzenieZwyciezcy(Gracz, GraczDrugi);
   }
 
@@ -83,7 +83,7 @@ public class Program
   inputKey = Console.ReadKey(true);
   
   if (inputKey.Key == ConsoleKey.D1){
-  Console.WriteLine("Opcja pierwsza");
+  Zagraj();
   }
   else if (inputKey.Key == ConsoleKey.D2){
   Powitanie();
