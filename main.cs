@@ -68,9 +68,23 @@ public class Program
   int wygrywa = SprawdzenieZwyciezcy(Gracz, GraczDrugi);
   }
 
+  static void WyswietlHistorieGier (string[,] wynikiGier, int WielkoscHistoriiGier, int ObecnaWielkoscHistoriiGier = 10, int OstatniWynik = 0)
+  {
+    int indeks;
+    if (ObecnaWielkoscHistoriiGier < WielkoscHistoriiGier){
+      indeks = 0;
+    }
+    else {
+      indeks = OstatniWynik;
+    }
+    Console.WriteLine ("Historia gier:");
+  for (int i = 0; i < ObecnaWielkoscHistoriiGier; i++)
+  {
+    Console.WriteLine ("Rozgrywka #{0}:\t{1}\t-\t{2},\t{3}", i+1, wynikiGier[indeks,0], wynikiGier[indeks,1], wynikiGier[indeks,2]);
+    indeks = (indeks + 1) % ObecnaWielkoscHistoriiGier;
+  }
 
-
-
+  }
 
 
   public static void MenuGlowne ()
@@ -79,14 +93,20 @@ public class Program
   do 
   {
   Console.Clear();
-  Console.WriteLine ("Kamień, Papier i Nożyce - Menu:\n\t[1] Zagraj\n\t[2] Zasady\n\t[ESC] Wyjście");
+  Console.WriteLine ("Kamień, Papier i Nożyce - Menu:\n\t[1] Zagraj\n\t[2] Zasady\n\t[3] Historia gier\n\t[ESC] Wyjście");
   inputKey = Console.ReadKey(true);
   
-  if (inputKey.Key == ConsoleKey.D1){
-  Zagraj();
+  if (inputKey.Key == ConsoleKey.D1)
+  {
+    Zagraj();
   }
-  else if (inputKey.Key == ConsoleKey.D2){
-  Powitanie();
+  else if (inputKey.Key == ConsoleKey.D2)
+  {
+   Powitanie();
+  }
+  else if (inputKey.Key == ConsoleKey.D3)
+  {
+   WyswietlHistorieGier();
   }
   else { continue; }
   Console.WriteLine ("(Wybierz jedną z opcji)");
