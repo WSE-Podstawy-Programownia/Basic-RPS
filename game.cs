@@ -1,5 +1,6 @@
 using System;
 using static System.Console;
+using System.Collections.Generic;
 
 class Game {
   Player playerOne, playerTwo;
@@ -46,44 +47,48 @@ class Game {
     return properInput;
   }
 
-  public string DetermineWinner (string playerOneChoice, string playerTwoChoice){
-    if (playerOneChoice == playerTwoChoice){
-        WriteLine ("It's a draw!");
-        return "Draw";
-    }
-    else if ((playerOneChoice == "Rock" && playerTwoChoice == "Scissors") ||
-            (playerOneChoice == "Paper" && playerTwoChoice == "Rock") ||
-            (playerOneChoice == "Scissors" && playerTwoChoice == "Paper")){
-      Console.WriteLine ("Player One won!");
-      return "Player One won";
-    }
-    else{
-      Console.WriteLine ("Player Two won!");
-      return "Player Two won";
-    }
+  public string DetermineWinner (Player playerOne, Player playerTwo){
+  if (playerOne.lastInput == playerTwo.lastInput){
+      WriteLine ("It's a draw!");
+      return "Draw";
   }
+  else if ((playerOne.lastInput == "Rock" && playerTwo.lastInput == "Scissors") ||
+          (playerOne.lastInput == "Paper" && playerTwo.lastInput == "Rock") ||
+          (playerOne.lastInput == "Scissors" && playerTwo.lastInput == "Paper")){
+    Console.WriteLine ("{0} won!", playerOne.playerName);
+    return String.Format("{0} won!", playerOne.playerName);
+  }
+  else{
+    Console.WriteLine ("{0} won!", playerTwo.playerName);
+    return String.Format("{0} won!", playerTwo.playerName);
+  }
+}
+
 
   public void Play (){
     // Clear the console before the round
     Clear();
 
     // FirstPlayer makes his choice with data validation
-    string firstPlayerChoiceString = GetPlayerInput(playerOne);
+    playerOne.GetInput(inputTable);
         
     // Clear the console so the SecondPlayer doesn't see what the FirstPlayer chose
     Clear ();
     
     // SecondPlayer makes his choice with data validation
-    string secondPlayerChoiceString = GetPlayerInput(playerTwo);
+    playerTwo.GetInput(inputTable);
+
     
     // Clear the console before announcing the winner
     Clear ();
 
     // Check and display the result
-    string gameResult = DetermineWinner(firstPlayerChoiceString, secondPlayerChoiceString);
+    string gameResult = DetermineWinner(playerOne, playerTwo);
+
 
     // Add data to GamesRecord
-    gamesRecord.AddRecord(firstPlayerChoiceString, secondPlayerChoiceString, gameResult);
+    gamesRecord.AddRecord(playerOne.lastInput, playerTwo.lastInput, gameResult);
+
     
     // Ask the players if they want to continue
     WriteLine("Do you want to play another round? [y]");
