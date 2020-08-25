@@ -3,8 +3,18 @@ using static System.Console;
 using System.Collections.Generic;
 
 class Player {
-  public string playerName;
+  protected string playerName;
   public string lastInput; 
+
+  public string PlayerName {
+    get {
+      return playerName;
+    }
+    set {
+      playerName = value;
+    }
+  }
+
 
   virtual public void GetInput (Dictionary<string, string> inputTable) {
   string rawInput;
@@ -20,9 +30,12 @@ class Player {
 }
 
 
-  public Player () {
+  public Player (bool invokeNameInput = true) {
+  if (invokeNameInput) {
     SetPlayerName();
   }
+}
+
 
   public Player (string playerName) {
     this.playerName = playerName;
