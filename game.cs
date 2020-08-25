@@ -14,11 +14,11 @@ class Game {
       };
 
 
-  public Game () {
+  public Game (bool singleplayer = false) {
     playerOne = new Player ();
-    playerTwo = new Player ();
+    if (singleplayer) playerTwo = new AIPlayer ();
+    else playerTwo = new Player ();
     gamesRecord = new GamesRecord ();
-
   }
 
 

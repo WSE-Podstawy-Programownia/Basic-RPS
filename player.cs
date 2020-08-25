@@ -6,7 +6,7 @@ class Player {
   public string playerName;
   public string lastInput; 
 
-  public void GetInput (Dictionary<string, string> inputTable) {
+  virtual public void GetInput (Dictionary<string, string> inputTable) {
   string rawInput;
   WriteLine ("{0}, Choose:", playerName);
   foreach(KeyValuePair<string, string> entry in inputTable) {
