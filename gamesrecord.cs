@@ -8,36 +8,31 @@ class GamesRecord {
   int gamesRecordCurrentIndex;
   int gamesRecordCurrentSize;
 
+  public GamesRecord (int recordSize = 10) {
+    try {
+      gamesRecordSize = recordSize;
+      gamesRecord = new string[gamesRecordSize,3];
+    }
+    catch (OverflowException e) {
+      WriteLine("OverflowException during GamesRecord initialization: \"{0}\"\nrecordSize given was [{1}]\nSetting recordSize to 10", e.Message, recordSize);
+      gamesRecordSize = 10;
+      gamesRecord = new string[gamesRecordSize,3];
+    }
+    gamesRecordCurrentIndex = 0;
+    gamesRecordCurrentSize = 0;
+    
+  }
+
   public static GamesRecord operator +(GamesRecord a, GamesRecord b) {
-      int displayRecordIndex;
+    int displayRecordIndex;
     if (b.gamesRecordCurrentSize < b.gamesRecordSize) displayRecordIndex = 0;
     else displayRecordIndex = b.gamesRecordCurrentIndex;
     for (int i = 0; i < b.gamesRecordCurrentSize; i++){
-      a.AddRecord(b.gamesRecord[displayRecordIndex,0], 
-      b.gamesRecord[displayRecordIndex,1], 
-      b.gamesRecord[displayRecordIndex,2]);
+      a.AddRecord(b.gamesRecord[displayRecordIndex,0], b.gamesRecord[displayRecordIndex,1], b.gamesRecord[displayRecordIndex,2]);
       displayRecordIndex = (displayRecordIndex + 1) % b.gamesRecordCurrentSize;
     }
     return a;
-
   }
-
-
-  public GamesRecord (int recordSize = 10) {
-  try 
-  {
-    gamesRecordSize = recordSize;
-    gamesRecord = new string[gamesRecordSize,3];
-  }
-  catch (OverflowException e) {
-     WriteLine("OverflowException during GamesRecord initialization: \"{0}\"\nrecordSize given was [{1}]\nSetting recordSize to 10", e.Message, recordSize);
-  gamesRecordSize = 10;
-  gamesRecord = new string[gamesRecordSize,3];
-  }
-  gamesRecordCurrentIndex = 0;
-  gamesRecordCurrentSize = 0;
-}
-
 
   public void AddRecord (string playerOneChoice, string playerTwoChoice, string result) {
     // Insert the record data
